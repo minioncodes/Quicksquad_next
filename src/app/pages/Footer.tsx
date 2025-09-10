@@ -82,25 +82,26 @@ export default function Footer() {
           </p>
 
           <form className="space-y-3">
-            <input
-              type="text"
-              placeholder="Enter your name"
-              className="w-full p-2 rounded text-black"
-              required
-            />
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full p-2 rounded text-black"
-              required
-            />
-            <button
-              type="submit"
-              className="w-full bg-blue-700 hover:bg-blue-800 py-2 rounded font-semibold"
-            >
-              SUBSCRIBE NOW
-            </button>
-          </form>
+  <input
+    type="text"
+    placeholder="Enter your name"
+    className="w-full p-2 rounded border border-white focus:border-blue-500 focus:ring focus:ring-blue-200"
+    required
+  />
+  <input
+    type="email"
+    placeholder="Enter your email"
+    className="w-full p-2 rounded border border-white focus:border-blue-500 focus:ring focus:ring-blue-200"
+    required
+  />
+  <button
+    type="submit"
+    className="w-full bg-blue-700 hover:bg-blue-800 py-2 rounded font-semibold"
+  >
+    SUBSCRIBE NOW
+  </button>
+</form>
+
         </div>
       </div>
 
