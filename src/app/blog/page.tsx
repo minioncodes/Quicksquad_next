@@ -1,5 +1,5 @@
-import { blogs } from "../pages/blogdata"
-import BlogCard from "../pages/Blogcard"
+import blogs from "@/data/blog.json";
+import BlogCard from "../pages/Blogcard";
 
 export default function BlogPage() {
   return (
@@ -7,7 +7,7 @@ export default function BlogPage() {
       {/* Page Header */}
       <section className="bg-gradient-to-b from-blue-500 to-blue-300 text-center py-16 text-white">
         <h1 className="text-4xl font-bold mb-2">BLOGS</h1>
-        <p className="text-blue-100">Our Latest Blog is here</p>
+        <p className="text-blue-100">Our Latest Blogs are here</p>
       </section>
 
       {/* Blog Listing */}
@@ -20,7 +20,7 @@ export default function BlogPage() {
                 title={blog.title}
                 image={blog.image}
                 date={blog.date}
-                url={blog.url}
+                url={`/blog/${blog.slug}`}
                 description={blog.description}
               />
             ))}
@@ -28,5 +28,5 @@ export default function BlogPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
