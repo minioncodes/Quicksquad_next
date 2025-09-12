@@ -52,7 +52,7 @@ export default function Footer() {
           <div className="space-y-6">
             <div>
               <p className="text-xs opacity-80">August 13, 2024</p>
-              <Link href="/blogs/slow-internet-issues" className="font-medium block hover:underline">
+              <Link href="/blog/slow-internet-issues" className="font-medium block hover:underline">
                 How to Fix Slow Internet and Connectivity Issues
               </Link>
               <p className="text-sm opacity-80">
@@ -62,7 +62,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-xs opacity-80">July 11, 2024</p>
-              <Link href="/blogs/computer-problem" className="font-medium block hover:underline">
+              <Link href="/blog/computer-problem" className="font-medium block hover:underline">
                 Common Computer Problems & How to Fix Them
               </Link>
               <p className="text-sm opacity-80">

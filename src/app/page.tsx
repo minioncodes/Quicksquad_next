@@ -25,6 +25,27 @@ const iconMap = {
   "fa-solid fa-user-graduate": faUserGraduate,
 };
 
+  const posts = [
+    {
+      title: "How to Fix Slow Internet and Connectivity Issues",
+      date: "Feb 10, 2025",
+      img: "/images/1.jpg",
+      slug: "slow-internet-issues",
+    },
+    {
+      title: "Common Computer Problems & How to Fix Them",
+      date: "Feb 10, 2025",
+      img: "/images/2.jpg",
+      slug: "common-computer-problems",
+    },
+    {
+      title: "Protecting Your Devices from Viruses & Malware",
+      date: "Feb 10, 2025",
+      img: "/images/3.jpg",
+      slug: "protecting-devices-malware",
+    },
+  ];
+
 export default function Home() {
   return (
     <main>
@@ -164,27 +185,50 @@ export default function Home() {
       </section>
 
       {/* Latest Updates */}
-      <section className="py-16">
-        <div className="text-black container mx-auto px-6">
-          <h2 className="text-center text-2xl font-bold mb-8">OUR LATEST UPDATES</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: "How to Fix Slow Internet and Connectivity Issues", date: "Feb 10, 2025", img: "/images/1.jpg" },
-              { title: "Common Computer Problems & How to Fix Them", date: "Feb 10, 2025", img: "/images/2.jpg" },
-              { title: "Protecting Your Devices from Viruses & Malware", date: "Feb 10, 2025", img: "/images/3.jpg" },
-            ].map((post, i) => (
-              <div key={i} className="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden">
-                <Image src={post.img} alt={post.title} width={500} height={250} className="w-full" />
-                <div className="p-4">
-                  <p className="text-xs text-gray-500">{post.date}</p>
-                  <h3 className="font-semibold mb-2">{post.title}</h3>
-                  <Link href="#" className="text-blue-600 text-sm hover:underline">Read More</Link>
-                </div>
+      <section className="py-16 bg-gray-50">
+      <div className="container mx-auto px-6">
+        {/* Section Heading */}
+        <h2 className="text-center text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+          Our Latest Updates
+        </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Stay updated with the latest tips, fixes, and guides from our experts
+          to keep your devices running smoothly.
+        </p>
+
+        {/* Blog Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {posts.map((post, i) => (
+            <Link
+              key={i}
+              href={`/blog/${post.slug}`}
+              className="group bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden flex flex-col"
+            >
+              {/* Image */}
+              <div className="relative w-full h-48">
+                <Image
+                  src={post.img}
+                  alt={post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
-            ))}
-          </div>
+
+              {/* Content */}
+              <div className="p-5 flex flex-col flex-grow">
+                <p className="text-xs text-gray-500 mb-1">{post.date}</p>
+                <h3 className="font-semibold text-lg text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600">
+                  {post.title}
+                </h3>
+                <span className="mt-auto text-sm text-blue-600 font-medium group-hover:underline">
+                  Read More →
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
     </main>
   )
 }
