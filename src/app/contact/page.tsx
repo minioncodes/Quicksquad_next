@@ -2,43 +2,93 @@
 
 import { useEffect, useState } from "react";
 
+// Extend Window interface so TS knows about grecaptcha
+declare global {
+  interface Window {
+    grecaptcha?: {
+      getResponse: () => string;
+    };
+  }
+}
+
 interface Category {
   title: string;
   description: string[];
 }
 
 const allCategories: Category[] = [
-  {
-    title: "Financial Assistance",
-    description: [
-      "How to open a bank account online",
-      "Understanding credit scores and reports",
-      "Stock market investment advice",
-      "Cryptocurrency basics and trading tips",
-      "Tax filing assistance and IRS guidance",
-    ],
-  },
-  {
-    title: "Technology & Digital Services",
-    description: [
-      "Troubleshooting common tech issues",
-      "Setting up and securing email accounts",
-      "Online payment and digital wallet support",
-      "Recovering lost passwords and account access",
-      "Cloud storage and backup solutions",
-    ],
-  },
-  {
-    title: "Healthcare & Wellness",
-    description: [
-      "Finding nearby hospitals, clinics, or pharmacies",
-      "Understanding insurance coverage and policies",
-      "Booking doctor’s appointments online",
-    ],
-  },
-];
+        { 
+            title: "Financial Assistance", 
+            description: [
+                "How to open a bank account online",
+                "Understanding credit scores and reports",
+                "Stock market investment advice",
+                "Cryptocurrency basics and trading tips",
+                "Tax filing assistance and IRS guidance"
+            ] 
+        },
+        { 
+            title: "Technology & Digital Services", 
+            description: [
+                "Troubleshooting common tech issues",
+                "Setting up and securing email accounts",
+                "Online payment and digital wallet support",
+                "Recovering lost passwords and account access",
+                "Cloud storage and backup solutions"
+            ] 
+        },
+        { 
+            title: "Location & Navigation Assistance", 
+            description: [
+                "Finding addresses and directions",
+                "Locating nearby services (banks, hospitals, restaurants, etc.)",
+                "Understanding ZIP codes and area codes"
+            ] 
+        },
+        { 
+            title: "Legal & Government Services", 
+            description: [
+                "Applying for social security benefits",
+                "Understanding tax deductions and credits",
+                "Assistance with DMV services (licenses, registrations)",
+                "Filing small claims or legal documents"
+            ] 
+        },
+        { 
+            title: "Travel & Transportation", 
+            description: [
+                "Booking flights, hotels, and rental cars",
+                "Public transportation schedules and routes",
+                "Understanding travel insurance and visa requirements"
+            ] 
+        },
+        { 
+            title: "Consumer & Shopping Assistance", 
+            description: [
+                "Finding the best online deals and discounts",
+                "Product comparisons and reviews",
+                "Subscription and membership management"
+            ] 
+        },
+        { 
+            title: "Healthcare & Wellness", 
+            description: [
+                "Finding nearby hospitals, clinics, or pharmacies",
+                "Understanding insurance coverage and policies",
+                "Booking doctor’s appointments online"
+            ] 
+        },
+        { 
+            title: "Education & Career Guidance", 
+            description: [
+                "Finding online courses and certifications",
+                "Resume building and job search assistance",
+                "College and scholarship application guidance"
+            ] 
+        }
+    ];
 
-export default function ContactForm() {
+export default function ContactPage() {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [captchaVerified, setCaptchaVerified] = useState(false);
@@ -46,7 +96,7 @@ export default function ContactForm() {
   // Check reCAPTCHA status
   useEffect(() => {
     const interval = setInterval(() => {
-      if (typeof window !== "undefined" && window.grecaptcha) {
+      if (window.grecaptcha) {
         setCaptchaVerified(window.grecaptcha.getResponse().length > 0);
       }
     }, 1000);
@@ -55,8 +105,7 @@ export default function ContactForm() {
 
   return (
     <section className="py-12 px-6 bg-gradient-to-br from-blue-50 to-white">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
-        {/* Title */}
+      <div className="max-w-3xl mx-auto text-gray-900 bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-2">
           Contact Us
         </h2>
@@ -65,7 +114,6 @@ export default function ContactForm() {
           and we’ll get back to you quickly.
         </p>
 
-        {/* Form */}
         <form className="space-y-6">
           {/* Name */}
           <div>
@@ -77,7 +125,7 @@ export default function ContactForm() {
               name="name"
               required
               placeholder="Enter your name"
-              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 text-gray-800 shadow-sm"
+              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
             />
           </div>
 
@@ -91,7 +139,7 @@ export default function ContactForm() {
               name="email"
               required
               placeholder="Enter your email"
-              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 text-gray-800 shadow-sm"
+              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
             />
           </div>
           <div>
@@ -99,11 +147,11 @@ export default function ContactForm() {
               Message
             </label>
             <input
-              type="Message"
+              type="text"
               name="Message"
               required
               placeholder="Enter your Message"
-              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 text-gray-800 shadow-sm"
+              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
             />
           </div>
 
@@ -113,12 +161,13 @@ export default function ContactForm() {
               Category
             </label>
             <select
+            title="category"
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
                 setSubCategory("");
               }}
-              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 text-gray-800 shadow-sm"
+              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
               required
             >
               <option value="">Select a category</option>
@@ -137,9 +186,10 @@ export default function ContactForm() {
                 Sub-Category
               </label>
               <select
+              title="Sub-category"
                 value={subCategory}
                 onChange={(e) => setSubCategory(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 text-gray-800 shadow-sm"
+                className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
                 required
               >
                 <option value="">Select a sub-category</option>
@@ -162,11 +212,11 @@ export default function ContactForm() {
             ></div>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
             disabled={!captchaVerified}
-            className={`w-full py-3 px-6 rounded-lg font-semibold shadow-md transition ${
+            className={`w-full py-3 px-6 rounded-lg font-semibold transition ${
               captchaVerified
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
