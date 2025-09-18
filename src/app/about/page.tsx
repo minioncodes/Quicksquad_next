@@ -20,7 +20,7 @@ export default function AboutPage() {
         <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
           <div>
             <Image
-              src="/images/support-team.jpg"
+              src="/images/team.png"
               alt="QuickSquad Team"
               width={500}
               height={400}
