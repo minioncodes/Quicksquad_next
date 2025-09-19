@@ -33,7 +33,6 @@ export default function Footer() {
               <li><Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
             </ul>
             <ul className="space-y-1">
-              <li><Link href="/testimonials" className="hover:underline">Testimonials</Link></li>
               <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
               <li><Link href="/terms-of-service" className="hover:underline">Terms of Service</Link></li>
             </ul>

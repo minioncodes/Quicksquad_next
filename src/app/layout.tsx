@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Script from "next/script";
+import ChatWidget from "./pages/chatgpt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +39,7 @@ export default function RootLayout({
           
       <Navbar/>
         {children}
-        
+        <ChatWidget/>
       <Footer/>
       </body>
     </html>
