@@ -4,8 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaSearch } from "react-icons/fa";
-import blogPosts from "@/data/blog.json"
+import { FaSearch, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
+import blogPosts from "@/data/blog.json";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,12 +39,28 @@ export default function Navbar() {
           <Link href="/contact" className="hover:text-gray-200">CONTACT</Link>
           <Link href="/pricing" className="hover:text-gray-200">PRICING</Link>
 
-          {/* Search Icon (Desktop) */}
+          {/* Search Icon */}
           <div className="relative">
             <FaSearch
               className="cursor-pointer hover:text-gray-200"
               onClick={() => setSearchOpen(!searchOpen)}
             />
+          </div>
+
+          {/* Contact Info */}
+          <div className="flex items-center space-x-6 ml-6 text-sm">
+            <div className="flex items-center gap-2">
+              <FaEnvelope className="text-white" />
+              <a href="mailto:support@quicksquad.live" className="hover:underline">
+                support@quicksquad.live
+              </a>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaPhoneAlt className="text-white" />
+              <a href="tel:+18339215472" className="hover:underline">
+                (833) 921-5472
+              </a>
+            </div>
           </div>
 
           {/* Socials */}
@@ -57,15 +73,11 @@ export default function Navbar() {
 
         {/* Mobile Buttons */}
         <div className="flex items-center space-x-4 md:hidden">
-          {/* Search Icon (Mobile) */}
           <FaSearch
             className="cursor-pointer text-xl hover:text-gray-200"
             onClick={() => setSearchOpen(!searchOpen)}
           />
-
-          {/* Hamburger */}
           <button
-          title="Mob"
             className="flex flex-col space-y-1"
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -76,7 +88,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Search Dropdown (Both Mobile + Desktop) */}
+      {/* Search Dropdown */}
       {searchOpen && (
         <div className="absolute top-full right-6 w-72 bg-white text-black rounded shadow-lg p-3 z-50">
           <input
@@ -118,7 +130,20 @@ export default function Navbar() {
           <Link href="/blog" className="block">BLOG</Link>
           <Link href="/contact" className="block">CONTACT</Link>
           <Link href="/pricing" className="block">PRICING</Link>
-          <div className="flex space-x-4 mt-2">
+
+          {/* Contact Info (Mobile) */}
+          <div className="space-y-2 mt-4 text-sm">
+            <div className="flex items-center gap-2">
+              <FaEnvelope />
+              <a href="mailto:support@quicksquad.live">support@quicksquad.live</a>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaPhoneAlt />
+              <a href="tel:+18339215472">(833) 921-5472</a>
+            </div>
+          </div>
+
+          <div className="flex space-x-4 mt-4">
             <FaFacebookF />
             <FaInstagram />
             <FaXTwitter />

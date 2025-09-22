@@ -1,24 +1,46 @@
 "use client"
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { FaCheckCircle, FaHeadset, FaHandsHelping, FaRegSmile, FaCogs, FaComments } from "react-icons/fa"
 
 export default function AboutPage() {
+  // animation variants
+  const fadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  }
+
   return (
     <main>
       {/* Hero / Header Section */}
-      <section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-20 text-center">
+      <div
+        className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-20 text-center"
+      >
         <div className="container mx-auto px-6">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">About QuickSquad</h1>
-          <p className="max-w-2xl mx-auto text-lg text-blue-100">
+          <motion.h1
+            className="text-4xl md:text-6xl font-bold mb-4"
+            variants={fadeUp}
+          >
+            About QuickSquad
+          </motion.h1>
+          <motion.p
+            className="max-w-2xl mx-auto text-lg text-blue-100"
+            variants={fadeUp}
+          >
             Your trusted partner for solving everyday tech and support challenges, available anytime you need us.
-          </p>
+          </motion.p>
         </div>
-      </section>
+      </div>
 
       {/* Who We Are */}
       <section className="py-16 bg-white text-black">
         <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <Image
               src="/images/team.png"
               alt="QuickSquad Team"
@@ -26,8 +48,13 @@ export default function AboutPage() {
               height={400}
               className="rounded-lg shadow-lg"
             />
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl font-bold mb-4">Who We Are</h2>
             <p className="mb-4 text-gray-700">
               At <span className="font-semibold">QuickSquad</span>, we’re not just a support service—we’re your
@@ -35,84 +62,85 @@ export default function AboutPage() {
               to resolve your issues with clarity, speed, and care.
             </p>
             <ul className="space-y-3">
-              <li className="flex items-start gap-2">
-                <FaCheckCircle className="text-blue-600 mt-1" />
-                Delivering the best solutions with the latest technology.
-              </li>
-              <li className="flex items-start gap-2">
-                <FaCheckCircle className="text-blue-600 mt-1" />
-                Swift, reliable problem-solving around the clock.
-              </li>
-              <li className="flex items-start gap-2">
-                <FaCheckCircle className="text-blue-600 mt-1" />
-                Staying ahead to provide top-tier, future-ready support.
-              </li>
-              <li className="flex items-start gap-2">
-                <FaCheckCircle className="text-blue-600 mt-1" />
-                Keeping your digital life running smoothly, always.
-              </li>
+              {[
+                "Delivering the best solutions with the latest technology.",
+                "Swift, reliable problem-solving around the clock.",
+                "Staying ahead to provide top-tier, future-ready support.",
+                "Keeping your digital life running smoothly, always.",
+              ].map((text, idx) => (
+                <motion.li
+                  key={idx}
+                  className="flex items-start gap-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.2 }}
+                >
+                  <FaCheckCircle className="text-blue-600 mt-1" />
+                  {text}
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* What We Do (Features Grid) */}
+      {/* What We Do */}
       <section className="py-16 bg-gray-50 text-black">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">What We Do</h2>
-          <p className="max-w-2xl mx-auto text-gray-600 mb-12">
+          <motion.h2
+            className="text-3xl font-bold mb-4"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeUp}
+            viewport={{ once: true }}
+          >
+            What We Do
+          </motion.h2>
+          <motion.p
+            className="max-w-2xl mx-auto text-gray-600 mb-12"
+            initial="hidden"
+            whileInView="visible"
+            variants={fadeUp}
+            viewport={{ once: true }}
+          >
             From technical troubleshooting to expert guidance, QuickSquad is built to make your life easier and stress-free.
-          </p>
+          </motion.p>
 
           <div className="grid md:grid-cols-3 gap-10">
-            <div className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-              <FaCogs className="text-blue-600 text-3xl mb-4 mx-auto" />
-              <h3 className="font-semibold mb-2">Core Services</h3>
-              <p className="text-gray-600 text-sm">
-                End-to-end support for devices, software, and systems.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-              <FaHeadset className="text-blue-600 text-3xl mb-4 mx-auto" />
-              <h3 className="font-semibold mb-2">24/7 Expert Help</h3>
-              <p className="text-gray-600 text-sm">
-                Always just a call away—fast, reliable, and effective.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-              <FaHandsHelping className="text-blue-600 text-3xl mb-4 mx-auto" />
-              <h3 className="font-semibold mb-2">Personalized Support</h3>
-              <p className="text-gray-600 text-sm">
-                Solutions tailored to your unique problems and goals.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-              <FaRegSmile className="text-blue-600 text-3xl mb-4 mx-auto" />
-              <h3 className="font-semibold mb-2">Clarity Always</h3>
-              <p className="text-gray-600 text-sm">
-                We simplify tech—no jargon, just clear communication.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-              <FaComments className="text-blue-600 text-3xl mb-4 mx-auto" />
-              <h3 className="font-semibold mb-2">Community Feedback</h3>
-              <p className="text-gray-600 text-sm">
-                We listen, adapt, and improve through your shared experiences.
-              </p>
-            </div>
-            <div className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-              <FaCogs className="text-blue-600 text-3xl mb-4 mx-auto" />
-              <h3 className="font-semibold mb-2">Smart Solutions</h3>
-              <p className="text-gray-600 text-sm">
-                Future-ready frameworks that keep your tech ahead of the curve.
-              </p>
-            </div>
+            {[
+              { icon: <FaCogs />, title: "Core Services", desc: "End-to-end support for devices, software, and systems." },
+              { icon: <FaHeadset />, title: "24/7 Expert Help", desc: "Always just a call away—fast, reliable, and effective." },
+              { icon: <FaHandsHelping />, title: "Personalized Support", desc: "Solutions tailored to your unique problems and goals." },
+              { icon: <FaRegSmile />, title: "Clarity Always", desc: "We simplify tech—no jargon, just clear communication." },
+              { icon: <FaComments />, title: "Community Feedback", desc: "We listen, adapt, and improve through your shared experiences." },
+              { icon: <FaCogs />, title: "Smart Solutions", desc: "Future-ready frameworks that keep your tech ahead of the curve." },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                className="p-6 bg-white rounded-lg shadow hover:shadow-lg transition"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.2 }}
+              >
+                <div className="text-blue-600 text-3xl mb-4 mx-auto">{item.icon}</div>
+                <h3 className="font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-600 text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Closing Section */}
-      <section className="bg-blue-600 text-white text-center py-16">
+      <motion.section
+        className="bg-blue-600 text-white text-center py-16"
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeUp}
+        viewport={{ once: true }}
+      >
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-4">Why Choose QuickSquad?</h2>
           <p className="max-w-2xl mx-auto mb-6">
@@ -125,7 +153,7 @@ export default function AboutPage() {
             Get in Touch
           </a>
         </div>
-      </section>
+      </motion.section>
     </main>
   )
 }

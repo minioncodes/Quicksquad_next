@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-12">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6">
-        
+
         {/* Left Column */}
         <div>
           <Link href="/" className="">
@@ -17,7 +17,6 @@ export default function Footer() {
   className="h-auto max-w-[150px] md:max-w-[200px]"
   priority
 />
-
         </Link>
           <p className="text-sm mb-4">
             Our website blends creativity, innovation, and functionality for a seamless
