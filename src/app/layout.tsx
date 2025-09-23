@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Script from "next/script";
-import ChatWidget from "./pages/chatgpt";
+import ChatWidget from "@/components/ChatWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
