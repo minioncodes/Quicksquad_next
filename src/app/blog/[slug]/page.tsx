@@ -16,11 +16,19 @@ interface Blog {
   related: string[];
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const blog = (blogs as Blog[]).find((b) => b.slug === params.slug);
+type RouteParams = { slug: string };
+
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}) {
+  const { slug } = await params;
+
+  const blog = (blogs as Blog[]).find((b) => b.slug === slug);
 
   if (!blog) {
-    return notFound();
+    notFound();
   }
 
   // Related posts
@@ -54,12 +62,10 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       </blockquote>
 
       {/* Blog Content */}
-      {/* Blog Content */}
-<div
-  className="prose prose-lg max-w-none prose-headings:mb-4 prose-p:mb-4 prose-ul:mb-4 prose-li:mb-2 prose-blockquote:italic prose-blockquote:text-gray-600"
-  dangerouslySetInnerHTML={{ __html: blog.content }}
-/>
-
+      <div
+        className="prose prose-lg max-w-none prose-headings:mb-4 prose-p:mb-4 prose-ul:mb-4 prose-li:mb-2 prose-blockquote:italic prose-blockquote:text-gray-600"
+        dangerouslySetInnerHTML={{ __html: blog.content }}
+      />
 
       {/* Tags */}
       <div className="mb-8">
@@ -101,4 +107,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       )}
     </article>
   );
+}
+
+// (optional) unchanged in Next 15:
+export async function generateStaticParams() {
+  return (blogs as Blog[]).map((b) => ({ slug: b.slug }));
 }
