@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import TestimonialsSection from "../pages/Testimonialsection";
+import Image from "next/image";
 
 const faqs = [
   {
@@ -61,7 +62,9 @@ export default function FAQSection() {
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold text-gray-800">{faq.question}</h3>
-                <img
+                <Image
+                width={5}          // ← required
+  height={5}
                   src="https://cdn.prod.website-files.com/5746a22e485f3a03442bea0f/59a0272ee70cd600015ee73f_next.png"
                   alt="toggle"
                   className={`w-4 h-4 transform transition-transform duration-300 ${

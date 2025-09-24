@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import blogs from "@/data/blog.json";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Blog {
   slug: string;
@@ -50,7 +51,9 @@ export default async function BlogPost({
       </div>
 
       {/* Image */}
-      <img
+      <Image
+      width={1600}          // ← required
+  height={720}
         src={blog.image}
         alt={blog.title}
         className="w-full h-72 object-cover rounded-lg shadow mb-8"
@@ -93,7 +96,9 @@ export default async function BlogPost({
                 key={post.slug}
                 className="p-4 border rounded-lg hover:shadow transition"
               >
-                <img
+                <Image
+                width={1600}          // ← required
+  height={720}
                   src={post.image}
                   alt={post.title}
                   className="h-40 w-full object-cover rounded mb-3"

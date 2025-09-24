@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const faqs = [
@@ -165,7 +166,9 @@ export default function PricingPage() {
             <ul className="space-y-3 flex-1">
               {plan.features.map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <img
+                  <Image
+                  width={1600}
+                  height={720}
                     src="https://cdn.prod.website-files.com/5746a22e485f3a03442bea0f/58c446970d703bb04aa5571f_confirm.svg"
                     alt="check"
                     className="w-5 h-5 mt-1"
@@ -193,7 +196,9 @@ export default function PricingPage() {
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold text-gray-800">{faq.question}</h3>
-                <img
+                <Image
+                  width={1600}
+                  height={720}
                   src="https://cdn.prod.website-files.com/5746a22e485f3a03442bea0f/59a0272ee70cd600015ee73f_next.png"
                   alt="toggle"
                   className={`w-4 h-4 transform transition-transform duration-300 ${
