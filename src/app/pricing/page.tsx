@@ -95,13 +95,17 @@ export default function PricingPage() {
     setOpenIndex(openIndex === index ? null : index);
 
   /* Load Razorpay script */
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => document.body.removeChild(script);
-  }, []);
+useEffect(() => {
+  const script = document.createElement("script");
+  script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  script.async = true;
+  document.body.appendChild(script);
+
+  return () => {
+    document.body.removeChild(script); // return type is void now
+  };
+}, []);
+
 
   /* Animate cards one by one */
   useEffect(() => {
