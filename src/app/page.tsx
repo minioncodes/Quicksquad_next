@@ -50,58 +50,61 @@ const posts = [
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white h-screen flex items-center">
-        <div className="container mx-auto grid md:grid-cols-2 gap-8 px-6">
-          {/* Left Content */}
-          <motion.div
-            className="flex flex-col justify-center"
-            initial={{ opacity: 0, x: -80 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Your Go-To Guide for Everyday Queries!
-            </h1>
-            <p className="text-lg mb-6 text-gray-100 max-w-lg">
-              We’re here to link you with skilled specialists who are ready to
-              tackle your problems, day or night.
-            </p>
-            <div className="space-x-4">
-              <Link
-                href="/contact"
-                className="bg-blue-800 px-6 py-3 rounded hover:bg-blue-900 transition"
-              >
-                CONTACT US
-              </Link>
-              <Link
-                href="/about"
-                className="border border-white px-6 py-3 rounded hover:bg-white hover:text-blue-600 transition"
-              >
-                ABOUT US
-              </Link>
-            </div>
-          </motion.div>
+      <section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white min-h-[80vh] sm:min-h-[85vh] flex items-center">
+  <div className="container mx-auto grid md:grid-cols-2 gap-6 px-4 sm:px-6">
+    {/* Left Content */}
+    <motion.div
+      className="flex flex-col justify-center"
+      initial={{ opacity: 0, x: -80 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 1 }}
+    >
+      <h1 className="text-3xl sm:text-5xl font-bold mb-4 leading-snug">
+        Your Go-To Guide for Everyday Queries!
+      </h1>
+      <p className="text-base sm:text-lg mb-4 text-gray-100 max-w-md">
+        We’re here to link you with skilled specialists who are ready to
+        tackle your problems, day or night.
+      </p>
+      <div className="space-x-3">
+        <Link
+          href="/contact"
+          className="bg-blue-800 px-5 py-2 rounded hover:bg-blue-900 transition text-sm sm:text-base"
+        >
+          CONTACT US
+        </Link>
+        <Link
+          href="/about"
+          className="border border-white px-5 py-2 rounded hover:bg-white hover:text-blue-600 transition text-sm sm:text-base"
+        >
+          ABOUT US
+        </Link>
+      </div>
+    </motion.div>
 
-          {/* Right Image */}
-          <motion.div
-            className="flex justify-center items-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2 }}
-          >
-            <Image
-              src="/images/hero.png"
-              alt="Tech Support"
-              width={1500}
-              height={1400}
-              className="rounded-lg shadow-lg object-cover"
-              priority
-            />
-          </motion.div>
-        </div>
-      </section>
+    {/* Right Image */}
+    <motion.div
+      className="flex justify-center items-center"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg">
+        <Image
+          src="/images/hero.png"
+          alt="Tech Support"
+          width={1500}
+          height={1400}
+          className="rounded-lg shadow-lg object-cover w-full h-auto"
+          priority
+        />
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* Our Services */}
       <section className="py-16">

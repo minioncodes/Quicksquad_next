@@ -4,19 +4,16 @@ import { motion } from "framer-motion"
 import { FaCheckCircle, FaHeadset, FaHandsHelping, FaRegSmile, FaCogs, FaComments } from "react-icons/fa"
 
 export default function AboutPage() {
-  // animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   }
 
   return (
-    <main>
+    <main className="overflow-x-hidden w-full"> {/* ✅ Prevents horizontal scroll */}
       {/* Hero / Header Section */}
-      <div
-        className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-20 text-center"
-      >
-        <div className="container mx-auto px-6">
+      <div className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-20 text-center w-full">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6"> {/* ✅ constrain width */}
           <motion.h1
             className="text-4xl md:text-6xl font-bold mb-4"
             variants={fadeUp}
@@ -34,7 +31,7 @@ export default function AboutPage() {
 
       {/* Who We Are */}
       <section className="py-16 bg-white text-black">
-        <div className="container mx-auto grid md:grid-cols-2 gap-10 items-center px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center px-4 sm:px-6"> {/* ✅ fixed */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -46,7 +43,7 @@ export default function AboutPage() {
               alt="QuickSquad Team"
               width={500}
               height={400}
-              className="rounded-lg shadow-lg"
+              className="rounded-lg shadow-lg w-full h-auto"
             />
           </motion.div>
           <motion.div
@@ -76,8 +73,8 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.2 }}
                 >
-                  <FaCheckCircle className="text-blue-600 mt-1" />
-                  {text}
+                  <FaCheckCircle className="text-blue-600 mt-1 shrink-0" /> {/* ✅ no stretching */}
+                  <span>{text}</span>
                 </motion.li>
               ))}
             </ul>
@@ -87,7 +84,7 @@ export default function AboutPage() {
 
       {/* What We Do */}
       <section className="py-16 bg-gray-50 text-black">
-        <div className="container mx-auto px-6 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center"> {/* ✅ constrain */}
           <motion.h2
             className="text-3xl font-bold mb-4"
             initial="hidden"
@@ -107,8 +104,8 @@ export default function AboutPage() {
             From technical troubleshooting to expert guidance, QuickSquad is built to make your life easier and stress-free.
           </motion.p>
 
-          <div className="grid md:grid-cols-3 gap-10">
-            {[
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6"> {/* ✅ responsive grid */}
+            {[ 
               { icon: <FaCogs />, title: "Core Services", desc: "End-to-end support for devices, software, and systems." },
               { icon: <FaHeadset />, title: "24/7 Expert Help", desc: "Always just a call away—fast, reliable, and effective." },
               { icon: <FaHandsHelping />, title: "Personalized Support", desc: "Solutions tailored to your unique problems and goals." },
@@ -124,7 +121,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
               >
-                <div className="text-blue-600 text-3xl mb-4 mx-auto">{item.icon}</div>
+                <div className="text-blue-600 text-3xl mb-4">{item.icon}</div>
                 <h3 className="font-semibold mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm">{item.desc}</p>
               </motion.div>
@@ -141,7 +138,7 @@ export default function AboutPage() {
         variants={fadeUp}
         viewport={{ once: true }}
       >
-        <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6"> {/* ✅ constrain */}
           <h2 className="text-3xl font-bold mb-4">Why Choose QuickSquad?</h2>
           <p className="max-w-2xl mx-auto mb-6">
             Because we believe support should be more than solving issues—it should be about building trust, ensuring clarity, and making your life simpler.

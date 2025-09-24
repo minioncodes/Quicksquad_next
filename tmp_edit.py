@@ -1,0 +1,10 @@
+from pathlib import Path
+path = Path(r"c:\\Users\\Hp\\Desktop\\Office\\quicksquad_next\\src\\app\\page.tsx")
+text = path.read_text()
+text = text.replace('className="bg-gradient-to-b from-blue-500 to-blue-300 text-white h-screen flex items-center"', 'className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-16 sm:py-20 md:py-24 flex items-center md:min-h-[70vh]"', 1)
+text = text.replace('className="container mx-auto grid md:grid-cols-2 gap-8 px-4 sm:px-6"', 'className="container mx-auto grid md:grid-cols-2 gap-6 md:gap-10 px-4 sm:px-6"', 1)
+text = text.replace('className="text-4xl md:text-6xl font-bold mb-6 leading-tight"', 'className="text-3xl md:text-5xl font-bold mb-4 leading-tight md:leading-[1.15]"', 1)
+text = text.replace('className="text-lg mb-6 text-gray-100 max-w-lg"', 'className="text-base md:text-lg mb-5 text-gray-100 max-w-lg"', 1)
+text = text.replace('className="space-x-4"', 'className="flex flex-wrap items-center gap-3"', 1)
+text = text.replace('We\u2019re', "We're")
+path.write_text(text)
