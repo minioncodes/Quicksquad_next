@@ -10,6 +10,7 @@ export default function ChatWidget() {
   );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPrompts, setShowPrompts] = useState(true); // ✅ control quick prompts
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickPrompts = [
@@ -33,6 +34,8 @@ export default function ChatWidget() {
   const sendMessage = async (msg?: string) => {
     const messageToSend = msg ?? input;
     if (!messageToSend.trim()) return;
+
+    setShowPrompts(false); // ✅ hide prompts after first send
 
     const userMessage = { role: "user", content: messageToSend };
     setMessages((prev) => [...prev, userMessage]);
@@ -97,19 +100,21 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          {/* Quick Prompts */}
-          <div className="p-2 border-b border-gray-200 bg-white/95 flex flex-wrap gap-2">
-            {quickPrompts.map((prompt, i) => (
-              <button
-                key={i}
-                onClick={() => sendMessage(prompt)}
-                className="text-xs px-3 py-1.5 rounded-md bg-gray-200 hover:bg-gray-300 active:bg-gray-400
-                           shadow-sm font-medium text-gray-800"
-              >
-                {prompt}
-              </button>
-            ))}
-          </div>
+          {/* Quick Prompts (only show before search) */}
+          {showPrompts && (
+            <div className="p-2 border-b border-gray-200 bg-white/95 flex flex-wrap gap-2">
+              {quickPrompts.map((prompt, i) => (
+                <button
+                  key={i}
+                  onClick={() => sendMessage(prompt)}
+                  className="text-xs px-3 py-1.5 rounded-md bg-gray-200 hover:bg-gray-300 active:bg-gray-400
+                             shadow-sm font-medium text-gray-800"
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Messages */}
           <div className="p-4 flex-1 overflow-y-auto space-y-2 bg-gradient-to-b from-white/98 to-white">
