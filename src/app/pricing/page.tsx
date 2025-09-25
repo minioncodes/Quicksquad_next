@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 /* ---------- Types ---------- */
 interface Plan {
   title: string;
-  price: number;       // amount in cents
+  price: number; // amount in cents
   displayPrice: string;
   features: string[];
 }
@@ -14,6 +14,35 @@ interface Plan {
 interface Faq {
   question: string;
   answer: string;
+}
+
+/* ---------- Razorpay Types ---------- */
+interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  image?: string;
+  handler: (response: { razorpay_payment_id: string }) => void;
+  prefill?: {
+    name: string;
+    email: string;
+    contact: string;
+  };
+  theme?: {
+    color: string;
+  };
+}
+
+interface RazorpayInstance {
+  open: () => void;
+}
+
+declare global {
+  interface Window {
+    Razorpay: new (options: RazorpayOptions) => RazorpayInstance;
+  }
 }
 
 /* ---------- Data ---------- */
@@ -95,17 +124,16 @@ export default function PricingPage() {
     setOpenIndex(openIndex === index ? null : index);
 
   /* Load Razorpay script */
-useEffect(() => {
-  const script = document.createElement("script");
-  script.src = "https://checkout.razorpay.com/v1/checkout.js";
-  script.async = true;
-  document.body.appendChild(script);
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
 
-  return () => {
-    document.body.removeChild(script); // return type is void now
-  };
-}, []);
-
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   /* Animate cards one by one */
   useEffect(() => {
@@ -126,14 +154,14 @@ useEffect(() => {
       return;
     }
 
-    const options = {
-      key: "rzp_test_RH1qkK5aG1oovC", // replace with your real key
+    const options: RazorpayOptions = {
+      key: "rzp_test_RH1qkK5aG1oovC", // replace with live key in prod
       amount: plan.price,
       currency: "USD",
       name: "QuickSquad",
       description: `${plan.title} Subscription`,
       image: "/images/logo.png",
-      handler(response: { razorpay_payment_id: string }) {
+      handler(response) {
         alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
       },
       prefill: {
@@ -144,8 +172,8 @@ useEffect(() => {
       theme: { color: "#0ea5e9" },
     };
 
-    const Razorpay = (window as typeof window & { Razorpay: any }).Razorpay;
-    new Razorpay(options).open();
+    const razorpay = new window.Razorpay(options);
+    razorpay.open();
   };
 
   return (
