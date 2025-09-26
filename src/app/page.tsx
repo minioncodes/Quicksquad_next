@@ -52,8 +52,8 @@ export default function Home() {
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white min-h-[80vh] sm:min-h-[85vh] flex items-center">
-  <div className="container mx-auto grid md:grid-cols-2 gap-6 px-4 sm:px-6">
+<section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white min-h-[100vh] flex items-center">
+  <div className="container mx-auto grid md:grid-cols-2 gap-10 px-6">
     {/* Left Content */}
     <motion.div
       className="flex flex-col justify-center"
@@ -61,23 +61,23 @@ export default function Home() {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
     >
-      <h1 className="text-3xl sm:text-5xl font-bold mb-4 leading-snug">
+      <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">
         Your Go-To Guide for Everyday Queries!
       </h1>
-      <p className="text-base sm:text-lg mb-4 text-gray-100 max-w-md">
+      <p className="text-lg sm:text-xl md:text-2xl mb-6 text-gray-100 max-w-2xl">
         We’re here to link you with skilled specialists who are ready to
         tackle your problems, day or night.
       </p>
-      <div className="space-x-3">
+      <div className="space-x-4">
         <Link
           href="/contact"
-          className="bg-blue-800 px-5 py-2 rounded hover:bg-blue-900 transition text-sm sm:text-base"
+          className="bg-blue-800 px-6 py-3 rounded-lg hover:bg-blue-900 transition text-base sm:text-lg"
         >
           CONTACT US
         </Link>
         <Link
           href="/about"
-          className="border border-white px-5 py-2 rounded hover:bg-white hover:text-blue-600 transition text-sm sm:text-base"
+          className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition text-base sm:text-lg"
         >
           ABOUT US
         </Link>
@@ -91,19 +91,20 @@ export default function Home() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg">
+      <div className="relative w-full max-w-xl sm:max-w-2xl">
         <Image
           src="/images/hero.png"
           alt="Tech Support"
-          width={1500}
-          height={1400}
-          className="rounded-lg shadow-lg object-cover w-full h-auto"
+          width={1800}
+          height={1600}
+          className="rounded-xl shadow-2xl object-cover w-full h-auto"
           priority
         />
       </div>
     </motion.div>
   </div>
 </section>
+
 
 
       {/* Our Services */}
