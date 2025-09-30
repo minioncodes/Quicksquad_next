@@ -155,7 +155,6 @@ export default function ServicesPage() {
                 <li key={idx}>{point}</li>
               ))}
             </ul>
-            <InternetSpeedMeter />
           </motion.div>
         ))}
       </div>
