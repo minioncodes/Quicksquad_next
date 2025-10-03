@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import InternetSpeedMeter from "../speedtest/page";
 
 const services = [
   {
