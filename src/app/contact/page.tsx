@@ -109,6 +109,7 @@ export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
   const recaptchaSiteKey =
@@ -180,7 +181,7 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name || !form.email || !form.phone || !form.message) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -206,7 +207,7 @@ export default function ContactPage() {
 
       if (res.ok) {
         alert("Your message has been sent successfully!");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", phone: "", message: "" });
         setCategory("");
         setSubCategory("");
         if (recaptchaWidgetId.current !== null) {
@@ -262,6 +263,22 @@ export default function ContactPage() {
               required
               placeholder="Enter your email"
               value={form.email}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
+            />
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              required
+              placeholder="Enter your phone number"
+              value={form.phone}
               onChange={handleChange}
               className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2"
             />
