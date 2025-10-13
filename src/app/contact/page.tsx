@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-// Extend Window interface so TS knows about grecaptcha
 declare global {
   interface Window {
     grecaptcha?: {
@@ -17,83 +16,91 @@ interface Category {
 }
 
 const allCategories: Category[] = [
-        { 
-            title: "Financial Assistance", 
-            description: [
-                "How to open a bank account online",
-                "Understanding credit scores and reports",
-                "Stock market investment advice",
-                "Cryptocurrency basics and trading tips",
-                "Tax filing assistance and IRS guidance"
-            ] 
-        },
-        { 
-            title: "Technology & Digital Services", 
-            description: [
-                "Troubleshooting common tech issues",
-                "Setting up and securing email accounts",
-                "Online payment and digital wallet support",
-                "Recovering lost passwords and account access",
-                "Cloud storage and backup solutions"
-            ] 
-        },
-        { 
-            title: "Location & Navigation Assistance", 
-            description: [
-                "Finding addresses and directions",
-                "Locating nearby services (banks, hospitals, restaurants, etc.)",
-                "Understanding ZIP codes and area codes"
-            ] 
-        },
-        { 
-            title: "Legal & Government Services", 
-            description: [
-                "Applying for social security benefits",
-                "Understanding tax deductions and credits",
-                "Assistance with DMV services (licenses, registrations)",
-                "Filing small claims or legal documents"
-            ] 
-        },
-        { 
-            title: "Travel & Transportation", 
-            description: [
-                "Booking flights, hotels, and rental cars",
-                "Public transportation schedules and routes",
-                "Understanding travel insurance and visa requirements"
-            ] 
-        },
-        { 
-            title: "Consumer & Shopping Assistance", 
-            description: [
-                "Finding the best online deals and discounts",
-                "Product comparisons and reviews",
-                "Subscription and membership management"
-            ] 
-        },
-        { 
-            title: "Healthcare & Wellness", 
-            description: [
-                "Finding nearby hospitals, clinics, or pharmacies",
-                "Understanding insurance coverage and policies",
-                "Booking doctor’s appointments online"
-            ] 
-        },
-        { 
-            title: "Education & Career Guidance", 
-            description: [
-                "Finding online courses and certifications",
-                "Resume building and job search assistance",
-                "College and scholarship application guidance"
-            ] 
-        }
-    ];
+  {
+    title: "Financial Assistance",
+    description: [
+      "How to open a bank account online",
+      "Understanding credit scores and reports",
+      "Stock market investment advice",
+      "Cryptocurrency basics and trading tips",
+      "Tax filing assistance and IRS guidance",
+    ],
+  },
+  {
+    title: "Technology & Digital Services",
+    description: [
+      "Troubleshooting common tech issues",
+      "Setting up and securing email accounts",
+      "Online payment and digital wallet support",
+      "Recovering lost passwords and account access",
+      "Cloud storage and backup solutions",
+    ],
+  },
+  {
+    title: "Location & Navigation Assistance",
+    description: [
+      "Finding addresses and directions",
+      "Locating nearby services (banks, hospitals, restaurants, etc.)",
+      "Understanding ZIP codes and area codes",
+    ],
+  },
+  {
+    title: "Legal & Government Services",
+    description: [
+      "Applying for social security benefits",
+      "Understanding tax deductions and credits",
+      "Assistance with DMV services (licenses, registrations)",
+      "Filing small claims or legal documents",
+    ],
+  },
+  {
+    title: "Travel & Transportation",
+    description: [
+      "Booking flights, hotels, and rental cars",
+      "Public transportation schedules and routes",
+      "Understanding travel insurance and visa requirements",
+    ],
+  },
+  {
+    title: "Consumer & Shopping Assistance",
+    description: [
+      "Finding the best online deals and discounts",
+      "Product comparisons and reviews",
+      "Subscription and membership management",
+    ],
+  },
+  {
+    title: "Healthcare & Wellness",
+    description: [
+      "Finding nearby hospitals, clinics, or pharmacies",
+      "Understanding insurance coverage and policies",
+      "Booking doctor’s appointments online",
+    ],
+  },
+  {
+    title: "Education & Career Guidance",
+    description: [
+      "Finding online courses and certifications",
+      "Resume building and job search assistance",
+      "College and scholarship application guidance",
+    ],
+  },
+];
 
 export default function ContactPage() {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Check reCAPTCHA status
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  // Watch reCAPTCHA
   useEffect(() => {
     const interval = setInterval(() => {
       if (window.grecaptcha) {
@@ -103,8 +110,44 @@ export default function ContactPage() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!form.name || !form.email || !form.phone || !form.message) {
+      alert("⚠️ Please fill in all required fields.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, category, subCategory }),
+      });
+
+      if (res.ok) {
+        alert("✅ Your message has been sent successfully!");
+        setForm({ name: "", email: "", phone: "", message: "" });
+        setCategory("");
+        setSubCategory("");
+      } else {
+        alert("❌ Failed to send message. Please try again later.");
+      }
+    } catch {
+      alert("⚠️ Network error. Please check your connection.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <section className="py-12 px-6 bg-gradient-to-br from-blue-50 to-white">
+<section className="py-12 px-6 bg-gradient-to-br from-blue-50 to-white">
       <div className="max-w-3xl mx-auto text-gray-900 bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-2">
           Contact Us
@@ -114,7 +157,7 @@ export default function ContactPage() {
           and we’ll get back to you quickly.
         </p>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
