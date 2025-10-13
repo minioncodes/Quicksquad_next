@@ -1,12 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+interface RecaptchaInstance {
+  render: (
+    container: string | HTMLElement,
+    parameters: {
+      sitekey: string;
+      callback?: () => void;
+      "expired-callback"?: () => void;
+      "error-callback"?: () => void;
+    }
+  ) => number;
+  reset: (widgetId?: number) => void;
+  getResponse: (widgetId?: number) => string;
+}
 
 declare global {
   interface Window {
-    grecaptcha?: {
-      getResponse: () => string;
-    };
+    grecaptcha?: RecaptchaInstance;
   }
 }
 
@@ -92,6 +104,7 @@ export default function ContactPage() {
   const [subCategory, setSubCategory] = useState("");
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [loading, setLoading] = useState(false);
+  const recaptchaWidgetId = useRef<number | null>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -99,16 +112,66 @@ export default function ContactPage() {
     phone: "",
     message: "",
   });
+  const recaptchaSiteKey =
+    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
+    "6LeNPuUqAAAAAOLA9Q4l620A_HfT4V5MhdCxxVWX";
 
-  // Watch reCAPTCHA
+  // Ensure reCAPTCHA script loads and widget renders once on the client.
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (window.grecaptcha) {
-        setCaptchaVerified(window.grecaptcha.getResponse().length > 0);
+    if (!recaptchaSiteKey) {
+      console.warn("Missing reCAPTCHA site key.");
+      return;
+    }
+
+    const renderCaptcha = () => {
+      if (!window.grecaptcha || recaptchaWidgetId.current !== null) {
+        return;
       }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+
+      recaptchaWidgetId.current = window.grecaptcha.render(
+        "recaptcha-container",
+        {
+          sitekey: recaptchaSiteKey,
+          callback: () => setCaptchaVerified(true),
+          "expired-callback": () => setCaptchaVerified(false),
+          "error-callback": () => setCaptchaVerified(false),
+        }
+      );
+    };
+
+    if (window.grecaptcha) {
+      renderCaptcha();
+      return;
+    }
+
+    const scriptSelector =
+      'script[src^="https://www.google.com/recaptcha/api.js"]';
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      scriptSelector
+    );
+
+    const handleScriptLoad = () => {
+      renderCaptcha();
+    };
+
+    if (existingScript) {
+      existingScript.addEventListener("load", handleScriptLoad);
+      return () => {
+        existingScript.removeEventListener("load", handleScriptLoad);
+      };
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.addEventListener("load", handleScriptLoad);
+    document.body.appendChild(script);
+
+    return () => {
+      script.removeEventListener("load", handleScriptLoad);
+    };
+  }, [recaptchaSiteKey]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -119,7 +182,18 @@ export default function ContactPage() {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.phone || !form.message) {
-      alert("⚠️ Please fill in all required fields.");
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    const responseToken =
+      window.grecaptcha?.getResponse(
+        recaptchaWidgetId.current !== null ? recaptchaWidgetId.current : undefined
+      ) || "";
+
+    if (!responseToken.length) {
+      setCaptchaVerified(false);
+      alert("Please complete the reCAPTCHA challenge.");
       return;
     }
 
@@ -132,15 +206,19 @@ export default function ContactPage() {
       });
 
       if (res.ok) {
-        alert("✅ Your message has been sent successfully!");
+        alert("Your message has been sent successfully!");
         setForm({ name: "", email: "", phone: "", message: "" });
         setCategory("");
         setSubCategory("");
+        if (recaptchaWidgetId.current !== null) {
+          window.grecaptcha?.reset(recaptchaWidgetId.current);
+        }
+        setCaptchaVerified(false);
       } else {
-        alert("❌ Failed to send message. Please try again later.");
+        alert("Failed to send message. Please try again later.");
       }
     } catch {
-      alert("⚠️ Network error. Please check your connection.");
+      alert("Network error. Please check your connection.");
     } finally {
       setLoading(false);
     }
@@ -249,23 +327,20 @@ export default function ContactPage() {
 
           {/* reCAPTCHA */}
           <div className="recaptcha-wrapper flex justify-center">
-            <div
-              className="g-recaptcha"
-              data-sitekey="6LeNPuUqAAAAAOLA9Q4l620A_HfT4V5MhdCxxVWX"
-            ></div>
+            <div id="recaptcha-container" className="g-recaptcha" />
           </div>
 
           {/* Submit */}
           <button
             type="submit"
-            disabled={!captchaVerified}
+            disabled={loading || !captchaVerified}
             className={`w-full py-3 px-6 rounded-lg font-semibold transition ${
-              captchaVerified
+              captchaVerified && !loading
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
           >
-            Submit
+            {loading ? "Sending..." : "Submit"}
           </button>
         </form>
       </div>
