@@ -180,12 +180,6 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!form.name || !form.email || !form.phone || !form.message) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-
     const responseToken =
       window.grecaptcha?.getResponse(
         recaptchaWidgetId.current !== null ? recaptchaWidgetId.current : undefined
