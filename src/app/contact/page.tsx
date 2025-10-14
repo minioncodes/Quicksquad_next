@@ -186,16 +186,16 @@ export default function ContactPage() {
       return;
     }
 
-    const responseToken =
-      window.grecaptcha?.getResponse(
-        recaptchaWidgetId.current !== null ? recaptchaWidgetId.current : undefined
-      ) || "";
+    // const responseToken =
+    //   window.grecaptcha?.getResponse(
+    //     recaptchaWidgetId.current !== null ? recaptchaWidgetId.current : undefined
+    //   ) || "";
 
-    if (!responseToken.length) {
-      setCaptchaVerified(false);
-      alert("Please complete the reCAPTCHA challenge.");
-      return;
-    }
+    // if (!responseToken.length) {
+    //   setCaptchaVerified(false);
+    //   alert("Please complete the reCAPTCHA challenge.");
+    //   return;
+    // }
 
     setLoading(true);
     try {
@@ -210,10 +210,10 @@ export default function ContactPage() {
         setForm({ name: "", email: "", phone: "", message: "" });
         setCategory("");
         setSubCategory("");
-        if (recaptchaWidgetId.current !== null) {
-          window.grecaptcha?.reset(recaptchaWidgetId.current);
-        }
-        setCaptchaVerified(false);
+        // if (recaptchaWidgetId.current !== null) {
+        //   window.grecaptcha?.reset(recaptchaWidgetId.current);
+        // }
+        // setCaptchaVerified(false);
       } else {
         alert("Failed to send message. Please try again later.");
       }
@@ -354,7 +354,7 @@ export default function ContactPage() {
           {/* Submit */}
           <button
             type="submit"
-            disabled={loading || !captchaVerified}
+            // disabled={loading || !captchaVerified}
             className={`w-full py-3 px-6 rounded-lg font-semibold transition ${
               captchaVerified && !loading
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
