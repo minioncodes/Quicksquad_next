@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     // ----------- 1️⃣  EMAIL TO ADMIN  ------------
     const adminMail = {
       from: `"QuickSquad Support" <${process.env.EMAIL_USER}>`,
-      to: "aman@digipants.com",
+      to: "devs@digipants.com",
       subject: `💻 New Support Inquiry from ${name}`,
       html: `
       <div style="background:#f0f5ff; padding:32px; font-family:'Segoe UI', Tahoma, sans-serif; color:#1e293b;">
