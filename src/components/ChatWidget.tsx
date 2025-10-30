@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FaRobot } from "react-icons/fa";
+import { SiOpenai } from "react-icons/si";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -73,11 +73,11 @@ export default function ChatWidget() {
       <button
         onClick={toggleWidget}
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center
-                   rounded-full bg-blue-700 text-white shadow-2xl hover:bg-blue-800
+                   rounded-full bg-blue-500 text-white shadow-2xl hover:bg-blue-700
                    transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
         aria-label="Open chat"
       >
-        <FaRobot size={24} />
+        <SiOpenai size={24} />
       </button>
 
       {open && (
@@ -89,7 +89,7 @@ export default function ChatWidget() {
           aria-label="AI Assistant"
         >
           {/* Header */}
-          <div className="p-4 font-semibold text-white bg-blue-700 flex justify-between items-center">
+          <div className="p-4 font-semibold text-white bg-blue-500 flex justify-between items-center">
             <span>Chat with AI</span>
             <button
               onClick={toggleWidget}
@@ -123,7 +123,7 @@ export default function ChatWidget() {
                 key={idx}
                 className={`px-3 py-2 rounded-lg max-w-[80%] text-[0.95rem] leading-relaxed shadow-sm ${
                   msg.role === "user"
-                    ? "ml-auto bg-blue-600 text-white"
+                    ? "ml-auto bg-blue-500 text-white"
                     : "bg-gray-100 text-gray-900"
                 }`}
               >
@@ -150,8 +150,8 @@ export default function ChatWidget() {
             />
             <button
               onClick={() => sendMessage()}
-              className="bg-blue-700 text-white px-4 py-2 rounded-md font-medium
-                         shadow hover:bg-blue-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md font-medium
+                         shadow hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
               Send
             </button>
