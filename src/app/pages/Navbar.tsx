@@ -147,8 +147,8 @@ export default function Navbar() {
             </div>
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-white" />
-              <a href="tel:(833) 921-5472" className="hover:underline">
-                (833) 921-5472
+              <a href="tel:(844) 587-5473" className="hover:underline">
+                (844) 587-5473
               </a>
             </div>
           </div>
@@ -322,7 +322,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-gray-800" />
-              <a href="tel:+18339215472">(833) 921-5472</a>
+              <a href="tel:+18339215472">(844) 587-5473</a>
             </div>
           </div>
 
