@@ -71,7 +71,7 @@ export default function Home() {
       <div className="space-x-4">
         <Link
           href="/contact"
-          className="bg-blue-800 px-6 py-3 rounded-lg hover:bg-blue-900 transition text-base sm:text-lg"
+          className="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition text-base sm:text-lg"
         >
           CONTACT US
         </Link>
@@ -207,7 +207,7 @@ export default function Home() {
             </p>
             <Link
               href="/about"
-              className="bg-white text-blue-600 px-5 py-2 rounded hover:bg-gray-200"
+              className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
             >
               Learn More
             </Link>
