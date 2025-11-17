@@ -10,7 +10,7 @@ export default function ChatWidget() {
   );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPrompts, setShowPrompts] = useState(true); // ✅ control quick prompts
+  const [showPrompts, setShowPrompts] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickPrompts = [
