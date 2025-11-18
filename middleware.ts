@@ -5,10 +5,10 @@ export function middleware(req: NextRequest) {
 
   if (req.nextUrl.pathname === "/") {
     if (country === "AU") {
-      return NextResponse.rewrite(new URL("au", req.url));
+      return NextResponse.rewrite(new URL("/au", req.url));
     }
     if (country === "US") {
-      return NextResponse.rewrite(new URL("us", req.url));
+      return NextResponse.rewrite(new URL("/us", req.url));
     }
   }
 
