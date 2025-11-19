@@ -1,14 +1,14 @@
 import { NextResponse, NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const country = req.geo?.country || "au";
+  const country = req.geo?.country || "IN"; // fallback
 
   if (req.nextUrl.pathname === "/") {
     if (country === "AU") {
-      return NextResponse.rewrite(new URL("au", req.url));
+      return NextResponse.rewrite(new URL("/au", req.url));
     }
     if (country === "US") {
-      return NextResponse.rewrite(new URL("us", req.url));
+      return NextResponse.rewrite(new URL("/us", req.url));
     }
   }
 
@@ -16,5 +16,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"],   // run middleware only on homepage
+  matcher: ["/"],
 };
