@@ -1,3 +1,4 @@
 [[edge_functions]]
 path = "/"
+excludedPath = ["/au", "/us", "/_next/*", "/images/*"]
 function = "geo"

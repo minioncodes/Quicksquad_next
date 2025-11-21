@@ -4,6 +4,11 @@ const geoHandler = async (request: Request) => {
 
   const url = new URL(request.url);
 
+  // Do not rewrite AU or US pages again → prevents infinite loop
+  if (url.pathname.startsWith("/au") || url.pathname.startsWith("/us")) {
+    return new Response(null);
+  }
+
   if (url.pathname === "/") {
     if (country === "AU") url.pathname = "/au";
     if (country === "US") url.pathname = "/us";
@@ -12,7 +17,7 @@ const geoHandler = async (request: Request) => {
   return new Response(null, {
     headers: {
       "x-middleware-rewrite": url.toString(),
-      "set-cookie": `country=${country}; Path=/; HttpOnly; Secure; SameSite=Lax`,
+      "set-cookie": `country=${country}; Path=/; HttpOnly; SameSite=Lax`,
     },
   });
 };
