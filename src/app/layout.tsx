@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { cookies, headers } from "next/headers";
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
 import Script from "next/script";
 import ChatWidget from "@/components/ChatWidget";
+import HeaderAu from "@/components/Header/HeaderAu";
+import HeaderUs from "@/components/Header/HeaderUs";
+import FooterAu from "@/components/Footer/FooterAu";
+import FooterUs from "@/components/Footer/FooterUs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,26 +68,45 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const cookieStore = await cookies();
+  const headerStore = headers();
+  const countryHeader = headerStore.get("x-country");
+  const country = countryHeader || cookieStore.get("country")?.value;
+
+  // Select proper header
+  const HeaderComponent =
+    country === "AU"
+      ? HeaderAu
+      : country === "US"
+      ? HeaderUs
+      : Navbar; // default
+
+  // Select proper footer
+  const FooterComponent =
+    country === "AU"
+      ? FooterAu
+      : country === "US"
+      ? FooterUs
+      : Footer; // default
+
   return (
     <html lang="en">
       <head>
-            <Script
+        <Script
           src="https://www.google.com/recaptcha/api.js"
           strategy="afterInteractive"
         />
-          </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          
-      <Navbar/>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <HeaderComponent />
         {children}
-        <ChatWidget/>
-      <Footer/>
+        <ChatWidget />
+        <FooterComponent />
       </body>
     </html>
   );
