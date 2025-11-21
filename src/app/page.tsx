@@ -54,6 +54,7 @@ export default function Home() {
       {/* Hero Section */}
 <section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white min-h-[100vh] flex items-center">
   <div className="container mx-auto grid md:grid-cols-2 gap-10 px-6">
+
     {/* Left Content */}
     <motion.div
       className="flex flex-col justify-center"
@@ -61,23 +62,34 @@ export default function Home() {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
     >
-      <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">
+      <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight font-[Poppins]">
         Your Go-To Guide for Everyday Queries!
       </h1>
-      <p className="text-lg sm:text-xl md:text-2xl mb-6 text-gray-100 max-w-2xl">
-        We’re here to link you with skilled specialists who are ready to
-        tackle your problems, day or night.
+
+      <p className="text-lg sm:text-xl md:text-2xl mb-6 text-gray-100 max-w-2xl font-[Inter]">
+        We’re here to link you with skilled specialists who are ready to tackle
+        your problems, day or night.
       </p>
+
       <div className="space-x-4">
+        {/* Gradient Button */}
         <Link
           href="/contact"
-          className="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition text-base sm:text-lg"
+          className="px-6 py-3 rounded-lg text-base sm:text-lg font-semibold 
+          bg-blue-600 
+          hover:opacity-90 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]
+          transition-all duration-300"
         >
           CONTACT US
         </Link>
+
+        {/* Outline Button */}
         <Link
           href="/about"
-          className="border border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition text-base sm:text-lg"
+          className="px-6 py-3 rounded-lg text-base sm:text-lg font-semibold 
+          border border-white/90 
+          hover:bg-white hover:text-blue-600 
+          transition-all duration-300"
         >
           ABOUT US
         </Link>
@@ -102,6 +114,7 @@ export default function Home() {
         />
       </div>
     </motion.div>
+
   </div>
 </section>
 
