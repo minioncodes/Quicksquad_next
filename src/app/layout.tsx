@@ -73,10 +73,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = await cookies();
-  const headerStore = headers();
-  const countryHeader = headerStore.get("x-country");
-  const country = countryHeader || cookieStore.get("country")?.value;
+const cookieStore = await cookies();
+const headerStore = await headers();
+
+const countryHeader = headerStore.get("x-country");
+const country = countryHeader || cookieStore.get("country")?.value;
+
 
   // Select proper header
   const HeaderComponent =
