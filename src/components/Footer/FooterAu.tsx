@@ -20,10 +20,10 @@ export default function FooterAu() {
         </Link>
           <p className="text-sm mb-4">
             Our website blends creativity, innovation, and functionality for a seamless
-            experience, helping you find solutions quickly and efficiently.
+            experience, helping you find solutions quickly and efficiently.(Australia)
           </p>
 
-          <h3 className="font-semibold mb-2">Information Australia</h3>
+          <h3 className="font-semibold mb-2">Information</h3>
           <div className="grid grid-cols-2 gap-2 text-sm">
             <ul className="space-y-1">
               <li><Link href="/services" className="hover:underline">Our Services</Link></li>

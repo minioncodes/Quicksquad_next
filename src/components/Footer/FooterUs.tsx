@@ -20,7 +20,7 @@ export default function FooterUs() {
         </Link>
           <p className="text-sm mb-4">
             Our website blends creativity, innovation, and functionality for a seamless
-            experience, helping you find solutions quickly and efficiently.
+            experience, helping you find solutions quickly and efficiently.(America)
           </p>
 
           <h3 className="font-semibold mb-2">Information America</h3>

@@ -148,8 +148,9 @@ export default function HeaderAu() {
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-white" />
               <a href="tel:(844) 587-5473" className="hover:underline">
-                Australia
+                (844) 587-5473
               </a>
+              <h2>(AU)</h2>
             </div>
           </div>
 
@@ -324,6 +325,7 @@ export default function HeaderAu() {
               <FaPhoneAlt className="text-gray-800" />
               <a href="tel:+18339215472">(844) 587-5473</a>
             </div>
+            <h2>(AU)</h2>
           </div>
 
           {/* Socials row */}
