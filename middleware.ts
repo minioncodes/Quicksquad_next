@@ -1,36 +1,45 @@
 import { NextResponse, NextRequest } from "next/server";
 
-// Set a country cookie for every request so layout can pick the right header/footer
-export function middleware(req: NextRequest) {
+// Define the shape we expect for req.geo.country (string or object with code)
+type GeoCountry = string | { code?: string } | undefined;
+
+function isCountryObject(x: GeoCountry): x is { code?: string } {
+  return typeof x === "object" && x !== null && "code" in x;
+}
+
+export function middleware(
+  req: NextRequest & { geo?: { country?: string | { code?: string } } }
+) {
   const url = req.nextUrl.clone();
   const pathCountry =
     url.pathname.startsWith("/au") ? "AU" : url.pathname.startsWith("/us") ? "US" : null;
 
-  // In dev, req.geo can be empty. Prefer explicit path hint if present.
-  const country = pathCountry || req.geo?.country || "IN"; // fallback if geo unavailable
+  // read into a local const so narrowing works predictably
+  const countryField: GeoCountry = req.geo?.country;
 
-  const onHome = url.pathname === "/";
+  // Handle both shapes: "AU" or { code: "AU" }
+  let geoCountry: string | undefined;
+  if (typeof countryField === "string") {
+    geoCountry = countryField;
+  } else if (isCountryObject(countryField)) {
+    geoCountry = countryField.code;
+  }
 
-  const response = onHome
-    ? NextResponse.rewrite(
-        country === "AU"
-          ? new URL("/au", req.url)
-          : country === "US"
-          ? new URL("/us", req.url)
-          : new URL("/", req.url)
-      )
-    : NextResponse.next();
+  const country = pathCountry || geoCountry || "IN";
+
+  // No rewriting — only continue
+  const response = NextResponse.next();
 
   response.cookies.set("country", country, {
     path: "/",
     httpOnly: true,
   });
-  response.headers.set("x-country", country); // also pass via header for SSR
+
+  response.headers.set("x-country", country);
 
   return response;
 }
 
-// Run on all routes except Next internals/assets so AU/US pages also receive the cookie
 export const config = {
   matcher: ["/((?!_next|_static|_vercel|.*\\.\\w+$).*)"],
 };
