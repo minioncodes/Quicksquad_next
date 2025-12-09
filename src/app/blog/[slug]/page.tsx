@@ -1,7 +1,7 @@
 // app/blog/[slug]/page.tsx  (or wherever you keep it)
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect,useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 

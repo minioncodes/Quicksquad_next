@@ -5,4 +5,5 @@ export interface Blog {
   content: string;
   date: string;
   image: string;
+  category:string;
 }

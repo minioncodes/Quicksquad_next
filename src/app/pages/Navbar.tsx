@@ -239,35 +239,92 @@ export default function Navbar() {
 
       {/* Mobile Menu Sheet */}
       <nav
-        className={`md:hidden fixed z-50 inset-x-0 top-16 bg-gray-100 text-black shadow-xl transition-transform duration-200 ${
-          menuOpen ? "translate-y-0" : "-translate-y-3 pointer-events-none opacity-0"
-        }`}
+  className={`md:hidden fixed z-50 inset-x-0 top-16 bg-gray-100 text-black shadow-xl 
+  transition-transform duration-200 ${
+    menuOpen ? "translate-y-0" : "-translate-y-3 pointer-events-none opacity-0"
+  }`}
+>
+  <div className="px-6 py-5 space-y-5">
+
+    {/* Internal Links (use Next.js Link) */}
+    <Link href="/" onClick={() => setMenuOpen(false)} className="block text-base">
+      HOME
+    </Link>
+    <Link href="/about" onClick={() => setMenuOpen(false)} className="block text-base">
+      ABOUT
+    </Link>
+    <Link href="/blog" onClick={() => setMenuOpen(false)} className="block text-base">
+      BLOG
+    </Link>
+    <Link href="/contact" onClick={() => setMenuOpen(false)} className="block text-base">
+      CONTACT
+    </Link>
+    <Link href="/pricing" onClick={() => setMenuOpen(false)} className="block text-base">
+      PRICING
+    </Link>
+
+    {/* Contact Section */}
+    <div className="pt-2 space-y-3 text-sm text-gray-700">
+
+      <div className="flex items-center gap-2">
+        <FaEnvelope />
+        <a
+          href="mailto:support@quicksquad.live"
+          className="hover:underline"
+        >
+          support@quicksquad.live
+        </a>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <FaPhoneAlt />
+        <a
+          href="tel:+18889074097"
+          className="hover:underline"
+        >
+          (888) 907-4097
+        </a>
+      </div>
+
+    </div>
+
+    {/* Social Icons */}
+    <div className="flex items-center gap-6 pt-3 text-xl">
+
+      <a
+        href="https://facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+        className="hover:text-blue-600"
       >
-        <div className="px-6 py-5 space-y-5">
-          <Link href="/" onClick={() => setMenuOpen(false)}>HOME</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>ABOUT</Link>
-          <Link href="/blog" onClick={() => setMenuOpen(false)}>BLOG</Link>
-          <Link href="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
-          <Link href="/pricing" onClick={() => setMenuOpen(false)}>PRICING</Link>
+        <FaFacebookF />
+      </a>
 
-          <div className="pt-2 space-y-2 text-sm text-gray-700">
-            <div className="flex items-center gap-2">
-              <FaEnvelope />
-              <Link href="mailto:support@quicksquad.live">support@quicksquad.live</Link>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaPhoneAlt />
-              <Link href="tel:(888) 907-4097">(888) 907-4097</Link>
-            </div>
-          </div>
+      <a
+        href="https://instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram"
+        className="hover:text-pink-500"
+      >
+        <FaInstagram />
+      </a>
 
-          <div className="flex items-center gap-6 pt-1 text-xl">
-            <Link href="https://facebook.com" target="_blank"><FaFacebookF /></Link>
-            <Link href="https://instagram.com" target="_blank"><FaInstagram /></Link>
-            <Link href="https://x.com" target="_blank"><FaXTwitter /></Link>
-          </div>
-        </div>
-      </nav>
+      <a
+        href="https://x.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Twitter / X"
+        className="hover:text-black"
+      >
+        <FaXTwitter />
+      </a>
+
+    </div>
+  </div>
+</nav>
+
     </header>
   );
 }
