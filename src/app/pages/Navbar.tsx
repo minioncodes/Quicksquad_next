@@ -11,26 +11,47 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import blogPosts from "@/data/blog.json";
+
+interface Blog {
+  _id: string;
+  title: string;
+  slug: string;
+}
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [results, setResults] = useState<Blog[]>([]);
   const pathname = usePathname();
 
-  // Filtered search results
-  const results = blogPosts.filter((post) =>
-    post.title.toLowerCase().includes(query.toLowerCase())
-  );
+  /* -------------------- SEARCH FETCH (Debounced) -------------------- */
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults([]);
+      return;
+    }
 
-  // Close sheets on route change
+    const delay = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/blogs/search?q=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        setResults(data.blogs || []);
+      } catch (error) {
+        console.error("Search error:", error);
+      }
+    }, 300);
+
+    return () => clearTimeout(delay);
+  }, [query]);
+
+  /* -------------------- CLOSE ON ROUTE CHANGE -------------------- */
   useEffect(() => {
     setMenuOpen(false);
     setSearchOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile sheets are open
+  /* -------------------- BODY SCROLL LOCK -------------------- */
   useEffect(() => {
     const anyOpen = menuOpen || searchOpen;
     document.body.style.overflow = anyOpen ? "hidden" : "";
@@ -39,7 +60,7 @@ export default function Navbar() {
     };
   }, [menuOpen, searchOpen]);
 
-  // Close on ESC
+  /* -------------------- ESC CLOSE -------------------- */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -69,21 +90,11 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 relative">
-          <Link href="/" className="hover:text-gray-200">
-            HOME
-          </Link>
-          <Link href="/about" className="hover:text-gray-200">
-            ABOUT
-          </Link>
-          <Link href="/blog" className="hover:text-gray-200">
-            BLOG
-          </Link>
-          <Link href="/contact" className="hover:text-gray-200">
-            CONTACT
-          </Link>
-          <Link href="/pricing" className="hover:text-gray-200">
-            PRICING
-          </Link>
+          <Link href="/" className="hover:text-gray-200">HOME</Link>
+          <Link href="/about" className="hover:text-gray-200">ABOUT</Link>
+          <Link href="/blog" className="hover:text-gray-200">BLOG</Link>
+          <Link href="/contact" className="hover:text-gray-200">CONTACT</Link>
+          <Link href="/pricing" className="hover:text-gray-200">PRICING</Link>
 
           {/* Search */}
           <div className="relative">
@@ -105,11 +116,12 @@ export default function Navbar() {
                   onChange={(e) => setQuery(e.target.value)}
                   className="w-full border border-gray-300 rounded px-3 py-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+
                 <div className="max-h-48 overflow-y-auto">
                   {query && results.length > 0 ? (
-                    results.map((post, i) => (
+                    results.map((post) => (
                       <Link
-                        key={i}
+                        key={post._id}
                         href={`/blog/${post.slug}`}
                         className="block px-2 py-1 rounded hover:bg-gray-100"
                         onClick={() => {
@@ -121,13 +133,9 @@ export default function Navbar() {
                       </Link>
                     ))
                   ) : query ? (
-                    <p className="text-sm text-gray-500 px-2">
-                      No blogs found
-                    </p>
+                    <p className="text-sm text-gray-500 px-2">No blogs found</p>
                   ) : (
-                    <p className="text-sm text-gray-400 px-2">
-                      Type to search…
-                    </p>
+                    <p className="text-sm text-gray-400 px-2">Type to search…</p>
                   )}
                 </div>
               </div>
@@ -138,44 +146,23 @@ export default function Navbar() {
           <div className="flex items-center gap-6 text-sm">
             <div className="flex items-center gap-2">
               <FaEnvelope className="text-white" />
-              <a
-                href="mailto:support@quicksquad.live"
-                className="hover:underline"
-              >
+              <Link href="mailto:support@quicksquad.live" className="hover:underline">
                 support@quicksquad.live
-              </a>
+              </Link>
             </div>
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-white" />
-              <a href="tel:(888) 907-4097" className="hover:underline">
+              <Link href="tel:(888) 907-4097" className="hover:underline">
                 (888) 907-4097
-              </a>
+              </Link>
             </div>
           </div>
 
           {/* Socials */}
           <div className="flex items-center gap-4">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="https://x.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaXTwitter />
-            </a>
+            <Link href="https://facebook.com" target="_blank"><FaFacebookF /></Link>
+            <Link href="https://instagram.com" target="_blank"><FaInstagram /></Link>
+            <Link href="https://x.com" target="_blank"><FaXTwitter /></Link>
           </div>
         </nav>
 
@@ -192,7 +179,7 @@ export default function Navbar() {
             <FaSearch className="text-xl" />
           </button>
 
-          {/* Hamburger */}
+          {/* Hamburger Menu */}
           <button
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
@@ -202,23 +189,10 @@ export default function Navbar() {
               if (searchOpen) setSearchOpen(false);
             }}
           >
-            <span className="sr-only">Open menu</span>
             <div className="space-y-1.5">
-              <span
-                className={`block w-6 h-0.5 bg-white transition ${
-                  menuOpen ? "translate-y-2 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block w-6 h-0.5 bg-white transition ${
-                  menuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block w-6 h-0.5 bg-white transition ${
-                  menuOpen ? "-translate-y-2 -rotate-45" : ""
-                }`}
-              />
+              <span className={`block w-6 h-0.5 bg-white transition ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
+              <span className={`block w-6 h-0.5 bg-white transition ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`block w-6 h-0.5 bg-white transition ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
             </div>
           </button>
         </div>
@@ -226,11 +200,8 @@ export default function Navbar() {
 
       {/* Mobile Search Sheet */}
       <div
-        className={`md:hidden fixed z-50 inset-x-0 top-16 bg-white text-black shadow-xl transition-transform duration-200
-        ${
-          searchOpen
-            ? "translate-y-0"
-            : "-translate-y-3 pointer-events-none opacity-0"
+        className={`md:hidden fixed z-50 inset-x-0 top-16 bg-white text-black shadow-xl transition-transform duration-200 ${
+          searchOpen ? "translate-y-0" : "-translate-y-3 pointer-events-none opacity-0"
         }`}
       >
         <div className="px-4 py-3">
@@ -241,11 +212,12 @@ export default function Navbar() {
             onChange={(e) => setQuery(e.target.value)}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+
           <div className="max-h-56 overflow-y-auto mt-2">
             {query && results.length > 0 ? (
-              results.map((post, i) => (
+              results.map((post) => (
                 <Link
-                  key={i}
+                  key={post._id}
                   href={`/blog/${post.slug}`}
                   className="block px-2 py-2 rounded hover:bg-gray-100"
                   onClick={() => {
@@ -267,91 +239,32 @@ export default function Navbar() {
 
       {/* Mobile Menu Sheet */}
       <nav
-        className={`md:hidden fixed z-50 inset-x-0 top-16 bg-gray-100 text-black shadow-xl transition-transform duration-200
-        ${
-          menuOpen
-            ? "translate-y-0"
-            : "-translate-y-3 pointer-events-none opacity-0"
+        className={`md:hidden fixed z-50 inset-x-0 top-16 bg-gray-100 text-black shadow-xl transition-transform duration-200 ${
+          menuOpen ? "translate-y-0" : "-translate-y-3 pointer-events-none opacity-0"
         }`}
-        aria-hidden={!menuOpen}
       >
         <div className="px-6 py-5 space-y-5">
-          <Link
-            href="/"
-            className="block text-base tracking-wide"
-            onClick={() => setMenuOpen(false)}
-          >
-            HOME
-          </Link>
-          <Link
-            href="/about"
-            className="block text-base tracking-wide"
-            onClick={() => setMenuOpen(false)}
-          >
-            ABOUT
-          </Link>
-          <Link
-            href="/blog"
-            className="block text-base tracking-wide"
-            onClick={() => setMenuOpen(false)}
-          >
-            BLOG
-          </Link>
-          <Link
-            href="/contact"
-            className="block text-base tracking-wide"
-            onClick={() => setMenuOpen(false)}
-          >
-            CONTACT
-          </Link>
-          <Link
-            href="/pricing"
-            className="block text-base tracking-wide"
-            onClick={() => setMenuOpen(false)}
-          >
-            PRICING
-          </Link>
+          <Link href="/" onClick={() => setMenuOpen(false)}>HOME</Link>
+          <Link href="/about" onClick={() => setMenuOpen(false)}>ABOUT</Link>
+          <Link href="/blog" onClick={() => setMenuOpen(false)}>BLOG</Link>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
+          <Link href="/pricing" onClick={() => setMenuOpen(false)}>PRICING</Link>
 
-          {/* Contact row */}
           <div className="pt-2 space-y-2 text-sm text-gray-700">
             <div className="flex items-center gap-2">
-              <FaEnvelope className="text-gray-800" />
-              <a href="mailto:support@quicksquad.live">
-                support@quicksquad.live
-              </a>
+              <FaEnvelope />
+              <Link href="mailto:support@quicksquad.live">support@quicksquad.live</Link>
             </div>
             <div className="flex items-center gap-2">
-              <FaPhoneAlt className="text-gray-800" />
-              <a href="tel:(888) 907-4097">(888) 907-4097</a>
+              <FaPhoneAlt />
+              <Link href="tel:(888) 907-4097">(888) 907-4097</Link>
             </div>
           </div>
 
-          {/* Socials row */}
           <div className="flex items-center gap-6 pt-1 text-xl">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <FaInstagram />
-            </a>
-            <a
-              href="https://x.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X / Twitter"
-            >
-              <FaXTwitter />
-            </a>
+            <Link href="https://facebook.com" target="_blank"><FaFacebookF /></Link>
+            <Link href="https://instagram.com" target="_blank"><FaInstagram /></Link>
+            <Link href="https://x.com" target="_blank"><FaXTwitter /></Link>
           </div>
         </div>
       </nav>

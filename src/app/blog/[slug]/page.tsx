@@ -1,131 +1,208 @@
-import { notFound } from "next/navigation";
-import blogs from "@/data/blog.json";
+// app/blog/[slug]/page.tsx  (or wherever you keep it)
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 interface Blog {
-  slug: string;
+  _id?: string;
   title: string;
   image: string;
   date: string;
-  description: string;
-  content: string;
-  category: string;
-  tags: string[];
-  readingTime: string;
-  highlight: string;
-  related: string[];
+  content: string; // html
+  slug: string;
+  excerpt?: string;
+  tags?: string[]; // optional
 }
 
-type RouteParams = { slug: string };
+interface BlogPageProps {
+  params: { slug: string };
+}
 
-export default async function BlogPost({
-  params,
-}: {
-  params: Promise<RouteParams>;
-}) {
-  const { slug } = await params;
+export default function BlogDetailPage({ params }: BlogPageProps) {
+  const { slug } = params;
+  const [blog, setBlog] = useState<Blog | null>(null);
+  const [recommended, setRecommended] = useState<Blog[]>([]);
+  const [allBlogs, setAllBlogs] = useState<Blog[]>([]);
 
-  const blog = (blogs as Blog[]).find((b) => b.slug === slug);
+  // fetch single blog
+  useEffect(() => {
+    setBlog(null);
+    async function fetchBlog() {
+      try {
+        const res = await fetch(`/api/blogs/${slug}`);
+        if (!res.ok) throw new Error("Failed to load blog");
+        const data: Blog = await res.json();
+        setBlog(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchBlog();
+  }, [slug]);
 
-  if (!blog) notFound();
+  // fetch all blogs for recommendations (only once)
+  useEffect(() => {
+    async function fetchAll() {
+      try {
+        const res = await fetch("/api/blogs");
+        if (!res.ok) throw new Error("Failed to load blogs");
+        const data: Blog[] = await res.json();
+        setAllBlogs(data || []);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchAll();
+  }, []);
 
-  const relatedPosts = (blogs as Blog[]).filter((b) =>
-    blog.related.includes(b.slug)
-  );
+  // compute a lightweight similarity score between text A and B
+  const textScore = (a: string, b: string) => {
+    if (!a || !b) return 0;
+    const norm = (s: string) =>
+      s
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .split(/\s+/)
+        .filter(Boolean);
+    const wa = norm(a);
+    const wb = new Set(norm(b));
+    let score = 0;
+    wa.forEach((w) => {
+      if (wb.has(w)) score += 1;
+    });
+    return score;
+  };
+
+  // build recommended list when blog + allBlogs available
+  useEffect(() => {
+    if (!blog || allBlogs.length === 0) {
+      setRecommended([]);
+      return;
+    }
+
+    // exclude current
+    const others = allBlogs.filter((b) => b.slug !== blog.slug);
+
+    // If tags exist, prefer those sharing tags
+    const scored = others.map((b) => {
+      let score = 0;
+      // tag overlap
+      if (Array.isArray(blog.tags) && Array.isArray(b.tags)) {
+        const aTags = new Set(blog.tags.map((t) => t.toLowerCase()));
+        score += b.tags.reduce((acc, t) => acc + (aTags.has(t.toLowerCase()) ? 8 : 0), 0);
+      }
+      // title/content overlap
+      score += textScore(blog.title + " " + (blog.excerpt || blog.content || ""), b.title + " " + (b.excerpt || b.content || "")) * 1;
+      // small boost for more recent posts (optional — uses date string)
+      try {
+        const d = new Date(b.date).getTime() || 0;
+        score += Math.min(3, Math.round((d / 1e10) % 4)); // tiny stable boost
+      } catch {}
+
+      return { blog: b, score };
+    });
+
+    // sort by score desc and pick top 3
+    scored.sort((a, b) => b.score - a.score);
+    const top = scored.slice(0, 3).map((s) => s.blog);
+
+    // fallback: if none scored positive, pick 3 random
+    if (top.length === 0 && others.length > 0) {
+      const sample = others.slice(0, 3);
+      setRecommended(sample);
+    } else {
+      setRecommended(top);
+    }
+  }, [blog, allBlogs]);
+
+  if (!blog) return <p className="p-10 text-center text-gray-600">Loading...</p>;
+
+  // utility: small excerpt from HTML content
+  const excerptFromHtml = (html: string, max = 140) => {
+    const txt = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+    return txt.length <= max ? txt : txt.slice(0, max).trim() + "…";
+  };
 
   return (
-    <article className="max-w-4xl mx-auto px-6 py-12 text-neutral-900 animate-fadeIn">
-      {/* Blog Header */}
-      <header className="mb-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight mb-4">
+    <main className="px-4 sm:px-6 lg:px-8 py-12 max-w-4xl mx-auto text-black">
+      {/* Hero */}
+      <div className="mb-8">
+        <div className="h-1 w-20 bg-blue-600 rounded-full mb-4" />
+        <div className="w-full rounded-xl overflow-hidden shadow-lg mb-6">
+          <Image
+            src={blog.image}
+            alt={blog.title}
+            width={1200}
+            height={600}
+            className="w-full h-64 sm:h-80 md:h-96 object-cover"
+          />
+        </div>
+
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-3 text-black">
           {blog.title}
         </h1>
-
-        <div className="flex items-center text-sm text-neutral-500 gap-3 flex-wrap">
-          <span>{blog.date}</span>
-          <span>•</span>
-          <span>{blog.readingTime}</span>
-
-          <span className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded-lg border border-blue-100">
-            {blog.category}
-          </span>
-        </div>
-      </header>
-
-      {/* Featured Image */}
-      <div className="rounded-xl overflow-hidden shadow-lg mb-10 bg-neutral-100">
-        <Image
-          width={1600}
-          height={720}
-          src={blog.image}
-          alt={blog.title}
-          className="w-full h-80 md:h-[420px] object-cover transition-transform duration-500 hover:scale-[1.02]"
-        />
+        <p className="text-sm text-gray-500 mb-8">
+          {new Date(blog.date).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
       </div>
 
-      {/* Highlight */}
-      <blockquote className="border-l-4 border-blue-500 pl-5 italic text-neutral-700 bg-neutral-50 p-4 rounded-lg mb-10 shadow-sm">
-        “{blog.highlight}”
-      </blockquote>
-
       {/* Content */}
-      <div
-        className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-img:rounded-xl prose-blockquote:border-l-4 prose-blockquote:border-blue-400 prose-blockquote:italic prose-blockquote:text-neutral-600"
+      <article
+        className="prose prose-lg max-w-none text-gray-800 prose-headings:text-black"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
-      {/* Tags */}
-      <section className="mt-12">
-        <h3 className="font-semibold text-xl mb-3">Tags</h3>
-        <div className="flex flex-wrap gap-2">
-          {blog.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="px-4 py-1.5 text-sm bg-neutral-100 text-neutral-700 rounded-full border hover:bg-neutral-200 transition"
-            >
-              #{tag}
-            </span>
-          ))}
+      {/* CTA */}
+      <div className="mt-12 bg-gradient-to-r from-blue-50 to-white border border-gray-100 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 className="text-lg font-semibold text-black">Found this helpful?</h3>
+          <p className="text-gray-500">If you need help, our experts are available 24/7.</p>
         </div>
-      </section>
+        <div>
+          <a
+            href="/contact"
+            className="inline-block bg-blue-600 text-white px-4 py-2 rounded-md shadow hover:bg-blue-700"
+          >
+            Contact Support
+          </a>
+        </div>
+      </div>
 
-      {/* Related Posts */}
-      {relatedPosts.length > 0 && (
-        <section className="mt-16 border-t pt-10">
-          <h3 className="font-bold text-2xl mb-6">Related Posts</h3>
+      {/* Recommended */}
+      {recommended.length > 0 && (
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold text-black mb-4">Recommended for you</h2>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {relatedPosts.map((post) => (
-              <Link
-                href={`/blog/${post.slug}`}
-                key={post.slug}
-                className="group border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition bg-white"
-              >
-                <Image
-                  width={1600}
-                  height={720}
-                  src={post.image}
-                  alt={post.title}
-                  className="h-40 w-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                />
-
-                <div className="p-4">
-                  <h4 className="font-semibold text-lg mb-1 group-hover:text-blue-600 transition">
-                    {post.title}
-                  </h4>
-                  <p className="text-sm text-neutral-500">{post.date}</p>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {recommended.map((r) => (
+              <Link key={r.slug} href={`/blog/${r.slug}`} className="group">
+                <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1">
+                  <div className="relative w-full h-40 sm:h-36">
+                    <Image
+                      src={r.image}
+                      alt={r.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-xs text-gray-500 mb-1">{new Date(r.date).toLocaleDateString()}</p>
+                    <h3 className="text-sm font-semibold text-black mb-2 line-clamp-2">{r.title}</h3>
+                    <p className="text-xs text-gray-500">{r.excerpt ?? excerptFromHtml(r.content || "", 100)}</p>
+                  </div>
+                </article>
               </Link>
             ))}
           </div>
         </section>
       )}
-    </article>
+    </main>
   );
-}
-
-// unchanged
-export async function generateStaticParams() {
-  return (blogs as Blog[]).map((b) => ({ slug: b.slug }));
 }
