@@ -60,7 +60,7 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-xs opacity-80">July 11, 2024</p>
-              <Link href="/blog/computer-problem" className="font-medium block hover:underline">
+              <Link href="/blog/common-computer-problems" className="font-medium block hover:underline">
                 Common Computer Problems & How to Fix Them
               </Link>
               <p className="text-sm opacity-80">
