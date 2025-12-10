@@ -53,7 +53,7 @@ export default function BlogPage() {
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-white text-gray-500 shadow-md rounded-xl p-4 mb-10 flex flex-wrap gap-4 items-center justify-between"
+        className="bg-white text-gray-700 shadow-md rounded-xl p-4 mb-10 flex flex-wrap gap-4 items-center justify-between"
       >
         {/* Search */}
         <input
@@ -66,6 +66,7 @@ export default function BlogPage() {
 
         {/* Category Filter */}
         <select
+        title="Category"
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -77,6 +78,7 @@ export default function BlogPage() {
 
         {/* Sort Filter */}
         <select
+        title="Filter"
           className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
           value={sort}
           onChange={(e) => setSort(e.target.value)}
@@ -92,7 +94,7 @@ export default function BlogPage() {
             setCategory("All");
             setSort("latest");
           }}
-          className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+          className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-blue-500 hover:text-white transition"
         >
           Reset Filters
         </button>
