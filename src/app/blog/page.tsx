@@ -83,8 +83,8 @@ export default function BlogPage() {
           value={sort}
           onChange={(e) => setSort(e.target.value)}
         >
-          <option value="latest">Latest First</option>
-          <option value="oldest">Oldest First</option>
+          <option value="oldest">Latest First</option>
+          <option value="latest">Oldest First</option>
         </select>
 
         {/* Reset Button */}
