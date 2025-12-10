@@ -138,12 +138,31 @@ export default function BlogPage() {
         ))}
       </div>
 
-      {/* NO RESULTS */}
-      {filteredBlogs.length === 0 && (
-        <p className="text-center text-gray-500 mt-10 text-lg">
-          No blogs found matching your filters.
-        </p>
-      )}
+{/* NO RESULTS → Replace this whole block */}
+{filteredBlogs.length === 0 && (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="flex flex-col items-center justify-center mt-16"
+  >
+    {/* Spinner */}
+    <motion.div
+      className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full"
+      animate={{ rotate: 360 }}
+      transition={{
+        repeat: Infinity,
+        duration: 0.8,
+        ease: "linear",
+      }}
+    />
+
+    <p className="text-gray-500 mt-6 text-lg">
+      Searching blogs…
+    </p>
+  </motion.div>
+)}
+
     </main>
   );
 }
