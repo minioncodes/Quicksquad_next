@@ -1,16 +1,39 @@
 // src/app/api/admin/blogs/[id]/route.ts
+import { cookies } from "next/headers";
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import { Blog } from "@/lib/models/Blog";
 import mongoose from "mongoose";
-import { cookies } from "next/headers";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 
-/** Determine authorization from Bearer header or cookies.
- *  Returns true when authorized, false otherwise.
- */
-async function isAuthorized(req: Request): Promise<boolean> {
+/* Minimal cookie interface matching what we call (.get(name)) */
+interface SimpleCookie {
+  name: string;
+  value: string;
+}
+interface SimpleCookies {
+  get(name: string): SimpleCookie | undefined;
+}
+
+/* Handler context: params may be sync or Promise (toolchain-dependent) */
+type HandlerContext =
+  | { params?: { id?: string } }
+  | { params?: Promise<{ id?: string }> };
+
+/* Generic Awaitable */
+type Awaitable<T> = T | Promise<T>;
+
+/* Narrow, safe promise detector without using `any` */
+function isPromise<T>(v: Awaitable<T>): v is Promise<T> {
+  // check typical duck-typed .then function
+  // cast to unknown then to object-with-then to avoid `any`
+  const maybe = v as unknown;
+  return typeof (maybe as { then?: unknown }).then === "function";
+}
+
+async function isAuthorized(req: NextRequest): Promise<boolean> {
   if (!ADMIN_PASSWORD) {
     console.warn("ADMIN_PASSWORD not configured - rejecting admin requests.");
     return false;
@@ -21,9 +44,11 @@ async function isAuthorized(req: Request): Promise<boolean> {
   const [type, token] = auth.split(" ");
   if (type === "Bearer" && token === ADMIN_PASSWORD) return true;
 
-  // 2) Next cookies() API
+  // 2) cookies() — handle both sync and Promise-returning shapes
   try {
-    const rCookies = await cookies();
+    const maybeCookies = cookies() as Awaitable<SimpleCookies>;
+    const rCookies = isPromise(maybeCookies) ? await maybeCookies : maybeCookies;
+
     const cookieNamesToCheck = ["qs_admin_session", "qs_admin", "qs_admin_token"];
     for (const name of cookieNamesToCheck) {
       const c = rCookies.get(name);
@@ -82,20 +107,16 @@ function extractErrorMessage(err: unknown): string {
  * - Fallback to parsing the request URL path last segment
  */
 function getIdFromRequest(req: Request, params?: { id?: string } | null): string | undefined {
-  // 1) direct params (recommended)
   if (params && typeof params.id === "string" && params.id) return params.id;
 
-  // 2) fallback to parsing URL (works in many server contexts)
   try {
     const u = new URL(req.url);
-    // split pathname and get last non-empty segment
     const segments = u.pathname.split("/").filter(Boolean);
     if (segments.length > 0) {
       const possible = segments[segments.length - 1];
-      // If route uses [id], last segment usually is the id
       return possible || undefined;
     }
-  } catch (err) {
+  } catch {
     // ignore
   }
 
@@ -103,9 +124,12 @@ function getIdFromRequest(req: Request, params?: { id?: string } | null): string
 }
 
 /* -------------------- Handlers -------------------- */
-export async function GET(req: Request, { params }: { params?: { id?: string } } = {}) {
+/* Use context?: HandlerContext (no default {} so no implicit any) */
+export async function GET(req: NextRequest, context?: HandlerContext) {
   try {
-    const id = getIdFromRequest(req, params);
+    const paramsResolved =
+      context?.params && isPromise(context.params) ? await context.params : (context as { params?: { id?: string } })?.params;
+    const id = getIdFromRequest(req, paramsResolved);
     if (!id) {
       console.warn("GET /api/admin/blogs/[id] called without params.id and fallback failed. req.url:", req.url);
       return NextResponse.json({ error: "Missing id param" }, { status: 400 });
@@ -122,11 +146,13 @@ export async function GET(req: Request, { params }: { params?: { id?: string } }
   }
 }
 
-export async function PUT(req: Request, { params }: { params?: { id?: string } } = {}) {
+export async function PUT(req: NextRequest, context?: HandlerContext) {
   try {
     if (!(await isAuthorized(req))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const id = getIdFromRequest(req, params);
+    const paramsResolved =
+      context?.params && isPromise(context.params) ? await context.params : (context as { params?: { id?: string } })?.params;
+    const id = getIdFromRequest(req, paramsResolved);
     if (!id) {
       console.warn("PUT /api/admin/blogs/[id] called without params.id and fallback failed. req.url:", req.url);
       return NextResponse.json({ error: "Missing id param" }, { status: 400 });
@@ -149,7 +175,6 @@ export async function PUT(req: Request, { params }: { params?: { id?: string } }
 
     await connectDB();
 
-    // check slug conflict but ignore same document
     const conflict = await Blog.findOne({ slug }).lean();
     if (conflict && String(conflict._id) !== String(id)) {
       return NextResponse.json({ error: "Slug already used by another blog" }, { status: 409 });
@@ -176,11 +201,13 @@ export async function PUT(req: Request, { params }: { params?: { id?: string } }
   }
 }
 
-export async function DELETE(req: Request, { params }: { params?: { id?: string } } = {}) {
+export async function DELETE(req: NextRequest, context?: HandlerContext) {
   try {
     if (!(await isAuthorized(req))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const id = getIdFromRequest(req, params);
+    const paramsResolved =
+      context?.params && isPromise(context.params) ? await context.params : (context as { params?: { id?: string } })?.params;
+    const id = getIdFromRequest(req, paramsResolved);
     if (!id) {
       console.warn("DELETE /api/admin/blogs/[id] called without params.id and fallback failed. req.url:", req.url);
       return NextResponse.json({ error: "Missing id param" }, { status: 400 });
