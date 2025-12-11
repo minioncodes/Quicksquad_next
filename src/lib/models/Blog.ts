@@ -1,11 +1,25 @@
-import { Schema, model, models } from "mongoose";
+// src/lib/models/Blog.ts
+import mongoose, { Document, Model } from "mongoose";
 
-const BlogSchema = new Schema({
+export interface IBlog extends Document {
+  title: string;
+  slug: string;
+  image?: string;
+  date?: string;
+  category?: string;
+  content: string; // HTML or markdown
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const BlogSchema = new mongoose.Schema<IBlog>({
   title: { type: String, required: true },
-  slug: { type: String, required: true, unique: true },
+  slug: { type: String, required: true, unique: true, index: true },
+  image: { type: String },
+  date: { type: String },
+  category: { type: String },
   content: { type: String, required: true },
-  date: { type: String, required: true },
-  image: { type: String, required: true }
-});
+}, { timestamps: true });
 
-export const Blog = models.Blog || model("Blog", BlogSchema);
+// Prevent model overwrite in dev
+export const Blog: Model<IBlog> = mongoose.models.Blog || mongoose.model<IBlog>("Blog", BlogSchema);
