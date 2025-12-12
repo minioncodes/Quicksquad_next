@@ -473,9 +473,9 @@ export default function AdminPage() {
                       <div className="text-xs text-gray-500">{b.slug} • {b.date ? new Date(b.date).toLocaleDateString() : ""}</div>
                     </div>
                     <div className="flex items-center gap-2">
-                      <button onClick={() => startEdit(b)} className="px-2 py-1 text-sm bg-yellow-100 rounded">Edit</button>
-                      <button onClick={() => handleDelete(b._id)} className="px-2 py-1 text-sm bg-red-100 rounded">Delete</button>
-                      <Link href={`/blog/${b.slug}`} className="px-2 py-1 text-sm bg-blue-50 rounded">View</Link>
+                      <button onClick={() => startEdit(b)} className="px-2 py-1 text-sm bg-yellow-400 rounded">Edit</button>
+                      <button onClick={() => handleDelete(b._id)} className="px-2 py-1 text-sm bg-red-400 rounded">Delete</button>
+                      <Link href={`/blog/${b.slug}`} className="px-2 py-1 text-sm bg-blue-400 rounded">View</Link>
                     </div>
                   </div>
                 </div>
