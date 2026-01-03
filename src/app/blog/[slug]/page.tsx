@@ -123,7 +123,27 @@ export default function BlogDetailPageClient() {
       <p className="text-gray-500 text-sm mb-8">{blog.date}</p>
 
       <article
-        className="prose prose-lg max-w-none text-black prose-p:mb-6 prose-p:text-gray-700 prose-a:text-blue-600 prose-headings:text-black"
+        className="
+          max-w-none text-gray-700 leading-8
+      
+          [&>p]:mb-6
+          [&>p]:text-gray-700
+      
+          [&>h2]:text-2xl
+          [&>h2]:font-semibold
+          [&>h2]:text-black
+          [&>h2]:mt-12
+          [&>h2]:mb-4
+      
+          [&>ul]:my-6
+          [&>ul]:pl-6
+          [&>ul]:list-disc
+      
+          [&>ul>li]:mb-3
+      
+          [&_strong]:text-black
+          [&_strong]:font-semibold
+        "
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
