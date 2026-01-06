@@ -105,6 +105,8 @@ export default function ContactPage() {
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const [loading, setLoading] = useState(false);
   const recaptchaWidgetId = useRef<number | null>(null);
+const [successMsg, setSuccessMsg] = useState("");
+const [errorMsg, setErrorMsg] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -178,51 +180,47 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    if (!form.name || !form.email || !form.phone || !form.message) {
-      alert("Please fill in all required fields.");
-      return;
+  setSuccessMsg("");
+  setErrorMsg("");
+
+  if (!form.name || !form.email || !form.phone || !form.message) {
+    setErrorMsg("Please fill in all required fields.");
+    return;
+  }
+
+  if (!captchaVerified) {
+    setErrorMsg("Please verify that you are not a robot.");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const res = await fetch("/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...form, category, subCategory }),
+    });
+
+    if (res.ok) {
+      setSuccessMsg("✅ Your message has been sent successfully. Our team will contact you shortly.");
+      setForm({ name: "", email: "", phone: "", message: "" });
+      setCategory("");
+      setSubCategory("");
+      window.grecaptcha?.reset(recaptchaWidgetId.current ?? undefined);
+      setCaptchaVerified(false);
+    } else {
+      setErrorMsg("❌ Failed to send message. Please try again.");
     }
-
-    // const responseToken =
-    //   window.grecaptcha?.getResponse(
-    //     recaptchaWidgetId.current !== null ? recaptchaWidgetId.current : undefined
-    //   ) || "";
-
-    // if (!responseToken.length) {
-    //   setCaptchaVerified(false);
-    //   alert("Please complete the reCAPTCHA challenge.");
-    //   return;
-    // }
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, category, subCategory }),
-      });
-
-      if (res.ok) {
-        alert("Your message has been sent successfully!");
-        setForm({ name: "", email: "", phone: "", message: "" });
-        setCategory("");
-        setSubCategory("");
-        // if (recaptchaWidgetId.current !== null) {
-        //   window.grecaptcha?.reset(recaptchaWidgetId.current);
-        // }
-        // setCaptchaVerified(false);
-      } else {
-        alert("Failed to send message. Please try again later.");
-      }
-    } catch {
-      alert("Network error. Please check your connection.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch {
+    setErrorMsg("❌ Network error. Please check your internet connection.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
 <section className="py-12 px-6 bg-gradient-to-br from-blue-50 to-white">
@@ -234,7 +232,17 @@ export default function ContactPage() {
           Our 24/7 tech support team offers expert solutions. Fill out the form
           and we’ll get back to you quickly.
         </p>
+{successMsg && (
+  <div className="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded-lg text-sm">
+    {successMsg}
+  </div>
+)}
 
+{errorMsg && (
+  <div className="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded-lg text-sm">
+    {errorMsg}
+  </div>
+)}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name */}
           <div>
