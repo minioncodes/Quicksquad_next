@@ -210,8 +210,8 @@ const handleSubmit = async (e: React.FormEvent) => {
       setForm({ name: "", email: "", phone: "", message: "" });
       setCategory("");
       setSubCategory("");
-      // window.grecaptcha?.reset(recaptchaWidgetId.current ?? undefined);
-      // setCaptchaVerified(false);
+      window.grecaptcha?.reset(recaptchaWidgetId.current ?? undefined);
+      setCaptchaVerified(false);
     } else {
       setErrorMsg("❌ Failed to send message. Please try again.");
     }
