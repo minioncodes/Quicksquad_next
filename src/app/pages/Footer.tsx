@@ -1,3 +1,4 @@
+import SubscribeForm from "@/components/SubscribeForm"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -78,27 +79,7 @@ export default function Footer() {
             Our 24/7 tech support team offers expert solutions. Contact us via form
             or call for fast, reliable assistance.
           </p>
-
-          <form className="space-y-3">
-  <input
-    type="text"
-    placeholder="Enter your name"
-    className="w-full p-2 rounded border border-white focus:border-blue-500 focus:ring focus:ring-blue-200"
-    required
-  />
-  <input
-    type="email"
-    placeholder="Enter your email"
-    className="w-full p-2 rounded border border-white focus:border-blue-500 focus:ring focus:ring-blue-200"
-    required
-  />
-  <button
-    type="submit"
-    className="w-full bg-blue-700 hover:bg-blue-800 py-2 rounded font-semibold"
-  >
-    SUBSCRIBE NOW
-  </button>
-</form>
+          <SubscribeForm />
 
         </div>
       </div>

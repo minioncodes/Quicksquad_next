@@ -352,17 +352,25 @@ export default function ContactPage() {
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            // disabled={loading || !captchaVerified}
-            className={`w-full py-3 px-6 rounded-lg font-semibold transition ${
-              captchaVerified && !loading
-                ? "bg-blue-600 hover:bg-blue-700 text-white"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            {loading ? "Sending..." : "Submit"}
-          </button>
+<button
+  type="submit"
+  disabled={loading || !captchaVerified}
+  className={`w-full py-3 px-6 rounded-lg font-semibold transition flex items-center justify-center gap-3 ${
+    captchaVerified && !loading
+      ? "bg-blue-600 hover:bg-blue-700 text-white"
+      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+  }`}
+>
+  {loading ? (
+    <>
+      <span className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+      Sending…
+    </>
+  ) : (
+    "Submit"
+  )}
+</button>
+
         </form>
       </div>
     </section>
