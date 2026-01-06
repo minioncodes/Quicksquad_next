@@ -38,7 +38,7 @@ export default function BlogPage() {
     }
 
     // Sort
-    if (sort === "latest") list = list.reverse();
+    if (sort === "oldest") list = list.reverse();
     return list;
   }, [blogs, search, category, sort]);
 
@@ -83,8 +83,8 @@ export default function BlogPage() {
           value={sort}
           onChange={(e) => setSort(e.target.value)}
         >
-          <option value="oldest">Latest First</option>
-          <option value="latest">Oldest First</option>
+          <option value="latest">Latest First</option>
+          <option value="oldest">Oldest First</option>
         </select>
 
         {/* Reset Button */}

@@ -122,8 +122,8 @@ export default function HeaderUs() {
 
           {/* SOCIALS */}
           <div className="hidden xl:flex items-center gap-4">
-            <Link href="https://facebook.com" target="_blank"><FaFacebookF /></Link>
-            <Link href="https://instagram.com" target="_blank"><FaInstagram /></Link>
+            <Link href="https://facebook.com/quicksquads" target="_blank"><FaFacebookF /></Link>
+            <Link href="https://instagram.com/quicksquad_tech" target="_blank"><FaInstagram /></Link>
             <Link href="https://x.com" target="_blank"><FaXTwitter /></Link>
           </div>
         </nav>
