@@ -119,61 +119,39 @@ const [errorMsg, setErrorMsg] = useState("");
     "6LeNPuUqAAAAAOLA9Q4l620A_HfT4V5MhdCxxVWX";
 
   // Ensure reCAPTCHA script loads and widget renders once on the client.
-  useEffect(() => {
-    if (!recaptchaSiteKey) {
-      console.warn("Missing reCAPTCHA site key.");
-      return;
-    }
+useEffect(() => {
+  if (!recaptchaSiteKey) return;
 
-    const renderCaptcha = () => {
-      if (!window.grecaptcha || recaptchaWidgetId.current !== null) {
-        return;
+  const loadCaptcha = () => {
+    if (!window.grecaptcha) return;
+
+    if (recaptchaWidgetId.current !== null) return;
+
+    recaptchaWidgetId.current = window.grecaptcha.render(
+      "recaptcha-container",
+      {
+        sitekey: recaptchaSiteKey,
+        callback: () => setCaptchaVerified(true),
+        "expired-callback": () => setCaptchaVerified(false),
+        "error-callback": () => setCaptchaVerified(false),
       }
-
-      recaptchaWidgetId.current = window.grecaptcha.render(
-        "recaptcha-container",
-        {
-          sitekey: recaptchaSiteKey,
-          callback: () => setCaptchaVerified(true),
-          "expired-callback": () => setCaptchaVerified(false),
-          "error-callback": () => setCaptchaVerified(false),
-        }
-      );
-    };
-
-    if (window.grecaptcha) {
-      renderCaptcha();
-      return;
-    }
-
-    const scriptSelector =
-      'script[src^="https://www.google.com/recaptcha/api.js"]';
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      scriptSelector
     );
+  };
 
-    const handleScriptLoad = () => {
-      renderCaptcha();
-    };
+  if (window.grecaptcha) {
+    loadCaptcha();
+    return;
+  }
 
-    if (existingScript) {
-      existingScript.addEventListener("load", handleScriptLoad);
-      return () => {
-        existingScript.removeEventListener("load", handleScriptLoad);
-      };
-    }
+  const script = document.createElement("script");
+  script.src = "https://www.google.com/recaptcha/api.js";
+  script.async = true;
+  script.defer = true;
+  script.onload = loadCaptcha;
 
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    script.async = true;
-    script.defer = true;
-    script.addEventListener("load", handleScriptLoad);
-    document.body.appendChild(script);
+  document.body.appendChild(script);
+}, [recaptchaSiteKey]);
 
-    return () => {
-      script.removeEventListener("load", handleScriptLoad);
-    };
-  }, [recaptchaSiteKey]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
