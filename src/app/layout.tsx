@@ -104,12 +104,12 @@ const country = countryHeader || cookieStore.get("country")?.value;
           strategy="afterInteractive"
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      {/* <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderComponent />
         {children}
         <ChatWidget />
         <FooterComponent />
-      </body>
+      </body> */}
     </html>
   );
 }
