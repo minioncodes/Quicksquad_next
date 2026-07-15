@@ -29,7 +29,7 @@ export default function AdminLoginPage() {
         // cookie set by server; navigate to original page
         router.push(from);
       }
-    } catch (err) {
+    } catch {
       setErr("Network error");
     } finally {
       setLoading(false);

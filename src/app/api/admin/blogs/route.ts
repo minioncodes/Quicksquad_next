@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import { Blog } from "@/lib/models/Blog";
 import { isAdminRequest } from "@/lib/adminAuth"; // <- helper you created
+import { canUseMongoBlogs, getLocalBlogs, stripAliases } from "@/lib/localBlogs";
 
 type BodyCreate = {
   title?: string;
@@ -33,6 +34,10 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(getLocalBlogs().map(stripAliases));
+    }
+
     await connectDB();
     // latest first
     const blogs = await Blog.find({})
@@ -54,6 +59,13 @@ export async function POST(req: Request) {
   try {
     if (!isAdminRequest(req)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(
+        { error: "Admin write operations require MONGODB_URI. Public blogs are currently served from local fallback data." },
+        { status: 503 }
+      );
     }
 
     const body: BodyCreate = (await req.json()) || {};
@@ -103,6 +115,13 @@ export async function PUT(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(
+        { error: "Admin write operations require MONGODB_URI. Public blogs are currently served from local fallback data." },
+        { status: 503 }
+      );
+    }
+
     const body: BodyUpdate = (await req.json()) || {};
     const { id, slug, fields } = body;
 
@@ -137,6 +156,13 @@ export async function DELETE(req: Request) {
   try {
     if (!isAdminRequest(req)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(
+        { error: "Admin write operations require MONGODB_URI. Public blogs are currently served from local fallback data." },
+        { status: 503 }
+      );
     }
 
     const body: BodyDelete = (await req.json()) || {};

@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import { Blog } from "@/lib/models/Blog";
 import mongoose from "mongoose";
+import { canUseMongoBlogs } from "@/lib/localBlogs";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
 
@@ -127,6 +128,13 @@ function getIdFromRequest(req: Request, params?: { id?: string } | null): string
 /* Use context?: HandlerContext (no default {} so no implicit any) */
 export async function GET(req: NextRequest, context?: HandlerContext) {
   try {
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(
+        { error: "Admin blog detail requires MONGODB_URI. Public blogs are currently served from local fallback data." },
+        { status: 503 }
+      );
+    }
+
     const paramsResolved =
       context?.params && isPromise(context.params) ? await context.params : (context as { params?: { id?: string } })?.params;
     const id = getIdFromRequest(req, paramsResolved);
@@ -149,6 +157,12 @@ export async function GET(req: NextRequest, context?: HandlerContext) {
 export async function PUT(req: NextRequest, context?: HandlerContext) {
   try {
     if (!(await isAuthorized(req))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(
+        { error: "Admin write operations require MONGODB_URI. Public blogs are currently served from local fallback data." },
+        { status: 503 }
+      );
+    }
 
     const paramsResolved =
       context?.params && isPromise(context.params) ? await context.params : (context as { params?: { id?: string } })?.params;
@@ -204,6 +218,12 @@ export async function PUT(req: NextRequest, context?: HandlerContext) {
 export async function DELETE(req: NextRequest, context?: HandlerContext) {
   try {
     if (!(await isAuthorized(req))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!canUseMongoBlogs()) {
+      return NextResponse.json(
+        { error: "Admin write operations require MONGODB_URI. Public blogs are currently served from local fallback data." },
+        { status: 503 }
+      );
+    }
 
     const paramsResolved =
       context?.params && isPromise(context.params) ? await context.params : (context as { params?: { id?: string } })?.params;

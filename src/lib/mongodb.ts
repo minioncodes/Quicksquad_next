@@ -1,14 +1,16 @@
 // src/lib/mongodb.ts
 import mongoose from "mongoose";
 
-const MONGO_URI = process.env.MONGODB_URI!;
-if (!MONGO_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable in production");
+function getMongoUri() {
+  const mongoUri = process.env.MONGODB_URI;
+  if (!mongoUri) {
+    throw new Error("Please define the MONGODB_URI environment variable");
+  }
+  return mongoUri;
 }
 
 declare global {
   // allow caching across hot-reloads in dev
-  // eslint-disable-next-line no-var
   var _mongo: { conn: mongoose.Connection | null; promise: Promise<mongoose.Connection> | null } | undefined;
 }
 
@@ -22,7 +24,14 @@ export async function connectDB() {
     return cached!.conn;
   }
   if (!cached!.promise) {
-    cached!.promise = mongoose.connect(MONGO_URI, { autoIndex: false }).then((m) => m.connection);
+    const mongoUri = getMongoUri();
+    cached!.promise = mongoose
+      .connect(mongoUri, { autoIndex: false })
+      .then((m) => m.connection)
+      .catch((err) => {
+        cached!.promise = null;
+        throw err;
+      });
   }
   cached!.conn = await cached!.promise;
   return cached!.conn;
