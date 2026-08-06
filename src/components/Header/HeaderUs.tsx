@@ -127,7 +127,7 @@ export default function HeaderUs() {
             </div>
             <div className="flex items-center gap-2">
               <FaPhoneAlt />
-              <Link href="tel:(888)907-4097">(844) 3121-044</Link>
+              <Link href="tel:(844) 3121-044">(844) 3121-044</Link>
             </div>
           </div>
 
