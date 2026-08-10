@@ -79,8 +79,9 @@ export default function FooterAu() {
       </div>
 
       {/* Bottom footer */}
-      <div className="mt-10 text-center text-xs opacity-80">
-        © {new Date().getFullYear()} QuickSquad. All Rights Reserved.
+      <div className="mt-10 text-center text-xs opacity-80 space-y-1">
+        <p>© {new Date().getFullYear()} QuickSquad.</p>
+        <p>Owned and operated by A V TRADE CORPORATION.</p>
       </div>
     </footer>
   )

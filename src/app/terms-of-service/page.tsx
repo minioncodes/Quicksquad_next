@@ -107,6 +107,9 @@ export default function TermsOfService() {
             Email: <strong>support@digipants.com</strong>
           </p>
           <p className="mt-2">
+            Owned and operated by <strong>A V TRADE CORPORATION</strong>.
+          </p>
+          <p className="mt-2">
             <strong>Effective Date:</strong> January 25, 2025
           </p>
         </motion.div>
