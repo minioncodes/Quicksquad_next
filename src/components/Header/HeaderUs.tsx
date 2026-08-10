@@ -86,7 +86,7 @@ export default function HeaderUs() {
             width={200}
             height={60}
             priority
-            className="h-auto max-w-[120px] sm:max-w-[150px] lg:max-w-[200px]"
+            className="h-auto max-w-30 sm:max-w-37.5 lg:max-w-50"
           />
         </Link>
 

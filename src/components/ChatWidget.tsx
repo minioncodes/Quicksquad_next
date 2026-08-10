@@ -82,7 +82,7 @@ export default function ChatWidget() {
 
       {open && (
         <div
-          className="fixed bottom-20 right-6 z-[9999] w-80 max-h-[560px] rounded-xl
+          className="fixed bottom-20 right-6 z-9999 w-80 max-h-140 rounded-xl
                      bg-white/95 shadow-2xl ring-1 ring-black/10
                      flex flex-col overflow-hidden"
           role="dialog"
@@ -117,7 +117,7 @@ export default function ChatWidget() {
           )}
 
           {/* Messages */}
-          <div className="p-4 flex-1 overflow-y-auto space-y-2 bg-gradient-to-b from-white/98 to-white">
+          <div className="p-4 flex-1 overflow-y-auto space-y-2 bg-linear-to-b from-white/98 to-white">
             {messages.map((msg, idx) => (
               <div
                 key={idx}

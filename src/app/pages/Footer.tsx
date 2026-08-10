@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-blue-500 to-blue-300 text-white py-12">
+    <footer className="bg-linear-to-b from-blue-500 to-blue-300 text-white py-12">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6">
 
         {/* Left Column */}
@@ -15,7 +15,7 @@ export default function Footer() {
   alt="QuickSquad Logo"
   width={200}
   height={60}
-  className="h-auto max-w-[150px] md:max-w-[200px]"
+  className="h-auto max-w-30 sm:max-w-37.5 lg:max-w-50"
   priority
 />
         </Link>

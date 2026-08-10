@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
-<section className="bg-gradient-to-b from-blue-500 to-blue-300 text-white min-h-[100vh] flex items-center">
+<section className="bg-linear-to-b from-blue-500 to-blue-300 text-white min-h-screen flex items-center">
   <div className="container mx-auto grid md:grid-cols-2 gap-10 px-6">
 
     {/* Left Content */}
@@ -312,7 +312,7 @@ export default function Home() {
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-5 flex flex-col flex-grow">
+                  <div className="p-5 flex flex-col grow">
                     <p className="text-xs text-gray-500 mb-1">{post.date}</p>
                     <h3 className="font-semibold text-lg text-gray-800 mb-3 line-clamp-2 group-hover:text-blue-600">
                       {post.title}
