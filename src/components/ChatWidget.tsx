@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { SiOpenai } from "react-icons/si";
+import { MessageCircle } from "lucide-react";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -77,7 +77,7 @@ export default function ChatWidget() {
                    transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
         aria-label="Open chat"
       >
-        <SiOpenai size={24} />
+        <MessageCircle size={24} />
       </button>
 
       {open && (
