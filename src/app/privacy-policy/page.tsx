@@ -42,8 +42,8 @@ export default function PrivacyPolicy() {
           <p>Depending on how you interact with our services, we may collect:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Contact details (such as your name, email address, and phone number).</li>
-            <li>Technical details (IP address, browser type, device information).</li>
-            <li>Service-related information (support requests, inquiries, and issues reported).</li>
+            <li>Usage details (IP address, browser type, and device information).</li>
+            <li>Service-related information (requests, inquiries, and issues reported).</li>
           </ul>
         </motion.div>
 
@@ -52,7 +52,7 @@ export default function PrivacyPolicy() {
           <p>We use your information to:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Deliver, maintain, and improve our services.</li>
-            <li>Provide customer support and respond to your inquiries.</li>
+            <li>Provide customer assistance and respond to your inquiries.</li>
             <li>Send important updates, notifications, or service-related communications.</li>
           </ul>
         </motion.div>

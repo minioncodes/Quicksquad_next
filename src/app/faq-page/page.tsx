@@ -17,22 +17,22 @@ const faqs = [
   {
     question: "Do you offer refunds if I’m not satisfied with the service?",
     answer:
-      "Yes, we have a refund policy based on the nature of the service provided. If you are not satisfied, please contact our support team for assistance.",
+      "Yes, we have a refund policy based on the nature of the service provided. If you are not satisfied, please contact our team for assistance.",
   },
   {
     question: "Can I get an invoice for my payment?",
     answer:
-      "Absolutely! Once your payment is completed, you will receive an email with your invoice. You can also request a copy through our support team.",
+      "Absolutely! Once your payment is completed, you will receive an email with your invoice. You can also request a copy through our team.",
   },
   {
     question: "Do you offer any discounts or subscription plans?",
     answer:
-      "Yes, we offer special discounts for long-term support plans and business subscriptions. Check our website for the latest offers.",
+      "Yes, we offer special discounts for long-term consultation plans and business subscriptions. Check our website for the latest offers.",
   },
   {
     question: "What should I do if my payment fails?",
     answer:
-      "If your payment fails, please try again with a different method or contact your bank. You can also reach out to our support team for assistance.",
+      "If your payment fails, please try again with a different method or contact your bank. You can also reach out to our team for assistance.",
   },
 ];
 

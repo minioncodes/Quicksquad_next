@@ -22,26 +22,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QuickSquad | 24/7 Online Tech Support & Troubleshooting Services",
+  title: "QuickSquad | Consultation Services for Everyday Decisions",
   description:
-    "QuickSquad offers 24/7 online tech support for computers, Wi-Fi, software, and devices. Get instant remote assistance from certified experts anytime, anywhere.",
+    "QuickSquad connects you with specialists across financial, travel, legal, digital, healthcare, shopping, and career consultations whenever you need reliable guidance.",
   keywords: [
-    "tech support",
-    "online tech support",
-    "remote assistance",
-    "computer troubleshooting",
-    "software help",
-    "Wi-Fi repair",
-    "printer setup",
-    "device optimization",
-    "IT help",
+    "consultation services",
+    "online consultation",
+    "expert guidance",
+    "financial assistance",
+    "travel assistance",
+    "legal guidance",
+    "digital services",
+    "career guidance",
+    "consumer assistance",
     "QuickSquad",
   ],
   authors: [{ name: "QuickSquad", url: "https://quicksquad.live" }],
   openGraph: {
-    title: "QuickSquad | 24/7 Online Tech Support & Troubleshooting Experts",
+    title: "QuickSquad | 24/7 Consultation Services Across Everyday Needs",
     description:
-      "Connect instantly with certified specialists for quick fixes to your computer, software, and internet issues — available 24/7.",
+      "Connect instantly with specialists for everyday guidance across finance, travel, digital accounts, legal forms, shopping, healthcare, and career decisions.",
     url: "https://quicksquad.live/",
     siteName: "QuickSquad",
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "https://quicksquad.live/images/quicksquad_og.png",
         width: 1200,
         height: 630,
-        alt: "QuickSquad Tech Support",
+        alt: "QuickSquad Consultation Services",
       },
     ],
     locale: "en_US",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "QuickSquad | 24/7 Tech Support & Troubleshooting Experts",
+    title: "QuickSquad | 24/7 Consultation Services",
     description:
-      "Instant help from certified specialists for all your tech issues — computers, Wi-Fi, and more.",
+      "Instant help from specialists for financial, travel, digital, legal, shopping, healthcare, and career questions.",
     images: ["https://quicksquad.live/images/quicksquad_og.png"],
     creator: "@QuickSquad",
   },

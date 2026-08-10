@@ -15,7 +15,7 @@ export default function ChatWidget() {
 
   const quickPrompts = [
     "Open a bank account online",
-    "Fix Wi-Fi that keeps dropping",
+    "Compare two travel insurance options",
     "Reset my email password",
     "Find the nearest DMV",
     "Explain Roth IRA vs 401(k)",

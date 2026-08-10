@@ -5,102 +5,102 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "Security & Privacy Setup",
+    title: "Financial Assistance",
     image: "/images/security.jpg",
     description:
-      "Protect your system from online threats with professional security and privacy configurations.",
+      "Get guidance on everyday financial questions with practical, easy-to-follow support.",
     bullets: [
-      "Antivirus & firewall installation",
-      "Privacy settings optimization",
-      "Secure browsing setup",
+      "Bank account and payment setup guidance",
+      "Credit score and credit report basics",
+      "Tax filing and financial document help",
     ],
   },
   {
-    title: "Performance Optimization",
+    title: "Digital Account & Online Services",
     image: "/images/performance.jpg",
     description:
-      "Boost your device’s speed and responsiveness with advanced optimization techniques.",
+      "Navigate online accounts, password recovery, payments, and email setup with confidence.",
     bullets: [
-      "Startup app management",
-      "System cleanup",
-      "RAM & storage optimization",
+      "Email account setup and organization",
+      "Password recovery and account access help",
+      "Online payments and cloud account guidance",
     ],
   },
   {
-    title: "Data Backup & Recovery",
+    title: "Location & Navigation Assistance",
     image: "/images/backup.jpg",
     description:
-      "Ensure your important files are backed up and recover lost data with expert help.",
+      "Find places, plan routes, and locate important nearby services without the guesswork.",
     bullets: [
-      "Cloud & local backup setup",
-      "Data recovery support",
-      "Automated backup scheduling",
+      "Address and direction help",
+      "Nearby services and local search guidance",
+      "ZIP code and area code lookups",
     ],
   },
   {
-    title: "Printer & Peripheral Support",
+    title: "Legal & Government Services",
     image: "/images/printer.jpg",
     description:
-      "Get hassle-free setup and troubleshooting for printers, scanners, and other peripherals.",
+      "Get help understanding forms, benefits, registrations, and common public-service tasks.",
     bullets: [
-      "Printer & scanner setup",
-      "Driver installation",
-      "Connectivity troubleshooting",
+      "Benefit and application guidance",
+      "DMV and registration assistance",
+      "Document preparation support",
     ],
   },
   {
-    title: "Email Configuration & Support",
+    title: "Travel & Transportation",
     image: "/images/email.jpg",
     description:
-      "Set up and troubleshoot email accounts across all major platforms and devices.",
+      "Plan trips, compare options, and organize travel details with less stress.",
     bullets: [
-      "Email client setup (Outlook, Gmail, etc.)",
-      "Sync across devices",
-      "Security & spam filtering",
+      "Flights, hotel, and route planning",
+      "Visa and insurance guidance",
+      "Public transportation and itinerary help",
     ],
   },
   {
-    title: "Internet & Network Support",
+    title: "Consumer & Shopping Assistance",
     image: "/images/network.jpg",
     description:
-      "Fix connectivity problems and configure secure, high-speed networks for home or office.",
+      "Make smarter buying decisions with comparison help and subscription guidance.",
     bullets: [
-      "Wi-Fi router setup",
-      "Troubleshooting slow internet",
-      "Network security & optimization",
+      "Product comparisons and review summaries",
+      "Deals, offers, and membership guidance",
+      "Subscription and renewal management help",
     ],
   },
   {
-    title: "Virus & Malware Removal",
+    title: "Healthcare & Wellness",
     image: "/images/virus.jpg",
     description:
-      "Remove harmful software and secure your system from future cyber threats.",
+      "Find providers, understand coverage, and organize everyday wellness logistics.",
     bullets: [
-      "Full system scans",
-      "Virus & malware removal",
-      "Security patch updates",
+      "Hospital, clinic, and pharmacy lookup",
+      "Insurance and coverage guidance",
+      "Appointment scheduling support",
     ],
   },
   {
-    title: "Software Installation & Setup",
+    title: "Education & Career Guidance",
     image: "/images/software.jpg",
     description:
-      "Get assistance installing and configuring essential software for smooth performance.",
+      "Move forward with courses, applications, resumes, and job planning support.",
     bullets: [
-      "OS & application setup",
-      "Driver installations",
-      "Configuration & updates",
+      "Course and certification research",
+      "Resume and job application help",
+      "Scholarship and college guidance",
     ],
   },
   {
-    title: "PC & Laptop Troubleshooting",
+    title: "Personal Planning Support",
     image: "/images/pc.jpg",
     description:
-      "Expert solutions for fixing common PC and laptop issues with speed and efficiency.",
+      "Get structured guidance for decisions that involve documents, deadlines, and next steps.",
     bullets: [
-      "Hardware diagnostics",
-      "OS troubleshooting",
-      "Blue screen & crash fixes",
+      "Decision checklists and planning help",
+      "Research summaries for important choices",
+      "One-on-one consultation support",
     ],
   },
 ];
@@ -114,8 +114,8 @@ export default function ServicesPage() {
           Our Services
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          We provide a wide range of expert services to keep your devices and
-          networks running at peak performance, securely and reliably.
+          We provide a wide range of consultation services to help you make
+          informed decisions across everyday personal and practical needs.
         </p>
       </section>
 

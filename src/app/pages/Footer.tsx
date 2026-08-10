@@ -20,8 +20,8 @@ export default function Footer() {
 />
         </Link>
           <p className="text-sm mb-4">
-            Our website blends creativity, innovation, and functionality for a seamless
-            experience, helping you find solutions quickly and efficiently.
+            QuickSquad connects you with practical consultation across everyday
+            needs, helping you make informed decisions quickly and confidently.
           </p>
 
           <h3 className="font-semibold mb-2">Information</h3>
@@ -38,11 +38,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          <Link href="/speedtest">
-            <button className="mt-4 bg-blue-700 hover:bg-blue-800 px-6 py-2 rounded w-full md:w-auto">
-              INTERNET SPEED
-            </button>
-          </Link>
         </div>
 
         {/* Middle Column */}
@@ -52,21 +47,21 @@ export default function Footer() {
             <div>
               <p className="text-xs opacity-80">August 13, 2024</p>
               <Link href="/blog/slow-internet-issues" className="font-medium block hover:underline">
-                How to Fix Slow Internet and Connectivity Issues
+                How to Compare Financial Options Before You Commit
               </Link>
               <p className="text-sm opacity-80">
-                Slow internet can be frustrating! Learn how to troubleshoot your
-                network, optimize router settings, and speed up […]
+                A practical framework for comparing costs, tradeoffs, and risks
+                before making an important money decision […]
               </p>
             </div>
             <div>
               <p className="text-xs opacity-80">July 11, 2024</p>
               <Link href="/blog/common-computer-problems" className="font-medium block hover:underline">
-                Common Computer Problems & How to Fix Them
+                Questions to Ask Before Booking Travel and Accommodation
               </Link>
               <p className="text-sm opacity-80">
-                Facing issues like freezing, crashing, or blue screen errors?
-                Here’s a step-by-step guide […]
+                Use this checklist to compare routes, policies, lodging, and
+                timing before you book […]
               </p>
             </div>
           </div>
@@ -76,8 +71,8 @@ export default function Footer() {
         <div>
           <h3 className="font-semibold mb-4">Contact</h3>
           <p className="text-sm mb-4">
-            Our 24/7 tech support team offers expert solutions. Contact us via form
-            or call for fast, reliable assistance.
+            Our consultation team is here to help with everyday decisions
+            across finance, travel, digital services, and more.
           </p>
           <SubscribeForm />
 

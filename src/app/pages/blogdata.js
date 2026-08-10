@@ -1,98 +1,98 @@
 export const blogs = [
   {
-    title: "How to Fix Slow Internet and Connectivity Issues",
+    title: "How to Compare Financial Options Before You Commit",
     image: "/images/1.jpg",
     date: "February 10, 2025",
     url: "/blogs/Slow-Internet-Issues",
     description:
-      "Slow internet can be frustrating! Learn how to troubleshoot your network, optimize router settings, and speed up your connection with simple steps.",
+      "Use a practical framework to compare fees, terms, flexibility, and risk before making an important financial decision.",
   },
   {
-    title: "Common Computer Problems & How to Fix Them",
+    title: "Questions to Ask Before Booking Travel and Accommodation",
     image: "/images/2.jpg",
     date: "February 14, 2025",
     url: "/Blogs/Computer-Problem",
     description:
-      "Facing issues like freezing, crashing, or blue screen errors? Here’s a step-by-step guide to fixing common PC problems on your own.",
+      "Plan better trips by checking refund terms, transport timing, full costs, and other key booking details up front.",
   },
   {
-    title: "Protecting Your Devices from Viruses & Malware",
+    title: "A Simple Checklist for Major Life and Service Decisions",
     image: "/images/3.jpg",
     date: "February 18, 2025",
     url: "/Blogs/Protecting-Your-Devices-from-Viruses-&-Malware",
     description:
-      "Keep your devices safe from cyber threats! Learn about antivirus, malware removal, and best security practices to stay safe.",
+      "Reduce stress around important decisions with a clear checklist for cost, timing, risk, and next steps.",
   },
   {
-    title: "Remote Tech Support: How It Works & When You Need It",
+    title: "When a Consultation Saves Time, Money, and Stress",
     image: "/images/4.jpg",
     date: "February 22, 2025",
     url: "/Blogs/Remote-Tech-Support",
     description:
-      "Need tech help but can’t visit a service center? Learn how remote tech support works, its benefits, and when to use it for troubleshooting.",
+      "Learn when a focused consultation can simplify complex decisions and prevent costly rework.",
   },
   {
-    title: "Best Tips to Optimize Your PC Performance",
+    title: "How to Organize Personal Records and Deadlines",
     image: "/images/5.jpg",
     date: "February 26, 2025",
     url: "/Blogs/Best-Tips-to-Optimize-Your-PC-Performance",
     description:
-      "Is your PC running slow? Follow these expert tips to clean up junk files, manage startup programs, and boost system performance easily!",
+      "A lighter system for records and reminders can help you stay ahead of deadlines, forms, and follow-up tasks.",
   },
   {
-    title: "How AI-Powered Chatbots Are Revolutionizing Tech Support in 2025",
+    title: "How AI Assistants Can Improve Everyday Research",
     image: "/images/6.jpg",
     date: "April 2, 2025",
     url: "/Blogs/AI-Powered",
     description:
-      "AI-powered chatbots are transforming tech support! discover how businesses can enhance customer support with AI-driven solutions.",
+      "See where AI helps most with summaries, comparisons, and faster research without replacing human judgment.",
   },
   {
-    title: "Millennials vs. Gen Z: How Their Customer Support Expectations Differ",
+    title: "Millennials vs. Gen Z: How Service Expectations Differ",
     image: "/images/7.jpg",
     date: "April 8, 2025",
     url: "/blogs/Tech-support/",
     description:
-      "Explore how Millennials and Gen Z approach customer support differently, and how your business can adapt to serve both effectively.",
+      "Understand how different generations value convenience, speed, and communication when choosing services.",
   },
   {
-    title: "The Most Frequent Questions We Get at Our Help Desk",
+    title: "The Most Common Questions People Ask Before They Commit",
     image: "/images/8.jpg",
     date: "April 14, 2025",
     url: "/blogs/help-desk-questions/",
     description:
-      "Discover how our help desk handles incidents, routine changes, user queries, and more—with insights from real support data.",
+      "The right questions about cost, flexibility, and responsibility often reveal the best option quickly.",
   },
   {
-    title: "How Artificial Intelligence Can Improve IT for Businesses",
+    title: "How AI Can Improve Decision-Making for Small Businesses",
     image: "/images/9.jpg",
     date: "May 6, 2025",
     url: "/blogs/ai-in-it-support/",
     description:
-      "Learn how AI is revolutionizing IT support by reducing costs, enhancing efficiency, and securing networks—tailored for modern business needs.",
+      "Small businesses can use AI to compare options faster, summarize information, and support better decisions.",
   },
   {
-    title: "Standard Operating Procedures (SOPs) and Training",
+    title: "Standard Operating Procedures and Training for Service Teams",
     image: "/images/sops.png",
     date: "May 12, 2025",
     url: "/blogs/Standard_Operating_Procedures",
     description:
-      "SOPs provide a clear, consistent process for handling support tasks, ensuring quality and efficiency. Regular training keeps support staff updated on tools, protocols, and best practices, improving response times and customer satisfaction.",
+      "Documented procedures and regular training create better consistency, smoother onboarding, and stronger service quality.",
   },
   {
-    title: "How Remote Support Works: Behind the Scenes of Fixing Tech Issues",
+    title: "What a Good Consultation Process Looks Like Behind the Scenes",
     image: "/images/remote-support.jpg",
     date: "June 9, 2025",
     url: "/blogs/How_Remote_Support_Works",
     description:
-      "Explore how remote tech support actually works—from secure connections to real-time troubleshooting. Learn what happens behind the scenes when experts fix your devices from anywhere in the world.",
+      "See how a clear consultation workflow turns confusion into structured next steps and better decisions.",
   },
   {
-    title: "How to Secure Your System During Remote Support Sessions",
+    title: "How to Protect Sensitive Information When Sharing Documents",
     image: "/images/secure.jpg",
     date: "June 18, 2025",
     url: "/blogs/Secure_Remote_Support_Sessions",
     description:
-      "Learn how to protect your data, privacy, and devices during remote tech support. From choosing trusted providers to revoking access after the session—discover essential tips to keep your system secure.",
+      "Protect privacy by sharing only what is needed, tracking what you send, and storing records where you can review them later.",
   },
 ];

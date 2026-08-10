@@ -20,16 +20,16 @@ export async function POST(req: Request) {
 
     // ----------- 1️⃣  EMAIL TO ADMIN  ------------
     const adminMail = {
-      from: `"QuickSquad Support" <${process.env.EMAIL_USER}>`,
+      from: `"QuickSquad" <${process.env.EMAIL_USER}>`,
       to: "devs@digipants.com",
-      subject: `💻 New Support Inquiry from ${name}`,
+      subject: `📩 New Consultation Inquiry from ${name}`,
       html: `
       <div style="background:#f0f5ff; padding:32px; font-family:'Segoe UI', Tahoma, sans-serif; color:#1e293b;">
         <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
 
           <!-- Header -->
           <div style="background:#2563eb; padding:20px 30px;">
-            <h2 style="color:#ffffff; margin:0; font-size:22px;">🧠 New Remote Support Request</h2>
+            <h2 style="color:#ffffff; margin:0; font-size:22px;">🧠 New Consultation Request</h2>
             <p style="color:#bfdbfe; margin-top:6px; font-size:14px;">Sent via QuickSquad Contact Form</p>
           </div>
 
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
 
           <!-- Footer -->
           <div style="background:#f1f5f9; padding:18px 30px; text-align:center; font-size:13px; color:#475569;">
-            <p style="margin:0;"><b>QuickSquad Remote Tech Support</b> — 24/7 Assistance Across Devices</p>
+            <p style="margin:0;"><b>QuickSquad Consultation Services</b> — Everyday Guidance Across Key Life Needs</p>
             <p style="margin-top:6px; color:#64748b;">
               Visit us at <a href="https://quicksquad.live" style="color:#2563eb; text-decoration:none;">https://quicksquad.live</a>
             </p>
@@ -66,9 +66,9 @@ export async function POST(req: Request) {
 
     // ----------- 2️⃣  CONFIRMATION EMAIL TO USER  ------------
     const userMail = {
-      from: `"QuickSquad Support" <${process.env.EMAIL_USER}>`,
+      from: `"QuickSquad" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: `✅ Your Support Request Has Been Received`,
+      subject: `✅ Your Consultation Request Has Been Received`,
       html: `
       <div style="background:#f0f5ff; padding:32px; font-family:'Segoe UI', Tahoma, sans-serif; color:#1e293b;">
         <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
@@ -76,12 +76,12 @@ export async function POST(req: Request) {
           <!-- Header -->
           <div style="background:#2563eb; padding:20px 30px;">
             <h2 style="color:#ffffff; margin:0; font-size:22px;">🙌 Thank You, ${name}!</h2>
-            <p style="color:#bfdbfe; margin-top:6px; font-size:14px;">We’ve received your support inquiry.</p>
+            <p style="color:#bfdbfe; margin-top:6px; font-size:14px;">We’ve received your consultation inquiry.</p>
           </div>
 
           <!-- Body -->
           <div style="padding:28px 30px;">
-            <p>We’ve received your message and one of our tech specialists will reach out to you shortly.</p>
+            <p>We’ve received your message and one of our specialists will reach out to you shortly.</p>
             <p style="margin-top:12px;">Here’s a copy of your submission:</p>
 
             <div style="background:#f8fafc; border-left:4px solid #2563eb; padding:12px 16px; border-radius:6px; font-size:15px;">
@@ -97,7 +97,7 @@ export async function POST(req: Request) {
 
           <!-- Footer -->
           <div style="background:#f1f5f9; padding:18px 30px; text-align:center; font-size:13px; color:#475569;">
-            <p style="margin:0;"><b>QuickSquad Remote Tech Support</b> — Always Here to Help</p>
+            <p style="margin:0;"><b>QuickSquad Consultation Services</b> — Always Here to Help</p>
             <p style="margin-top:6px; color:#64748b;">
               Visit us at <a href="https://quicksquad.live" style="color:#2563eb; text-decoration:none;">https://quicksquad.live</a>
             </p>

@@ -39,13 +39,13 @@ const allCategories: Category[] = [
     ],
   },
   {
-    title: "Technology & Digital Services",
+    title: "Digital Account & Online Services",
     description: [
-      "Troubleshooting common tech issues",
       "Setting up and securing email accounts",
-      "Online payment and digital wallet support",
+      "Online payment and digital wallet guidance",
       "Recovering lost passwords and account access",
-      "Cloud storage and backup solutions",
+      "Cloud storage and backup planning",
+      "Understanding common online account settings",
     ],
   },
   {
@@ -231,8 +231,8 @@ export default function ContactPage() {
           Contact Us
         </h2>
         <p className="text-gray-600 text-center mb-8">
-          Our 24/7 tech support team offers expert solutions. Fill out the form
-          and we’ll get back to you quickly.
+          Tell us what you need help with and our consultation team will get
+          back to you quickly with the right next steps.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">

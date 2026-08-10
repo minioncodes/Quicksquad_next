@@ -3,22 +3,22 @@ import { useState, useEffect } from "react";
 
 const testimonials = [
   {
-    text: "QuickSquad.live saved my laptop from a total meltdown! Their remote support was quick and efficient. I was back to work in no time. Highly recommended!",
+    text: "QuickSquad.live helped me sort through a confusing financial process quickly and clearly. I left the call knowing exactly what to do next.",
     name: "Michael R.",
     location: "New York, NY",
   },
   {
-    text: "I signed up for the Premium Plan, and it has been a lifesaver. The team is knowledgeable, friendly, and always available. My devices have never run smoother!",
+    text: "I signed up for the Premium Plan, and the guidance has been consistently practical. The team is responsive, organized, and easy to work with.",
     name: "Sarah L.",
     location: "Austin, TX",
   },
   {
-    text: "Fantastic service! I had a printer issue that no one else could fix, but QuickSquad.live got it working perfectly within minutes. Worth every penny!",
+    text: "Fantastic service. I needed help comparing options across travel, paperwork, and booking details, and QuickSquad made the whole process far less stressful.",
     name: "David M.",
     location: "Los Angeles, CA",
   },
   {
-    text: "Running a small business means I can’t afford tech issues. The Enterprise Plan from QuickSquad.live ensures everything runs smoothly—zero downtime and excellent support!",
+    text: "Running a small business means decisions pile up fast. The Enterprise Plan gives us dependable consultation support across admin, planning, and customer-facing questions.",
     name: "Emily J.",
     location: "Chicago, IL",
   },

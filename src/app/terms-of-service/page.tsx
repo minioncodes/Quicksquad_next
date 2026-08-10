@@ -40,9 +40,9 @@ export default function TermsOfService() {
         <motion.div variants={sectionVariants} initial="hidden" animate="visible">
           <h3 className="text-2xl font-semibold text-gray-900">2. Fair Use of Services</h3>
           <p>
-            QuickSquad is designed to provide reliable tech support. You agree
-            to use our services responsibly and lawfully. Specifically, you must
-            not:
+            QuickSquad is designed to provide reliable consultation services.
+            You agree to use our services responsibly and lawfully.
+            Specifically, you must not:
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Disrupt, overload, or interfere with the platform.</li>
@@ -75,7 +75,7 @@ export default function TermsOfService() {
           <p>
             While we strive to deliver uninterrupted, high-quality services, we
             are not liable for damages caused by service interruptions, data
-            loss, or technical issues beyond our control.
+            loss, or operational issues beyond our control.
           </p>
         </motion.div>
 

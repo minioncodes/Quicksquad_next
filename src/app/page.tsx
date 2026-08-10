@@ -29,19 +29,19 @@ const iconMap = {
 
 const posts = [
   {
-    title: "How to Fix Slow Internet and Connectivity Issues",
+    title: "How to Compare Financial Options Before You Commit",
     date: "Feb 10, 2025",
     img: "/images/1.jpg",
     slug: "slow-internet-issues",
   },
   {
-    title: "Common Computer Problems & How to Fix Them",
+    title: "Questions to Ask Before Booking Travel and Accommodation",
     date: "Feb 10, 2025",
     img: "/images/2.jpg",
     slug: "common-computer-problems",
   },
   {
-    title: "Protecting Your Devices from Viruses & Malware",
+    title: "A Simple Checklist for Major Life and Service Decisions",
     date: "Feb 10, 2025",
     img: "/images/3.jpg",
     slug: "protecting-devices-malware",
@@ -106,7 +106,7 @@ export default function Home() {
       <div className="relative w-full max-w-xl sm:max-w-2xl">
         <Image
           src="/images/hero.png"
-          alt="Tech Support"
+          alt="QuickSquad consultation services"
           width={1800}
           height={1600}
           className="rounded-xl shadow-2xl object-cover w-full h-auto"
@@ -125,7 +125,7 @@ export default function Home() {
         <div className="container text-gray-700 mx-auto px-6">
           <h2 className="text-2xl font-bold text-center mb-2">OUR SERVICES</h2>
           <p className="text-gray-800 text-center mb-8">
-            Explore our wide range of support services and choose the one that
+            Explore our wide range of consultation services and choose the one that
             best fits your needs.
           </p>
 
@@ -193,10 +193,10 @@ export default function Home() {
               SOME OTHER THINGS WE REALLY LOVE & LIKE
             </h2>
             <ul className="space-y-3">
-              <li>✔ We deliver the best solutions with the latest tech.</li>
-              <li>✔ Swift problem-solving is our passion.</li>
-              <li>✔ We stay ahead to provide top-tier support.</li>
-              <li>✔ Our goal is to keep your tech running smoothly.</li>
+              <li>✔ We simplify complex choices with practical guidance.</li>
+              <li>✔ Fast, clear consultation is our standard.</li>
+              <li>✔ We cover a wide variety of everyday service needs.</li>
+              <li>✔ Our goal is to help you move forward with confidence.</li>
             </ul>
           </motion.div>
         </div>
@@ -212,11 +212,11 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-2xl font-bold mb-4">
-              SMART THINKING MEETS INNOVATIVE TECH FOR SEAMLESS SOLUTIONS.
+              SMART THINKING MEETS PRACTICAL GUIDANCE FOR BETTER DECISIONS.
             </h2>
             <p className="mb-6">
-              At QuickSquad, we merge smart strategies with the latest tech to
-              deliver efficient, future-proof solutions.
+              At QuickSquad, we combine clear communication, research, and
+              specialist insight to deliver useful consultation across everyday needs.
             </p>
             <Link
               href="/about"
@@ -253,7 +253,7 @@ export default function Home() {
           >
             <Image
               src="/images/hero-3.jpeg"
-              alt="Support team"
+              alt="QuickSquad consultation team"
               width={500}
               height={400}
               className="rounded-lg"
@@ -267,8 +267,8 @@ export default function Home() {
           >
             <h2 className="text-2xl font-bold mb-4">WHAT MAKES US DIFFERENT?</h2>
             <p className="mb-6">
-              Our commitment to 24/7 expert support, personalized solutions, and
-              proactive problem-solving sets us apart.
+              Our commitment to accessible guidance, personalized consultation,
+              and practical next steps sets us apart.
             </p>
             <Link
               href="/about"
@@ -287,8 +287,8 @@ export default function Home() {
             Our Latest Updates
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Stay updated with the latest tips, fixes, and guides from our
-            experts to keep your devices running smoothly.
+            Stay updated with practical insights, planning advice, and everyday
+            guidance from our specialists.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">

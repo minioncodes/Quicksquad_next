@@ -24,7 +24,7 @@ export default function AboutPage() {
             className="max-w-2xl mx-auto text-lg text-blue-100"
             variants={fadeUp}
           >
-            Your trusted partner for solving everyday tech and support challenges, available anytime you need us.
+            Your trusted partner for everyday consultation needs, available whenever you need clear guidance.
           </motion.p>
         </div>
       </div>
@@ -54,16 +54,18 @@ export default function AboutPage() {
           >
             <h2 className="text-3xl font-bold mb-4">Who We Are</h2>
             <p className="mb-4 text-gray-700">
-              At <span className="font-semibold">QuickSquad</span>, we’re not just a support service—we’re your
-              go-to problem solvers. Our mission is simple: connect you with skilled specialists who are always ready 
-              to resolve your issues with clarity, speed, and care.
+              At <span className="font-semibold">QuickSquad</span>, we are a consultation-led service designed to
+              connect people with specialists across finance, travel, legal,
+              digital, healthcare, shopping, and career decisions. Our mission
+              is simple: deliver clarity, speed, and confidence when everyday
+              choices feel overwhelming.
             </p>
             <ul className="space-y-3">
               {[
-                "Delivering the best solutions with the latest technology.",
-                "Swift, reliable problem-solving around the clock.",
-                "Staying ahead to provide top-tier, future-ready support.",
-                "Keeping your digital life running smoothly, always.",
+                "Delivering practical guidance tailored to real-world situations.",
+                "Providing dependable consultation whenever timing matters.",
+                "Connecting you with the right category of specialist quickly.",
+                "Helping you act with confidence instead of confusion.",
               ].map((text, idx) => (
                 <motion.li
                   key={idx}
@@ -101,17 +103,18 @@ export default function AboutPage() {
             variants={fadeUp}
             viewport={{ once: true }}
           >
-            From technical troubleshooting to expert guidance, QuickSquad is built to make your life easier and stress-free.
+            From financial questions to travel planning and digital account help,
+            QuickSquad is built to make everyday decisions easier and less stressful.
           </motion.p>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6"> {/* ✅ responsive grid */}
             {[ 
-              { icon: <FaCogs />, title: "Core Services", desc: "End-to-end support for devices, software, and systems." },
-              { icon: <FaHeadset />, title: "24/7 Expert Help", desc: "Always just a call away—fast, reliable, and effective." },
-              { icon: <FaHandsHelping />, title: "Personalized Support", desc: "Solutions tailored to your unique problems and goals." },
-              { icon: <FaRegSmile />, title: "Clarity Always", desc: "We simplify tech—no jargon, just clear communication." },
+              { icon: <FaCogs />, title: "Broad Consultation", desc: "Guidance across financial, legal, travel, digital, and personal service needs." },
+              { icon: <FaHeadset />, title: "Accessible Help", desc: "Reach out whenever you need clear, timely answers and next steps." },
+              { icon: <FaHandsHelping />, title: "Personalized Guidance", desc: "Recommendations shaped around your goals, priorities, and situation." },
+              { icon: <FaRegSmile />, title: "Clarity Always", desc: "We simplify complex topics with direct, understandable communication." },
               { icon: <FaComments />, title: "Community Feedback", desc: "We listen, adapt, and improve through your shared experiences." },
-              { icon: <FaCogs />, title: "Smart Solutions", desc: "Future-ready frameworks that keep your tech ahead of the curve." },
+              { icon: <FaCogs />, title: "Practical Solutions", desc: "Actionable guidance you can use immediately, not vague advice." },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -141,7 +144,8 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6"> {/* ✅ constrain */}
           <h2 className="text-3xl font-bold mb-4">Why Choose QuickSquad?</h2>
           <p className="max-w-2xl mx-auto mb-6">
-            Because we believe support should be more than solving issues—it should be about building trust, ensuring clarity, and making your life simpler.
+            Because consultation should do more than answer questions. It should
+            build trust, create clarity, and make your next step simpler.
           </p>
           <a
             href="/contact"

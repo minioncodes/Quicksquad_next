@@ -60,22 +60,22 @@ const faqs: Faq[] = [
   {
     question: "Do you offer refunds if I’m not satisfied with the service?",
     answer:
-      "Yes, we have a refund policy based on the nature of the service provided. If you are not satisfied, please contact our support team for assistance.",
+      "Yes, we have a refund policy based on the nature of the service provided. If you are not satisfied, please contact our team for assistance.",
   },
   {
     question: "Can I get an invoice for my payment?",
     answer:
-      "Absolutely! Once your payment is completed, you will receive an email with your invoice. You can also request a copy through our support team.",
+      "Absolutely! Once your payment is completed, you will receive an email with your invoice. You can also request a copy through our team.",
   },
   {
     question: "Do you offer any discounts or subscription plans?",
     answer:
-      "Yes, we offer special discounts for long-term support plans and business subscriptions. Check our website for the latest offers.",
+      "Yes, we offer special discounts for long-term consultation plans and business subscriptions. Check our website for the latest offers.",
   },
   {
     question: "What should I do if my payment fails?",
     answer:
-      "If your payment fails, please try again with a different method or contact your bank. You can also reach out to our support team for assistance.",
+      "If your payment fails, please try again with a different method or contact your bank. You can also reach out to our team for assistance.",
   },
 ];
 
@@ -85,10 +85,10 @@ const plans: Plan[] = [
     price: 2000,
     displayPrice: "$20/month",
     features: [
-      "24/7 access to online support",
-      "Basic troubleshooting for software and devices",
-      "Assistance with installation and updates",
-      "Email and chat support",
+      "Access to everyday consultation guidance",
+      "Help with common questions and planning decisions",
+      "Email and chat assistance",
+      "Clear next-step recommendations",
     ],
   },
   {
@@ -97,9 +97,9 @@ const plans: Plan[] = [
     displayPrice: "$75/month",
     features: [
       "Everything in the Basic Plan",
-      "Advanced troubleshooting for hardware and networks",
-      "Remote desktop support",
-      "Comprehensive device optimization",
+      "Priority consultation handling",
+      "Deeper research and comparison guidance",
+      "Complex case coordination",
     ],
   },
   {
@@ -109,8 +109,8 @@ const plans: Plan[] = [
     features: [
       "Tailored solutions for businesses",
       "Dedicated account manager",
-      "24/7 phone, email, and chat support",
-      "Scalability for multiple devices and users",
+      "Phone, email, and chat consultation access",
+      "Scalability for teams, departments, and workflows",
     ],
   },
 ];
@@ -185,7 +185,7 @@ export default function PricingPage() {
         </h1>
         <p className="text-lg text-gray-600 mt-3 max-w-2xl mx-auto">
           We provide flexible, transparent pricing to meet your budget and
-          support needs.
+          consultation needs.
         </p>
       </div>
 

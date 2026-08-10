@@ -48,7 +48,7 @@ const adminMail = {
         </div>
 
         <p style="margin-top:30px;font-size:16px;color:#334155;">
-          This subscriber will now receive updates, tech tips, and promotions.
+          This subscriber will now receive updates, practical guidance, and promotions.
         </p>
       </div>
 
@@ -73,7 +73,7 @@ const userMail = {
       <div style="background:#2563eb;padding:30px;text-align:center;color:white">
         <h1 style="margin:0;font-size:28px;">Welcome to QuickSquad 🚀</h1>
         <p style="margin-top:10px;font-size:16px;opacity:0.9">
-          You're officially part of our tech community
+          You&apos;re officially part of our QuickSquad community
         </p>
       </div>
 
@@ -84,7 +84,7 @@ const userMail = {
 
         <p style="font-size:18px;margin-top:15px;line-height:1.6;">
           Thank you for subscribing to <strong>QuickSquad</strong>!  
-          You’ll now receive expert tech tips, troubleshooting guides,
+          You’ll now receive practical guidance, useful updates,
           and exclusive offers directly in your inbox.
         </p>
 
@@ -93,8 +93,8 @@ const userMail = {
             What you’ll receive:
           </p>
           <ul style="margin-top:15px;font-size:16px;color:#334155">
-            <li>🔧 Easy-to-follow tech fixes</li>
-            <li>💡 Tips to speed up and protect your devices</li>
+            <li>📘 Clear consultation insights</li>
+            <li>💡 Practical everyday guidance</li>
             <li>🎁 Special QuickSquad deals</li>
           </ul>
         </div>

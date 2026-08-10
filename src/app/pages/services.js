@@ -1,9 +1,9 @@
 const services = [
   {
     icon: "fa-solid fa-laptop-code",
-    title: "Technology & Digital Services",
-    description: "Troubleshooting tech issues, email setup, online payments, password recovery, cloud storage.",
-    tags: ["troubleshooting", "email", "payments", "passwords", "cloud"]
+    title: "Digital Account & Online Services",
+    description: "Email setup, online payments, password recovery, account access, and cloud storage guidance.",
+    tags: ["email", "payments", "passwords", "accounts", "cloud"]
   },
   {
     icon: "fa-solid fa-hand-holding-dollar",
