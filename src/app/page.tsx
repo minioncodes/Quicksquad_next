@@ -52,8 +52,8 @@ export default function Home() {
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
-<section className="bg-linear-to-b from-blue-500 to-blue-300 text-white min-h-screen flex items-center">
-  <div className="container mx-auto grid md:grid-cols-2 gap-10 px-6">
+<section className="bg-linear-to-b from-blue-500 to-blue-300 text-white flex items-center">
+  <div className="container mx-auto grid min-h-[calc(100svh-4rem)] items-center gap-10 px-6 py-16 md:grid-cols-2 md:py-20">
 
     {/* Left Content */}
     <motion.div
@@ -63,15 +63,15 @@ export default function Home() {
       transition={{ duration: 1 }}
     >
       <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight font-[Poppins]">
-        Your Go-To Guide for Everyday Queries!
+        Your Everyday AI-Powered Consultation Partner
       </h1>
 
       <p className="text-lg sm:text-xl md:text-2xl mb-6 text-gray-100 max-w-2xl font-[Inter]">
-        We’re here to link you with skilled specialists who are ready to tackle
-        your problems, day or night.
+        Get trusted guidance for technology, finance, travel, digital accounts,
+        government services, healthcare, shopping, and more—all in one place.
       </p>
 
-      <div className="space-x-4">
+      <div className="flex flex-wrap gap-4">
         {/* Gradient Button */}
         <Link
           href="/contact"
@@ -80,18 +80,18 @@ export default function Home() {
           hover:opacity-90 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]
           transition-all duration-300"
         >
-          CONTACT US
+          Start Consultation
         </Link>
 
         {/* Outline Button */}
         <Link
-          href="/about"
+          href="/services"
           className="px-6 py-3 rounded-lg text-base sm:text-lg font-semibold 
           border border-white/90 
           hover:bg-white hover:text-blue-600 
           transition-all duration-300"
         >
-          ABOUT US
+          Explore Services
         </Link>
       </div>
     </motion.div>
@@ -103,13 +103,13 @@ export default function Home() {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative w-full max-w-xl sm:max-w-2xl">
+      <div className="relative aspect-4/3 w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20 sm:aspect-16/11">
         <Image
           src="/images/hero.png"
           alt="QuickSquad consultation services"
-          width={1800}
-          height={1600}
-          className="rounded-xl shadow-2xl object-cover w-full h-auto"
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="object-cover object-center"
           priority
         />
       </div>

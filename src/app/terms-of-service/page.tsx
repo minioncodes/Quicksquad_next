@@ -1,119 +1,18 @@
-"use client";
-import { motion } from "framer-motion";
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = { title: "Terms of Service", description: "QuickSquad terms of service and important boundaries for general consumer consultation, operated by A V TRADE CORPORATION.", alternates: { canonical: "/terms-of-service" } };
+
+const sections = [
+  ["Acceptance and platform operator", "QuickSquad is a consumer-facing consultation platform owned and operated by A V TRADE CORPORATION. By using the website, requesting a consultation, or purchasing a subscription, you agree to these Terms and the linked Privacy Policy, Refund Policy, and Disclaimer."],
+  ["What QuickSquad provides", "QuickSquad provides AI-powered information assistance and general consultation for everyday questions and online tasks. We may help you research options, understand common processes, organize information, and identify useful next steps."],
+  ["Important professional boundaries", "Information on QuickSquad is educational and general. It is not professional legal advice, investment advice, medical advice, tax advice, or any other regulated professional advice. QuickSquad is not a bank, law firm, medical provider, financial adviser, or government agency. Consult an appropriately qualified professional before making decisions where professional advice is required."],
+  ["Your responsibilities", "You are responsible for the accuracy of information you submit, protecting your accounts and credentials, reviewing information before acting on it, and making your own decisions. Do not share passwords, bank-card details, or other highly sensitive information unless specifically requested through an approved and secure process."],
+  ["Payments and subscriptions", "Where a paid service or subscription is offered, prices, billing frequency, and applicable terms will be shown before purchase. Payments, subscriptions, customer support, and billing are managed by A V TRADE CORPORATION. Refund requests are handled under our Refund Policy."],
+  ["Acceptable use and availability", "You must use the platform lawfully and must not misuse it, disrupt it, attempt unauthorized access, submit harmful content, or use it to commit fraud. We may change, suspend, or discontinue parts of the platform to maintain security, comply with law, or improve our services."],
+  ["Liability", "To the extent permitted by law, QuickSquad and A V TRADE CORPORATION are not responsible for decisions, losses, or outcomes resulting from reliance on general information, third-party resources, service interruptions, or events outside our reasonable control."],
+];
 
 export default function TermsOfService() {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
-  return (
-    <section className="bg-gray-50 py-16 px-6 min-h-screen">
-      {/* Title */}
-      <motion.div
-        className="text-center mb-12"
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-black">
-          QuickSquad Terms of Service
-        </h1>
-        <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-          These Terms of Service outline the rules and responsibilities you agree
-          to when using QuickSquad’s platform and services. Please read them
-          carefully.
-        </p>
-      </motion.div>
-
-      {/* Content */}
-      <main className="max-w-4xl mx-auto space-y-8 text-gray-800 leading-relaxed">
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">1. Acceptance of Terms</h3>
-          <p>
-            By accessing or using QuickSquad, you confirm that you agree to
-            comply with these Terms. If you do not agree, please discontinue use
-            of our services immediately.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">2. Fair Use of Services</h3>
-          <p>
-            QuickSquad is designed to provide reliable consultation services.
-            You agree to use our services responsibly and lawfully.
-            Specifically, you must not:
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Disrupt, overload, or interfere with the platform.</li>
-            <li>Access or attempt to access data without authorization.</li>
-            <li>Engage in fraudulent, harmful, or malicious activities.</li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">3. User Responsibilities</h3>
-          <p>As a QuickSquad user, you are expected to:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Provide accurate and up-to-date information.</li>
-            <li>Maintain the confidentiality of your login credentials.</li>
-            <li>Promptly report unauthorized use of your account.</li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">4. Intellectual Property</h3>
-          <p>
-            All content, branding, and materials on QuickSquad are the exclusive
-            property of our company. You may not copy, distribute, or reproduce
-            them without prior written permission.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">5. Limitation of Liability</h3>
-          <p>
-            While we strive to deliver uninterrupted, high-quality services, we
-            are not liable for damages caused by service interruptions, data
-            loss, or operational issues beyond our control.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">6. Termination of Access</h3>
-          <p>
-            QuickSquad reserves the right to suspend or terminate your access if
-            you violate these Terms, engage in harmful activities, or misuse our
-            services.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">7. Updates to Terms</h3>
-          <p>
-            These Terms may be updated from time to time. Any changes will be
-            effective immediately upon posting. Continued use of our services
-            constitutes acceptance of the revised Terms.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">8. Contact Us</h3>
-          <p>
-            If you have any questions or concerns about these Terms, please
-            reach out to us:
-          </p>
-          <p className="mt-2">
-            Email: <strong>support@digipants.com</strong>
-          </p>
-          <p className="mt-2">
-            Owned and operated by <strong>A V TRADE CORPORATION</strong>.
-          </p>
-          <p className="mt-2">
-            <strong>Effective Date:</strong> January 25, 2025
-          </p>
-        </motion.div>
-      </main>
-    </section>
-  );
+  return <main className="bg-slate-50 px-6 py-16 text-slate-800"><article className="mx-auto max-w-4xl rounded-2xl bg-white p-7 shadow-sm ring-1 ring-slate-200 sm:p-12"><p className="text-sm font-bold uppercase tracking-[.16em] text-blue-700">QuickSquad legal</p><h1 className="mt-3 text-4xl font-bold text-slate-950">Terms of Service</h1><div className="mt-10 space-y-8">{sections.map(([title, text], index) => <section key={title}><h2 className="text-xl font-bold text-slate-900">{index + 1}. {title}</h2><p className="mt-3 leading-7 text-slate-600">{text}</p></section>)}</div><section className="mt-10 border-t border-slate-200 pt-8"><h2 className="text-xl font-bold text-slate-900">Contact and updates</h2><p className="mt-3 leading-7 text-slate-600">For questions, contact <a className="font-semibold text-blue-700 underline" href="mailto:support@quicksquad.live">support@quicksquad.live</a>. We may update these Terms by posting a revised version here. Read the <Link className="font-semibold text-blue-700 underline" href="/privacy-policy">Privacy Policy</Link>, <Link className="font-semibold text-blue-700 underline" href="/refund-policy">Refund Policy</Link>, and <Link className="font-semibold text-blue-700 underline" href="/disclaimer">Disclaimer</Link>.</p></section><p className="mt-8 text-sm text-slate-500">Effective date: August 11, 2026</p></article></main>;
 }

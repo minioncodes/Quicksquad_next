@@ -1,50 +1,50 @@
 const services = [
   {
     icon: "fa-solid fa-laptop-code",
-    title: "Digital Account & Online Services",
-    description: "Email setup, online payments, password recovery, account access, and cloud storage guidance.",
+    title: "Digital Accounts",
+    description: "Guidance for email setup, account access, passwords, online payments, and common digital tasks.",
     tags: ["email", "payments", "passwords", "accounts", "cloud"]
   },
   {
     icon: "fa-solid fa-hand-holding-dollar",
-    title: "Financial Assistance",
-    description: "Bank account setup, credit score guidance, stock advice, crypto basics, tax filing support.",
-    tags: ["banking", "credit", "stocks", "crypto", "tax"]
+    title: "Banking & Finance Guidance",
+    description: "General information on banking tasks, financial concepts, and preparing questions for qualified professionals.",
+    tags: ["banking", "budgeting", "credit", "financial basics"]
   },
   {
     icon: "fa-solid fa-location-dot",
-    title: "Location & Navigation Assistance",
-    description: "Find addresses, discover nearby services, look up ZIP & area codes.",
-    tags: ["maps", "nearby", "zip codes"]
+    title: "Technology Assistance",
+    description: "Practical computer, internet, device, and online safety guidance for everyday needs.",
+    tags: ["computers", "internet", "devices", "online safety"]
   },
   {
     icon: "fa-solid fa-scale-unbalanced-flip",
-    title: "Legal & Government Services",
-    description: "Apply for benefits, understand tax deductions, DMV help, file legal documents.",
-    tags: ["benefits", "tax", "dmv", "legal"]
+    title: "Government Services",
+    description: "Help finding official resources and understanding common online forms and public-service portals.",
+    tags: ["official resources", "forms", "applications", "portals"]
   },
   {
     icon: "fa-solid fa-route",
-    title: "Travel & Transportation",
-    description: "Book flights & hotels, check public transport routes, get visa & insurance help.",
+    title: "Travel Planning",
+    description: "Research trips, compare options, and organize online travel tasks with greater clarity.",
     tags: ["flights", "hotels", "transport", "visa"]
   },
   {
     icon: "fa-solid fa-cart-shopping",
-    title: "Consumer & Shopping Assistance",
-    description: "Find online deals, compare products, manage subscriptions & memberships.",
+    title: "Shopping Assistance",
+    description: "Compare products, understand subscriptions, and complete online shopping tasks confidently.",
     tags: ["deals", "reviews", "subscriptions"]
   },
   {
     icon: "fa-solid fa-staff-snake",
-    title: "Healthcare & Wellness",
-    description: "Locate hospitals & pharmacies, understand insurance, book doctor appointments.",
+    title: "Healthcare Information",
+    description: "General health-information and online task guidance; not medical advice or a substitute for care.",
     tags: ["hospitals", "insurance", "appointments"]
   },
   {
     icon: "fa-solid fa-user-graduate",
-    title: "Education & Career Guidance",
-    description: "Discover courses, build resumes, apply for jobs, scholarships & colleges.",
+    title: "Career Guidance",
+    description: "Explore learning options, organize job-search materials, and navigate career-related online tasks.",
     tags: ["courses", "resume", "jobs", "scholarships"]
   }
 ];

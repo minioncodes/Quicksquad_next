@@ -1,131 +1,17 @@
-"use client";
-import { motion } from "framer-motion";
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = { title: "Privacy Policy", description: "Learn how QuickSquad, owned and operated by A V TRADE CORPORATION, collects, uses, and protects customer information.", alternates: { canonical: "/privacy-policy" } };
+
+const sections = [
+  ["Information we collect", "Depending on how you use QuickSquad, we may collect contact details such as your name, email address, and phone number; the content of service inquiries; subscription details; and technical usage information such as device, browser, IP address, and pages visited."],
+  ["How we use information", "We use information to respond to requests, deliver and improve consultation services, process subscriptions or billing where applicable, maintain site security, communicate service updates, and meet legal obligations."],
+  ["When information is shared", "We do not sell personal information. We may share it with service providers that help operate the platform, process payments, provide customer support, or secure systems; and with authorities where required by law. These parties may use information only to perform their services or meet legal requirements."],
+  ["Cookies and analytics", "QuickSquad may use cookies and similar technologies to remember preferences, understand site use, improve performance, and measure marketing. You can manage cookies through browser settings, although some site features may be affected."],
+  ["Data security and retention", "We use reasonable administrative, technical, and organizational safeguards designed to protect information. No internet transmission or storage system is completely secure. We retain information only for as long as needed for the purposes described here, including legal, accounting, and dispute-resolution requirements."],
+  ["Your choices", "You may ask to access, correct, delete, or limit the use of personal information, or opt out of promotional messages. Some requests may be limited where we must retain information by law or to protect the platform and its users."],
+];
 
 export default function PrivacyPolicy() {
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
-  return (
-    <section className="bg-gray-50 py-16 px-6 min-h-screen">
-      {/* Header */}
-      <motion.div
-        className="text-center mb-12"
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-black">
-          QuickSquad Privacy Policy
-        </h1>
-        <h4 className="mt-4 text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-          At QuickSquad, your privacy is our highest priority. This Privacy
-          Policy explains how we collect, use, safeguard, and share your
-          information while you use our website and services.
-        </h4>
-      </motion.div>
-
-      {/* Content */}
-      <main className="max-w-4xl mx-auto space-y-8 text-gray-800 leading-relaxed">
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">Overview</h3>
-          <p>
-            This Privacy Policy describes how QuickSquad [&quot;we,&quot; &quot;our,&quot; &quot;us&quot;]
-            handles your personal information. By using our services, you agree
-            to the practices outlined in this policy.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">1. Information We Collect</h3>
-          <p>Depending on how you interact with our services, we may collect:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Contact details (such as your name, email address, and phone number).</li>
-            <li>Usage details (IP address, browser type, and device information).</li>
-            <li>Service-related information (requests, inquiries, and issues reported).</li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">2. How We Use Your Information</h3>
-          <p>We use your information to:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Deliver, maintain, and improve our services.</li>
-            <li>Provide customer assistance and respond to your inquiries.</li>
-            <li>Send important updates, notifications, or service-related communications.</li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">3. Sharing Your Information</h3>
-          <p>
-            We respect your privacy and never sell your data. However, we may
-            share your information with:
-          </p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Trusted third-party service providers assisting us in operations.</li>
-            <li>Regulatory or legal authorities when required by law.</li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">4. Data Security</h3>
-          <p>
-            We implement industry-standard security measures to protect your
-            data. However, please note that no online system is completely
-            secure, and we cannot guarantee absolute protection.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">5. Your Rights</h3>
-          <p>You have the right to:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Access, correct, or request deletion of your personal data.</li>
-            <li>Opt out of promotional or marketing communications.</li>
-          </ul>
-          <p className="mt-2">
-            To exercise your rights, contact us at:{" "}
-            <strong>support@digipants.com</strong>
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">6. Cookies</h3>
-          <p>
-            We use cookies and similar technologies to enhance your browsing
-            experience, improve site functionality, and analyze usage patterns.
-            You can manage cookie preferences in your browser settings.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">7. Updates to This Policy</h3>
-          <p>
-            We may update this Privacy Policy from time to time. Any changes
-            will be posted here, and continued use of our services indicates
-            your acceptance of the revised policy.
-          </p>
-        </motion.div>
-
-        <motion.div variants={sectionVariants} initial="hidden" animate="visible">
-          <h3 className="text-2xl font-semibold text-gray-900">8. Contact Us</h3>
-          <p>
-            If you have any questions about this Privacy Policy or how we
-            handle your information, please contact us:
-          </p>
-          <p className="mt-2">
-            Email: <strong>support@digipants.com</strong>
-          </p>
-          <p className="mt-2">
-            Owned and operated by <strong>A V TRADE CORPORATION</strong>.
-          </p>
-          <p className="mt-2">
-            <strong>Effective Date:</strong> January 25, 2025
-          </p>
-        </motion.div>
-      </main>
-    </section>
-  );
+  return <main className="bg-slate-50 px-6 py-16 text-slate-800"><article className="mx-auto max-w-4xl rounded-2xl bg-white p-7 shadow-sm ring-1 ring-slate-200 sm:p-12"><p className="text-sm font-bold uppercase tracking-[.16em] text-blue-700">QuickSquad legal</p><h1 className="mt-3 text-4xl font-bold text-slate-950">Privacy Policy</h1><p className="mt-5 text-lg leading-8 text-slate-600">This Privacy Policy describes how QuickSquad, owned and operated by A V TRADE CORPORATION, collects, uses and protects customer information.</p><p className="mt-5 leading-7 text-slate-600">A V TRADE CORPORATION is a registered partnership firm and manages QuickSquad’s services, customer support, billing, subscriptions, marketing, and operations.</p><div className="mt-10 space-y-8">{sections.map(([title, text], index) => <section key={title}><h2 className="text-xl font-bold text-slate-900">{index + 1}. {title}</h2><p className="mt-3 leading-7 text-slate-600">{text}</p></section>)}</div><section className="mt-10 border-t border-slate-200 pt-8"><h2 className="text-xl font-bold text-slate-900">Contact and changes</h2><p className="mt-3 leading-7 text-slate-600">For privacy questions or requests, email <a className="font-semibold text-blue-700 underline" href="mailto:support@quicksquad.live">support@quicksquad.live</a>. We may update this policy from time to time; the current version will be posted on this page. Please also review our <Link className="font-semibold text-blue-700 underline" href="/terms-of-service">Terms of Service</Link> and <Link className="font-semibold text-blue-700 underline" href="/disclaimer">Disclaimer</Link>.</p></section><p className="mt-8 text-sm text-slate-500">Effective date: August 11, 2026</p></article></main>;
 }

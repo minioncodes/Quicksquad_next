@@ -1,26 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-interface RecaptchaInstance {
-  render: (
-    container: string | HTMLElement,
-    parameters: {
-      sitekey: string;
-      callback?: () => void;
-      "expired-callback"?: () => void;
-      "error-callback"?: () => void;
-    }
-  ) => number;
-  reset: (widgetId?: number) => void;
-  getResponse: (widgetId?: number) => string;
-}
-
-declare global {
-  interface Window {
-    grecaptcha?: RecaptchaInstance;
-  }
-}
+import { useState } from "react";
 
 interface Category {
   title: string;
@@ -29,13 +9,13 @@ interface Category {
 
 const allCategories: Category[] = [
   {
-    title: "Financial Assistance",
+    title: "Banking & Financial Guidance",
     description: [
       "How to open a bank account online",
       "Understanding credit scores and reports",
-      "Stock market investment advice",
-      "Cryptocurrency basics and trading tips",
-      "Tax filing assistance and IRS guidance",
+      "General financial concepts and terminology",
+      "Preparing questions for a qualified financial professional",
+      "Online financial account navigation guidance",
     ],
   },
   {
@@ -49,20 +29,20 @@ const allCategories: Category[] = [
     ],
   },
   {
-    title: "Location & Navigation Assistance",
+    title: "Technology & Internet Guidance",
     description: [
-      "Finding addresses and directions",
-      "Locating nearby services (banks, hospitals, restaurants, etc.)",
-      "Understanding ZIP codes and area codes",
+      "Computer, device, and internet guidance",
+      "Online safety and basic digital tasks",
+      "Finding reliable online resources",
     ],
   },
   {
-    title: "Legal & Government Services",
+    title: "Government Services Guidance",
     description: [
-      "Applying for social security benefits",
-      "Understanding tax deductions and credits",
-      "Assistance with DMV services (licenses, registrations)",
-      "Filing small claims or legal documents",
+      "Finding official government resources",
+      "Understanding public-service portals and forms",
+      "Online application and registration task guidance",
+      "General information only, not legal advice",
     ],
   },
   {
@@ -70,7 +50,7 @@ const allCategories: Category[] = [
     description: [
       "Booking flights, hotels, and rental cars",
       "Public transportation schedules and routes",
-      "Understanding travel insurance and visa requirements",
+      "Finding official visa and travel information",
     ],
   },
   {
@@ -85,8 +65,8 @@ const allCategories: Category[] = [
     title: "Healthcare & Wellness",
     description: [
       "Finding nearby hospitals, clinics, or pharmacies",
-      "Understanding insurance coverage and policies",
-      "Booking doctor’s appointments online",
+      "Understanding general health-information resources",
+      "Booking healthcare appointments online",
     ],
   },
   {
@@ -102,9 +82,7 @@ const allCategories: Category[] = [
 export default function ContactPage() {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
-  const [captchaVerified, setCaptchaVerified] = useState(false);
   const [loading, setLoading] = useState(false);
-  const recaptchaWidgetId = useRef<number | null>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -112,67 +90,6 @@ export default function ContactPage() {
     phone: "",
     message: "",
   });
-  const recaptchaSiteKey =
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
-    "6LeNPuUqAAAAAOLA9Q4l620A_HfT4V5MhdCxxVWX";
-
-  // Ensure reCAPTCHA script loads and widget renders once on the client.
-  useEffect(() => {
-    if (!recaptchaSiteKey) {
-      console.warn("Missing reCAPTCHA site key.");
-      return;
-    }
-
-    const renderCaptcha = () => {
-      if (!window.grecaptcha || recaptchaWidgetId.current !== null) {
-        return;
-      }
-
-      recaptchaWidgetId.current = window.grecaptcha.render(
-        "recaptcha-container",
-        {
-          sitekey: recaptchaSiteKey,
-          callback: () => setCaptchaVerified(true),
-          "expired-callback": () => setCaptchaVerified(false),
-          "error-callback": () => setCaptchaVerified(false),
-        }
-      );
-    };
-
-    if (window.grecaptcha) {
-      renderCaptcha();
-      return;
-    }
-
-    const scriptSelector =
-      'script[src^="https://www.google.com/recaptcha/api.js"]';
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      scriptSelector
-    );
-
-    const handleScriptLoad = () => {
-      renderCaptcha();
-    };
-
-    if (existingScript) {
-      existingScript.addEventListener("load", handleScriptLoad);
-      return () => {
-        existingScript.removeEventListener("load", handleScriptLoad);
-      };
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    script.async = true;
-    script.defer = true;
-    script.addEventListener("load", handleScriptLoad);
-    document.body.appendChild(script);
-
-    return () => {
-      script.removeEventListener("load", handleScriptLoad);
-    };
-  }, [recaptchaSiteKey]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -225,14 +142,27 @@ export default function ContactPage() {
   };
 
   return (
-<section className="py-12 px-6 bg-gradient-to-br from-blue-50 to-white">
-      <div className="max-w-3xl mx-auto text-gray-900 bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
+<main className="bg-gradient-to-br from-blue-50 to-white px-6 py-12 md:py-16">
+  <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[.8fr_1.2fr]">
+    <aside className="h-fit rounded-2xl bg-slate-950 p-8 text-white shadow-lg">
+      <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-300">Business transparency</p>
+      <h1 className="mt-3 text-3xl font-bold">Contact QuickSquad</h1>
+      <p className="mt-4 text-sm leading-6 text-slate-300">QuickSquad is a consumer-facing AI-powered consultation platform owned and operated by A V TRADE CORPORATION.</p>
+      <dl className="mt-8 space-y-5 text-sm">
+        <div><dt className="font-semibold text-blue-200">Brand Name</dt><dd className="mt-1 text-white">QuickSquad</dd></div>
+        <div><dt className="font-semibold text-blue-200">Legal Entity</dt><dd className="mt-1 text-white">A V TRADE CORPORATION<br />Registered Partnership Firm</dd></div>
+        <div><dt className="font-semibold text-blue-200">Customer Support</dt><dd className="mt-1"><a className="text-white underline" href="mailto:support@quicksquad.live">support@quicksquad.live</a></dd></div>
+        <div><dt className="font-semibold text-blue-200">Sales</dt><dd className="mt-1"><a className="text-white underline" href="mailto:sales@quicksquad.live">sales@quicksquad.live</a></dd></div>
+        <div><dt className="font-semibold text-blue-200">Business Hours</dt><dd className="mt-1 text-slate-300">Customer Support availability is provided when you contact us.</dd></div>
+      </dl>
+    </aside>
+      <div className="text-gray-900 bg-white shadow-lg rounded-2xl p-8 border border-gray-100">
         <h2 className="text-3xl font-bold text-gray-900 text-center mb-2">
-          Contact Us
+          Start a Consultation
         </h2>
         <p className="text-gray-600 text-center mb-8">
-          Tell us what you need help with and our consultation team will get
-          back to you quickly with the right next steps.
+          Tell us what you need help with. QuickSquad provides general guidance
+          and consultation; regulated professional advice is not provided.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -346,17 +276,12 @@ export default function ContactPage() {
             </div>
           )}
 
-          {/* reCAPTCHA */}
-          <div className="recaptcha-wrapper flex justify-center">
-            <div id="recaptcha-container" className="g-recaptcha" />
-          </div>
-
           {/* Submit */}
 <button
   type="submit"
-  disabled={loading || !captchaVerified}
+  disabled={loading}
   className={`w-full py-3 px-6 rounded-lg font-semibold transition flex items-center justify-center gap-3 ${
-    captchaVerified && !loading
+    !loading
       ? "bg-blue-600 hover:bg-blue-700 text-white"
       : "bg-gray-300 text-gray-500 cursor-not-allowed"
   }`}
@@ -373,6 +298,7 @@ export default function ContactPage() {
 
         </form>
       </div>
-    </section>
+  </div>
+</main>
   );
 }

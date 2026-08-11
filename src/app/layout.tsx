@@ -10,6 +10,7 @@ import HeaderAu from "@/components/Header/HeaderAu";
 import HeaderUs from "@/components/Header/HeaderUs";
 import FooterAu from "@/components/Footer/FooterAu";
 import FooterUs from "@/components/Footer/FooterUs";
+import SiteDisclosure from "@/components/SiteDisclosure";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,27 +23,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QuickSquad | Consultation Services for Everyday Decisions",
+  metadataBase: new URL("https://quicksquad.live"),
+  title: {
+    default: "QuickSquad | AI-Powered Everyday Consultation",
+    template: "%s | QuickSquad",
+  },
   description:
-    "QuickSquad connects you with specialists across financial, travel, legal, digital, healthcare, shopping, and career consultations whenever you need reliable guidance.",
+    "QuickSquad is an AI-powered consultation platform owned and operated by A V TRADE CORPORATION, providing everyday digital guidance across technology, finance, travel, government services, and more.",
   keywords: [
     "consultation services",
     "online consultation",
     "expert guidance",
     "financial assistance",
     "travel assistance",
-    "legal guidance",
+    "government services guidance",
     "digital services",
     "career guidance",
     "consumer assistance",
     "QuickSquad",
   ],
-  authors: [{ name: "QuickSquad", url: "https://quicksquad.live" }],
+  authors: [{ name: "A V TRADE CORPORATION", url: "https://quicksquad.live" }],
+  creator: "A V TRADE CORPORATION",
+  publisher: "A V TRADE CORPORATION",
+  category: "Consumer consultation services",
   openGraph: {
-    title: "QuickSquad | 24/7 Consultation Services Across Everyday Needs",
+    title: "QuickSquad | AI-Powered Everyday Consultation",
     description:
-      "Connect instantly with specialists for everyday guidance across finance, travel, digital accounts, legal forms, shopping, healthcare, and career decisions.",
-    url: "https://quicksquad.live/",
+      "Trusted general guidance for technology, finance, travel, digital accounts, government services, healthcare, shopping, and more.",
+    url: "https://quicksquad.live",
     siteName: "QuickSquad",
     images: [
       {
@@ -57,15 +65,58 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "QuickSquad | 24/7 Consultation Services",
+    title: "QuickSquad | AI-Powered Everyday Consultation",
     description:
-      "Instant help from specialists for financial, travel, digital, legal, shopping, healthcare, and career questions.",
+      "General consumer guidance across everyday online tasks and questions.",
     images: ["https://quicksquad.live/images/quicksquad_og.png"],
     creator: "@QuickSquad",
   },
   alternates: {
-    canonical: "https://quicksquad.live/",
+    canonical: "/",
   },
+  robots: { index: true, follow: true },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://quicksquad.live/#organization",
+      name: "A V TRADE CORPORATION",
+      legalName: "A V TRADE CORPORATION",
+      description: "Registered partnership firm operating the QuickSquad consumer consultation platform.",
+      url: "https://quicksquad.live",
+      email: "support@quicksquad.live",
+      brand: { "@type": "Brand", name: "QuickSquad" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://quicksquad.live/#website",
+      name: "QuickSquad",
+      url: "https://quicksquad.live",
+      publisher: { "@id": "https://quicksquad.live/#organization" },
+    },
+    {
+      "@type": "Service",
+      name: "QuickSquad Everyday Consultation Services",
+      provider: { "@id": "https://quicksquad.live/#organization" },
+      serviceType: "AI-powered consumer guidance and consultation",
+      areaServed: "Worldwide",
+      description: "General guidance for technology, finance, travel, digital accounts, shopping, career, healthcare information, government-service tasks, and everyday online help.",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        { "@type": "Question", name: "What does QuickSquad provide?", acceptedAnswer: { "@type": "Answer", text: "QuickSquad provides general consumer guidance and consultation for everyday questions and online tasks." } },
+        { "@type": "Question", name: "Is QuickSquad a bank, law firm, medical provider, investment adviser, or government agency?", acceptedAnswer: { "@type": "Answer", text: "No. QuickSquad does not provide regulated professional services. Information is general and educational; consult qualified professionals when required." } },
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://quicksquad.live" }],
+    },
+  ],
 };
 
 export default async function RootLayout({
@@ -100,10 +151,6 @@ const country = countryHeader || cookieStore.get("country")?.value;
     <html lang="en">
       <head>
         <Script
-          src="https://www.google.com/recaptcha/api.js"
-          strategy="afterInteractive"
-        />
-        <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18376694937"
           strategy="afterInteractive"
         />
@@ -115,10 +162,12 @@ const country = countryHeader || cookieStore.get("country")?.value;
             gtag('config', 'AW-18376694937');
           `}
         </Script>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <HeaderComponent />
         {children}
+        <SiteDisclosure />
         <ChatWidget />
         <FooterComponent />
       </body>
