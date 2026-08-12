@@ -1,121 +1,69 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character] || character);
+
+const asTrimmedString = (value: unknown) => typeof value === "string" ? value.trim() : "";
+
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, message, category, subCategory } = await req.json();
+    const body = await req.json();
+    const name = asTrimmedString(body.name);
+    const email = asTrimmedString(body.email).toLowerCase();
+    const phone = asTrimmedString(body.phone);
+    const message = asTrimmedString(body.message);
+    const category = asTrimmedString(body.category) || "Not specified";
+    const subCategory = asTrimmedString(body.subCategory) || "Not specified";
 
     if (!name || !email || !phone || !message) {
-      return NextResponse.json({ success: false, error: "Missing required fields." }, { status: 400 });
+      return NextResponse.json({ success: false, error: "Please complete all required fields." }, { status: 400 });
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      return NextResponse.json({ success: false, error: "Please enter a valid email address." }, { status: 400 });
+    }
+    if (name.length > 120 || phone.length > 60 || message.length > 5000 || category.length > 160 || subCategory.length > 220) {
+      return NextResponse.json({ success: false, error: "One or more fields are too long." }, { status: 400 });
     }
 
-    // Create transporter
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
+    const inbox = process.env.CONTACT_INBOX || "support@quicksquad.live";
+    const from = process.env.EMAIL_FROM || emailUser;
+
+    if (!emailUser || !emailPass || !from) {
+      console.error("Contact email is not configured.");
+      return NextResponse.json({ success: false, error: "Contact email is temporarily unavailable. Please email support@quicksquad.live directly." }, { status: 503 });
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
+      auth: { user: emailUser, pass: emailPass },
     });
 
-    // ----------- 1️⃣  EMAIL TO ADMIN  ------------
-    const adminMail = {
-      from: `"QuickSquad" <${process.env.EMAIL_USER}>`,
-      to: "devs@digipants.com",
-      subject: `📩 New Consultation Inquiry from ${name}`,
-      html: `
-      <div style="background:#f0f5ff; padding:32px; font-family:'Segoe UI', Tahoma, sans-serif; color:#1e293b;">
-        <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
+    const safe = { name: escapeHtml(name), email: escapeHtml(email), phone: escapeHtml(phone), message: escapeHtml(message).replace(/\n/g, "<br />"), category: escapeHtml(category), subCategory: escapeHtml(subCategory) };
+    const brandFrom = `"QuickSquad — A V TRADE CORPORATION" <${from}>`;
 
-          <!-- Header -->
-          <div style="background:#2563eb; padding:20px 30px;">
-            <h2 style="color:#ffffff; margin:0; font-size:22px;">🧠 New Consultation Request</h2>
-            <p style="color:#bfdbfe; margin-top:6px; font-size:14px;">Sent via QuickSquad Contact Form</p>
-          </div>
+    await transporter.sendMail({
+      from: brandFrom,
+      to: inbox,
+      replyTo: email,
+      subject: `New QuickSquad consultation request from ${name}`,
+      text: `New consultation request\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nCategory: ${category}\nSub-category: ${subCategory}\n\nMessage:\n${message}`,
+      html: `<div style="font-family:Arial,sans-serif;color:#1e293b;line-height:1.55"><h2 style="color:#1d4ed8">New QuickSquad consultation request</h2><p>Submitted through quicksquad.live. QuickSquad is operated by A V TRADE CORPORATION.</p><table cellpadding="6"><tr><td><strong>Name</strong></td><td>${safe.name}</td></tr><tr><td><strong>Email</strong></td><td>${safe.email}</td></tr><tr><td><strong>Phone</strong></td><td>${safe.phone}</td></tr><tr><td><strong>Category</strong></td><td>${safe.category}</td></tr><tr><td><strong>Sub-category</strong></td><td>${safe.subCategory}</td></tr></table><h3>Message</h3><p>${safe.message}</p></div>`,
+    });
 
-          <!-- Body -->
-          <div style="padding:28px 30px;">
-            <p style="margin-bottom:12px;">A new inquiry was submitted on your website:</p>
-
-            <table cellpadding="6" cellspacing="0" width="100%" style="margin-top:10px; border-collapse:collapse;">
-              <tr><td style="font-weight:600; width:150px; color:#2563eb;">👤 Name:</td><td>${name}</td></tr>
-              <tr><td style="font-weight:600; color:#2563eb;">📧 Email:</td><td>${email}</td></tr>
-              <tr><td style="font-weight:600; color:#2563eb;">📞 Phone:</td><td>${phone}</td></tr>
-              <tr><td style="font-weight:600; color:#2563eb;">📂 Category:</td><td>${category || "Not specified"}</td></tr>
-              <tr><td style="font-weight:600; color:#2563eb;">🧩 Sub-Category:</td><td>${subCategory || "Not specified"}</td></tr>
-            </table>
-
-            <div style="margin-top:20px;">
-              <p style="font-weight:600; margin-bottom:6px; color:#2563eb;">📝 Message:</p>
-              <div style="background:#f8fafc; border-left:4px solid #2563eb; padding:12px 16px; border-radius:6px; font-size:15px;">
-                ${message}
-              </div>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div style="background:#f1f5f9; padding:18px 30px; text-align:center; font-size:13px; color:#475569;">
-            <p style="margin:0;"><b>QuickSquad Consultation Services</b> — Everyday Guidance Across Key Life Needs</p>
-            <p style="margin-top:6px; color:#64748b;">
-              Visit us at <a href="https://quicksquad.live" style="color:#2563eb; text-decoration:none;">https://quicksquad.live</a>
-            </p>
-          </div>
-        </div>
-      </div>`,
-    };
-
-    // ----------- 2️⃣  CONFIRMATION EMAIL TO USER  ------------
-    const userMail = {
-      from: `"QuickSquad" <${process.env.EMAIL_USER}>`,
+    transporter.sendMail({
+      from: brandFrom,
       to: email,
-      subject: `✅ Your Consultation Request Has Been Received`,
-      html: `
-      <div style="background:#f0f5ff; padding:32px; font-family:'Segoe UI', Tahoma, sans-serif; color:#1e293b;">
-        <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);">
+      subject: "We received your QuickSquad consultation request",
+      text: `Hello ${name},\n\nWe received your consultation request. QuickSquad, operated by A V TRADE CORPORATION, provides general consumer guidance and consultation. Our support team will review your message.\n\nCategory: ${category}\n\nThank you,\nQuickSquad`,
+      html: `<div style="font-family:Arial,sans-serif;color:#1e293b;line-height:1.55"><h2 style="color:#1d4ed8">We received your request</h2><p>Hello ${safe.name},</p><p>Thank you for contacting QuickSquad. QuickSquad is operated by A V TRADE CORPORATION and provides general consumer guidance and consultation.</p><p><strong>Category:</strong> ${safe.category}</p><p>Our customer-support team will review your message.</p><p>Thank you,<br /><strong>QuickSquad</strong></p></div>`,
+    }).catch((error) => console.error("Confirmation email failed:", error));
 
-          <!-- Header -->
-          <div style="background:#2563eb; padding:20px 30px;">
-            <h2 style="color:#ffffff; margin:0; font-size:22px;">🙌 Thank You, ${name}!</h2>
-            <p style="color:#bfdbfe; margin-top:6px; font-size:14px;">We’ve received your consultation inquiry.</p>
-          </div>
-
-          <!-- Body -->
-          <div style="padding:28px 30px;">
-            <p>We’ve received your message and one of our specialists will reach out to you shortly.</p>
-            <p style="margin-top:12px;">Here’s a copy of your submission:</p>
-
-            <div style="background:#f8fafc; border-left:4px solid #2563eb; padding:12px 16px; border-radius:6px; font-size:15px;">
-              <p><strong>Category:</strong> ${category || "Not specified"}</p>
-              <p><strong>Sub-Category:</strong> ${subCategory || "Not specified"}</p>
-              <p><strong>Message:</strong><br>${message}</p>
-            </div>
-
-            <p style="margin-top:16px; color:#334155;">
-              Our team operates <strong>24×7</strong>, so expect a reply soon.
-            </p>
-          </div>
-
-          <!-- Footer -->
-          <div style="background:#f1f5f9; padding:18px 30px; text-align:center; font-size:13px; color:#475569;">
-            <p style="margin:0;"><b>QuickSquad Consultation Services</b> — Always Here to Help</p>
-            <p style="margin-top:6px; color:#64748b;">
-              Visit us at <a href="https://quicksquad.live" style="color:#2563eb; text-decoration:none;">https://quicksquad.live</a>
-            </p>
-          </div>
-        </div>
-      </div>`,
-    };
-
-    // Send both emails
-    await transporter.sendMail(adminMail);
-    await transporter.sendMail(userMail);
-
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: "Your consultation request has been sent." });
   } catch (error) {
-    console.error("Email sending error:", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to send email." },
-      { status: 500 }
-    );
+    console.error("Contact form submission failed:", error);
+    return NextResponse.json({ success: false, error: "We could not send your request. Please try again or email support@quicksquad.live." }, { status: 500 });
   }
 }

@@ -83,6 +83,7 @@ export default function ContactPage() {
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
   const [loading, setLoading] = useState(false);
+  const [formStatus, setFormStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -97,9 +98,10 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormStatus(null);
 
     if (!form.name || !form.email || !form.phone || !form.message) {
-      alert("Please fill in all required fields.");
+      setFormStatus({ type: "error", message: "Please fill in all required fields." });
       return;
     }
 
@@ -122,20 +124,18 @@ export default function ContactPage() {
         body: JSON.stringify({ ...form, category, subCategory }),
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        alert("Your message has been sent successfully!");
+        setFormStatus({ type: "success", message: data.message || "Your consultation request has been sent." });
         setForm({ name: "", email: "", phone: "", message: "" });
         setCategory("");
         setSubCategory("");
-        // if (recaptchaWidgetId.current !== null) {
-        //   window.grecaptcha?.reset(recaptchaWidgetId.current);
-        // }
-        // setCaptchaVerified(false);
       } else {
-        alert("Failed to send message. Please try again later.");
+        setFormStatus({ type: "error", message: data.error || "We could not send your request. Please try again." });
       }
     } catch {
-      alert("Network error. Please check your connection.");
+      setFormStatus({ type: "error", message: "Network error. Please check your connection and try again." });
     } finally {
       setLoading(false);
     }
@@ -164,6 +164,15 @@ export default function ContactPage() {
           Tell us what you need help with. QuickSquad provides general guidance
           and consultation; regulated professional advice is not provided.
         </p>
+
+        {formStatus && (
+          <div
+            role="status"
+            className={`mb-6 rounded-lg border px-4 py-3 text-sm ${formStatus.type === "success" ? "border-emerald-200 bg-emerald-50 text-emerald-800" : "border-red-200 bg-red-50 text-red-800"}`}
+          >
+            {formStatus.message}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name */}
