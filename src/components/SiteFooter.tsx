@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { PhoneCall } from "lucide-react";
 
 const categories = ["Finance", "Technology", "Travel", "Healthcare", "Government Services", "Shopping", "Career", "Digital Accounts"];
 const supportLinks = [
@@ -32,6 +33,7 @@ export default function SiteFooter() {
           <ul className="mt-4 space-y-2 text-sm">
             {supportLinks.map((link) => <li key={link.href}><Link className="text-slate-300 transition hover:text-white hover:underline" href={link.href}>{link.label}</Link></li>)}
           </ul>
+          <a className="mt-5 flex items-center gap-2 text-lg font-bold text-white hover:text-blue-200" href="tel:+18443121044"><PhoneCall size={18} aria-hidden="true" /> (844) 312-1044</a>
           <a className="mt-5 inline-block text-sm font-medium text-blue-300 hover:text-blue-200" href="mailto:support@quicksquad.live">support@quicksquad.live</a>
         </div>
       </div>

@@ -148,10 +148,12 @@ export default function ContactPage() {
       <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-300">Business transparency</p>
       <h1 className="mt-3 text-3xl font-bold">Contact QuickSquad</h1>
       <p className="mt-4 text-sm leading-6 text-slate-300">QuickSquad is a consumer-facing AI-powered consultation platform owned and operated by A V TRADE CORPORATION.</p>
+      <a href="tel:+18443121044" className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-white px-4 py-3 text-center text-base font-bold text-blue-700 transition hover:bg-blue-50">Call Now: (844) 312-1044</a>
       <dl className="mt-8 space-y-5 text-sm">
         <div><dt className="font-semibold text-blue-200">Brand Name</dt><dd className="mt-1 text-white">QuickSquad</dd></div>
         <div><dt className="font-semibold text-blue-200">Legal Entity</dt><dd className="mt-1 text-white">A V TRADE CORPORATION<br />Registered Partnership Firm</dd></div>
         <div><dt className="font-semibold text-blue-200">Customer Support</dt><dd className="mt-1"><a className="text-white underline" href="mailto:support@quicksquad.live">support@quicksquad.live</a></dd></div>
+        <div><dt className="font-semibold text-blue-200">Phone</dt><dd className="mt-1"><a className="text-white underline" href="tel:+18443121044">(844) 312-1044</a></dd></div>
         <div><dt className="font-semibold text-blue-200">Sales</dt><dd className="mt-1"><a className="text-white underline" href="mailto:sales@quicksquad.live">sales@quicksquad.live</a></dd></div>
         <div><dt className="font-semibold text-blue-200">Business Hours</dt><dd className="mt-1 text-slate-300">Customer Support availability is provided when you contact us.</dd></div>
       </dl>

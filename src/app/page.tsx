@@ -15,6 +15,7 @@ import {
   faStaffSnake,
   faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
+import { PhoneCall } from "lucide-react";
 
 const iconMap = {
   "fa-solid fa-laptop-code": faLaptopCode,
@@ -73,15 +74,12 @@ export default function Home() {
 
       <div className="flex flex-wrap gap-4">
         {/* Gradient Button */}
-        <Link
-          href="/contact"
-          className="px-6 py-3 rounded-lg text-base sm:text-lg font-semibold 
-          bg-blue-600 
-          hover:opacity-90 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]
-          transition-all duration-300"
+        <a
+          href="tel:+18443121044"
+          className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-base font-bold text-blue-700 shadow-lg transition-all duration-300 hover:bg-blue-50 hover:shadow-xl sm:text-lg"
         >
-          Start Consultation
-        </Link>
+          <PhoneCall size={20} aria-hidden="true" /> Call Now: (844) 312-1044
+        </a>
 
         {/* Outline Button */}
         <Link
@@ -91,7 +89,7 @@ export default function Home() {
           hover:bg-white hover:text-blue-600 
           transition-all duration-300"
         >
-          Explore Services
+          Explore Services Instead
         </Link>
       </div>
     </motion.div>

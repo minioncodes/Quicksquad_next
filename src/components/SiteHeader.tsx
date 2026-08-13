@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, PhoneCall, X } from "lucide-react";
 import { useState } from "react";
 
 const navigation = [
@@ -46,19 +46,19 @@ export default function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="rounded-lg bg-slate-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+          <a
+            href="tel:+18443121044"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-blue-700 shadow-sm transition hover:bg-blue-50"
           >
-            Start Consultation
-          </Link>
+            <PhoneCall size={16} aria-hidden="true" /> Call (844) 312-1044
+          </a>
         </nav>
 
         <button
           type="button"
           aria-label={open ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={open}
-          className="rounded-lg p-2 text-slate-800 transition hover:bg-slate-100 lg:hidden"
+          className="rounded-lg p-2 text-white transition hover:bg-white/15 lg:hidden"
           onClick={() => setOpen((current) => !current)}
         >
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -81,16 +81,24 @@ export default function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/contact"
+            <a
+              href="tel:+18443121044"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-lg bg-blue-600 px-4 py-3 text-center font-semibold text-white"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-center font-semibold text-white"
             >
-              Start Consultation
-            </Link>
+              <PhoneCall size={18} aria-hidden="true" /> Call (844) 312-1044
+            </a>
           </div>
         </nav>
       )}
+
+      <a
+        href="tel:+18443121044"
+        className="fixed inset-x-4 bottom-4 z-50 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-5 py-4 text-base font-bold text-white shadow-xl transition hover:bg-blue-800 md:hidden"
+        aria-label="Call QuickSquad at 844 312 1044"
+      >
+        <PhoneCall size={20} aria-hidden="true" /> Call Now: (844) 312-1044
+      </a>
     </header>
   );
 }
