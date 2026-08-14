@@ -142,7 +142,7 @@ export default function ContactPage() {
   };
 
   return (
-<main className="bg-gradient-to-br from-blue-50 to-white px-6 py-12 md:py-16">
+<main className="bg-linear-to-br from-blue-50 to-white px-6 py-12 md:py-16">
   <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[.8fr_1.2fr]">
     <aside className="h-fit rounded-2xl bg-slate-950 p-8 text-white shadow-lg">
       <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-300">Business transparency</p>
@@ -234,7 +234,7 @@ export default function ContactPage() {
               placeholder="Enter your message"
               value={form.message}
               onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2 min-h-[120px]"
+              className="w-full rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 px-4 py-2 min-h-30"
             ></textarea>
           </div>
 
