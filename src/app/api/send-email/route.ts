@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       html: `<div style="font-family:Arial,sans-serif;color:#1e293b;line-height:1.55"><h2 style="color:#1d4ed8">New QuickSquad consultation request</h2><p>Submitted through quicksquad.live. QuickSquad is operated by A V TRADE CORPORATION.</p><table cellpadding="6"><tr><td><strong>Name</strong></td><td>${safe.name}</td></tr><tr><td><strong>Email</strong></td><td>${safe.email}</td></tr><tr><td><strong>Phone</strong></td><td>${safe.phone}</td></tr><tr><td><strong>Category</strong></td><td>${safe.category}</td></tr><tr><td><strong>Sub-category</strong></td><td>${safe.subCategory}</td></tr></table><h3>Message</h3><p>${safe.message}</p></div>`,
     });
 
-    transporter.sendMail({
+    await transporter.sendMail({
       from: brandFrom,
       to: email,
       subject: "We received your QuickSquad consultation request",
