@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Terms of Service", description: "QuickSquad terms of service and important boundaries for general consumer consultation, operated by A V TRADE CORPORATION.", alternates: { canonical: "/terms-of-service" } };
+export const metadata: Metadata = { title: "Terms of Service", description: "QuickSquad terms of service and important boundaries for general consumer consultation.", alternates: { canonical: "/terms-of-service" } };
 
 const sections = [
-  ["Acceptance and platform operator", "QuickSquad is a consumer-facing consultation platform owned and operated by A V TRADE CORPORATION. By using the website, requesting a consultation, or purchasing a subscription, you agree to these Terms and the linked Privacy Policy, Refund Policy, and Disclaimer."],
+  ["Acceptance", "By using the QuickSquad website, requesting a consultation, or purchasing a subscription, you agree to these Terms and the linked Privacy Policy, Refund Policy, and Disclaimer."],
   ["What QuickSquad provides", "QuickSquad provides AI-powered information assistance and general consultation for everyday questions and online tasks. We may help you research options, understand common processes, organize information, and identify useful next steps."],
   ["Important professional boundaries", "Information on QuickSquad is educational and general. It is not professional legal advice, investment advice, medical advice, tax advice, or any other regulated professional advice. QuickSquad is not a bank, law firm, medical provider, financial adviser, or government agency. Consult an appropriately qualified professional before making decisions where professional advice is required."],
   ["Your responsibilities", "You are responsible for the accuracy of information you submit, protecting your accounts and credentials, reviewing information before acting on it, and making your own decisions. Do not share passwords, bank-card details, or other highly sensitive information unless specifically requested through an approved and secure process."],
-  ["Payments and subscriptions", "Where a paid service or subscription is offered, prices, billing frequency, and applicable terms will be shown before purchase. Payments, subscriptions, customer support, and billing are managed by A V TRADE CORPORATION. Refund requests are handled under our Refund Policy."],
+  ["Payments and subscriptions", "Where a paid service or subscription is offered, prices, billing frequency, and applicable terms will be shown before purchase. Refund requests are handled under our Refund Policy."],
   ["Acceptable use and availability", "You must use the platform lawfully and must not misuse it, disrupt it, attempt unauthorized access, submit harmful content, or use it to commit fraud. We may change, suspend, or discontinue parts of the platform to maintain security, comply with law, or improve our services."],
-  ["Liability", "To the extent permitted by law, QuickSquad and A V TRADE CORPORATION are not responsible for decisions, losses, or outcomes resulting from reliance on general information, third-party resources, service interruptions, or events outside our reasonable control."],
+  ["Liability", "To the extent permitted by law, QuickSquad is not responsible for decisions, losses, or outcomes resulting from reliance on general information, third-party resources, service interruptions, or events outside our reasonable control."],
 ];
 
 export default function TermsOfService() {

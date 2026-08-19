@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | QuickSquad",
   },
   description:
-    "QuickSquad is an AI-powered consultation platform owned and operated by A V TRADE CORPORATION, providing everyday digital guidance across technology, finance, travel, government services, and more.",
+    "QuickSquad is an AI-powered consultation platform providing everyday digital guidance across technology, finance, travel, government services, and more.",
   keywords: [
     "consultation services",
     "online consultation",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     "consumer assistance",
     "QuickSquad",
   ],
-  authors: [{ name: "A V TRADE CORPORATION", url: "https://quicksquad.live" }],
-  creator: "A V TRADE CORPORATION",
-  publisher: "A V TRADE CORPORATION",
+  authors: [{ name: "QuickSquad", url: "https://quicksquad.live" }],
+  creator: "QuickSquad",
+  publisher: "QuickSquad",
   category: "Consumer consultation services",
   openGraph: {
     title: "QuickSquad | AI-Powered Everyday Consultation",
@@ -83,12 +83,10 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": "https://quicksquad.live/#organization",
-      name: "A V TRADE CORPORATION",
-      legalName: "A V TRADE CORPORATION",
-      description: "Registered partnership firm operating the QuickSquad consumer consultation platform.",
+      name: "QuickSquad",
+      description: "AI-powered consumer consultation platform for everyday online tasks and questions.",
       url: "https://quicksquad.live",
       email: "support@quicksquad.live",
-      brand: { "@type": "Brand", name: "QuickSquad" },
     },
     {
       "@type": "WebSite",

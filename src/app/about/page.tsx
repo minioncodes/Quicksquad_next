@@ -5,9 +5,9 @@ import { Bot, CheckCircle2, ShieldCheck, UsersRound } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About QuickSquad",
-  description: "Learn how QuickSquad, owned and operated by A V TRADE CORPORATION, combines AI-powered information assistance with thoughtful human support for everyday consumer questions.",
-  openGraph: { title: "About QuickSquad | Owned by A V TRADE CORPORATION", description: "An AI-powered consumer consultation platform for everyday online tasks and questions." },
-  twitter: { card: "summary_large_image", title: "About QuickSquad", description: "Everyday AI-powered consultation, operated by A V TRADE CORPORATION." },
+  description: "Learn how QuickSquad combines AI-powered information assistance with thoughtful human support for everyday consumer questions.",
+  openGraph: { title: "About QuickSquad", description: "An AI-powered consumer consultation platform for everyday online tasks and questions." },
+  twitter: { card: "summary_large_image", title: "About QuickSquad", description: "Everyday AI-powered consultation for everyday questions and online tasks." },
   alternates: { canonical: "/about" },
 };
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-100">About QuickSquad</p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Everyday questions deserve clear answers</h1>
-          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-blue-50">QuickSquad is an AI-powered consumer consultation platform owned and operated by A V TRADE CORPORATION, a registered partnership firm.</p>
+          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-blue-50">QuickSquad is an AI-powered consumer consultation platform for everyday questions and online tasks.</p>
         </div>
       </section>
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-blue-700">Who we are</p>
           <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-900">A consumer-first platform for practical guidance</h2>
           <p className="mt-5 leading-7 text-slate-600">QuickSquad helps people navigate the questions and online tasks that come up in everyday life—from technology and digital accounts to shopping, travel planning, career research, banking concepts, and public-service portals. We make information easier to understand and actions easier to take.</p>
-          <p className="mt-4 leading-7 text-slate-600">The QuickSquad brand and all related customer support, billing, subscriptions, marketing, and operations are managed by <strong>A V TRADE CORPORATION</strong>. We believe that being clear about who runs a service is fundamental to earning trust.</p>
+          <p className="mt-4 leading-7 text-slate-600">We believe that clear service boundaries, accessible support, and practical information are fundamental to earning trust.</p>
         </div>
       </section>
 

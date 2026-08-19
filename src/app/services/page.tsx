@@ -39,7 +39,7 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-100">QuickSquad services</p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">Everyday guidance, all in one place</h1>
-          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-blue-50">QuickSquad helps consumers research questions, navigate online tasks, and move forward with practical general consultation. QuickSquad is owned and operated by A V TRADE CORPORATION.</p>
+          <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-blue-50">QuickSquad helps consumers research questions, navigate online tasks, and move forward with practical general consultation.</p>
         </div>
       </section>
 
