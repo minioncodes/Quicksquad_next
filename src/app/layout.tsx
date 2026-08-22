@@ -149,7 +149,7 @@ const country = countryHeader || cookieStore.get("country")?.value;
     <html lang="en">
       <head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18376694937"
+          src="https://www.googletagmanager.com/gtag/js?id=G-5HV0XZ5FSJ"
           strategy="afterInteractive"
         />
         <Script id="google-ads-gtag" strategy="afterInteractive">
@@ -157,6 +157,7 @@ const country = countryHeader || cookieStore.get("country")?.value;
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            gtag('config', 'G-5HV0XZ5FSJ');
             gtag('config', 'AW-18376694937');
           `}
         </Script>
