@@ -16,7 +16,7 @@ export default function SiteFooter() {
     <footer className="bg-linear-to-br from-blue-950 via-blue-800 to-cyan-800 text-blue-50">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <Link href="/" aria-label="QuickSquad home"><Image src="/images/logo.png" alt="QuickSquad" width={200} height={60} className="mb-5 h-auto w-40" /></Link>
+          <Link href="/" aria-label="QuickSquad home"><Image src="/images/logo.png" alt="QuickSquad" width={505} height={136} loading="eager" className="mb-5 h-auto w-40" /></Link>
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-cyan-200">AI-powered Consultation Platform</p>
           <p className="mt-4 max-w-sm text-sm leading-6 text-blue-100">
             QuickSquad is a consumer-facing brand owned and operated by <strong className="text-white">A V TRADE CORPORATION</strong>, a registered partnership firm. All services, support, billing, subscriptions, marketing, and operations are managed by A V TRADE CORPORATION.

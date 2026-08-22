@@ -175,9 +175,9 @@ export default function Home() {
             <Image
               src="/images/hero-2.jpg"
               alt="Team working"
-              width={500}
-              height={400}
-              className="rounded-lg"
+              width={1000}
+              height={667}
+              className="h-auto w-full rounded-lg"
             />
           </motion.div>
           <motion.div
@@ -232,9 +232,9 @@ export default function Home() {
             <Image
               src="/images/hero-4.jpg"
               alt="Office teamwork"
-              width={500}
-              height={400}
-              className="rounded-lg"
+              width={1000}
+              height={605}
+              className="h-auto w-full rounded-lg"
             />
           </motion.div>
         </div>
@@ -252,9 +252,9 @@ export default function Home() {
             <Image
               src="/images/hero-3.jpeg"
               alt="QuickSquad consultation team"
-              width={500}
-              height={400}
-              className="rounded-lg"
+              width={1000}
+              height={605}
+              className="h-auto w-full rounded-lg"
             />
           </motion.div>
           <motion.div
@@ -307,6 +307,7 @@ export default function Home() {
                       src={post.img}
                       alt={post.title}
                       fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>

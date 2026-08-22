@@ -23,9 +23,9 @@ export default function SiteHeader() {
           <Image
             src="/images/logo.png"
             alt="QuickSquad"
-            width={200}
-            height={60}
-            priority
+            width={505}
+            height={136}
+            loading="eager"
             className="h-auto w-32 sm:w-40"
           />
         </Link>
